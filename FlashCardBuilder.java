@@ -51,11 +51,22 @@ public class FlashCardBuilder {
             }
         });
 
+        // flashcard event button
+        JButton reviewButton = new JButton("Review");
+        reviewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Review review = new Review(cardList);
+                review.start();
+            }
+        });
+
         mainPanel.add(questionLabel);
         mainPanel.add(questionScroll);
         mainPanel.add(answerLabel);
         mainPanel.add(answerScroll);
         mainPanel.add(nextButton);
+        mainPanel.add(reviewButton);
 
         frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
         frame.setSize(450,600);
