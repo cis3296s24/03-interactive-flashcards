@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.json.JSONObject;
@@ -12,7 +14,6 @@ public class DeckDatabase {
     public void write(Deck deck) {
         try (FileWriter file = new FileWriter("json_decks/" + deck.deck_name + ".json")) {
             file.write(get_json(deck).toString());
-            file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -20,8 +21,7 @@ public class DeckDatabase {
 
     public ArrayList<Deck> read() {
         ArrayList<Deck> decks = new ArrayList<Deck>();
-        File json_decks_dir = new File("/json_decks");
-
+        File json_decks_dir = new File("json_decks");
         if (json_decks_dir.exists() && json_decks_dir.isDirectory()) {
             File[] files = json_decks_dir.listFiles();
 
@@ -29,8 +29,8 @@ public class DeckDatabase {
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(".json")) {
                         try {
-                            FileReader reader = new FileReader(file);
-                            decks.add(read_json(new JSONObject(reader), file.getName().split(".")[0]));
+                            String content = new String(Files.readAllBytes(Paths.get("json_decks/" + file.getName())));
+                            decks.add(read_json(new JSONObject(content), file.getName().split("\\.")[0]));
                         } catch(IOException e) {
                             e.printStackTrace();
                         }
@@ -80,6 +80,9 @@ public class DeckDatabase {
 
         DeckDatabase database = new DeckDatabase();
         database.write(test1);
-        System.out.println("here");
+
+        ArrayList<Deck> temp;
+        temp = database.read();
+        System.out.println(temp.get(0).get(0).question);
     }
 }
