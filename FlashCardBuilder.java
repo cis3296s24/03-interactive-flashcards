@@ -36,7 +36,7 @@ public class FlashCardBuilder {
         answerScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         answerScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        JButton nextButton = new JButton("Next Card");
+        JButton nextButton = new JButton("Save Card");
 
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
