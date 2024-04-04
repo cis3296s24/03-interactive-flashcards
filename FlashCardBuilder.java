@@ -15,6 +15,8 @@ public class FlashCardBuilder {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         Font font = new Font("Helvetica", Font.BOLD,20);
 
@@ -22,6 +24,7 @@ public class FlashCardBuilder {
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
         question.setFont(font);
+        question.setBorder(BorderFactory.createCompoundBorder(question.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
         JScrollPane questionScroll = new JScrollPane(question);
         questionScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -31,6 +34,7 @@ public class FlashCardBuilder {
         answer.setLineWrap(true);
         answer.setWrapStyleWord(true);
         answer.setFont(font);
+        answer.setBorder(BorderFactory.createCompoundBorder(answer.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
         JScrollPane answerScroll = new JScrollPane(answer);
         answerScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -40,6 +44,20 @@ public class FlashCardBuilder {
 
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
+        mainPanel.add(questionLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
+        mainPanel.add(questionScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(answerLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        mainPanel.add(answerScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(nextButton);
+
+
+        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+        frame.setSize(450, 600);
+        frame.setVisible(true);
 
         nextButton.addActionListener(new ActionListener() {
             @Override
