@@ -20,7 +20,7 @@ public class DeckDatabase {
     /**
      * Writes new deck to user_data.json file
      * Reads and updates existing data in file
-     * Takes argument Deck
+     * Updates existing deck (overwrites)
      * @param deck
      */
     public void write(Deck deck) {
@@ -29,7 +29,7 @@ public class DeckDatabase {
         if (new File(PATH).length() == 0) {
             current_json = new JSONArray();
         } else {
-            current_json = overwrite_arr(deck.deck_name);
+            current_json = remove_obj(deck.deck_name);
         }
         //Create JSONObject wrapper and append to JSONArray
         JSONObject deck_json = new JSONObject();
@@ -56,6 +56,27 @@ public class DeckDatabase {
         }
         JSONArray arr = read_json_arr();
         return json_to_decks(arr);
+    }
+
+    /**
+     * Removes the deck from the user_data.json file
+     * Deletes deck JSONObj wrapper from JSONArray
+     * @param deck
+     */
+    public void delete(Deck deck) {
+        JSONArray current_json;
+        //Check if file is empty
+        if (new File(PATH).length() == 0) {
+            current_json = new JSONArray();
+        } else {
+            current_json = remove_obj(deck.deck_name);
+        }
+        //Write json string to file
+        try (FileWriter file = new FileWriter(PATH)) {
+            file.write(current_json.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -126,7 +147,7 @@ public class DeckDatabase {
      * @param key
      * @return JSONArray
      */
-    private JSONArray overwrite_arr(String key) {
+    private JSONArray remove_obj(String key) {
         JSONArray arr = read_json_arr();
         //Iterate through JSONArray check for duplicate JSONObj wrapper
         for (int i = 0; i < arr.length(); i++) {
@@ -139,7 +160,7 @@ public class DeckDatabase {
     }
 
     public static void main(String[] args) {
-        Deck test1 = new Deck("test3");
+        Deck test1 = new Deck("test1");
         Deck test2 = new Deck("test2");
         FlashCard t1 = new FlashCard();
         t1.question = "aaaa";
@@ -154,7 +175,7 @@ public class DeckDatabase {
 
         DeckDatabase database = new DeckDatabase();
         database.write(test1);
-
-        System.out.println(database.read().get(0).deck_name);
+        database.write(test2);
+        database.delete(test1);
     }
 }
