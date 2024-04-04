@@ -24,11 +24,11 @@ Verifying Java (openJDK) installation to auto-run JAR file
  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 Run JAR file
-- In the unzipped releases file, double-click the Interactive-FlashCards.jar file.
+- In the unzipped releases file, double-click the Flashcards.jar file.
 - This will launch the application.
 ### Run on Windows
 Run EXE file
-- In the unzipped releases file, double-click the Interactive-FlashCards.exe file.
+- In the unzipped releases file, double-click the Flashcards.exe file.
 - This will launch the application.
 
 # How to contribute
