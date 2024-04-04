@@ -9,11 +9,15 @@ import static java.awt.Color.black;
 
 public class Review {
     private JFrame frame;
-    private ArrayList<FlashCard> cardList;
+    private Deck cardList;
+    private ArrayList<Deck> deckList;
     private int currentCard;
+    private DeckDatabase database = new DeckDatabase();
 
-    public Review(ArrayList<FlashCard> cardList) {
+    public Review(Deck cardList) {
         this.cardList = cardList;
+        database.write(cardList);
+        this.deckList = database.read();
         currentCard = 0;
         start();
     }
