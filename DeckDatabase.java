@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.json.JSONObject;
-import org.json.JSONArray;
+import org.json.JSONObject; //Dependency org.json required - https://repo1.maven.org/maven2/org/json/json/20240303/json-20240303.jar
+import org.json.JSONArray;  //Dependency org.json required - https://repo1.maven.org/maven2/org/json/json/20240303/json-20240303.jar
 
 /**
  * Creates and manages JSON database (file)
