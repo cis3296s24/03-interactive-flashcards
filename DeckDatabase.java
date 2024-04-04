@@ -18,8 +18,9 @@ public class DeckDatabase {
             current_json = new JSONArray();
         }
         else {
-            current_json = read_json_arr();
+            current_json = overwrite_arr(deck.deck_name);
         }
+
         JSONObject deck_json = new JSONObject();
         deck_json.put(deck.deck_name, get_json(deck));
         current_json.put(deck_json);
@@ -77,8 +78,18 @@ public class DeckDatabase {
         return decks;
     }
 
+    private JSONArray overwrite_arr(String key) {
+        JSONArray arr = read_json_arr();
+        for (int i = 0; i < arr.length(); i++) {
+            if (arr.getJSONObject(i).keys().next().equals(key)) {
+                arr.remove(i);
+            }
+        }
+        return arr;
+    }
+
     public static void main(String[] args) {
-        Deck test1 = new Deck("test1");
+        Deck test1 = new Deck("test3");
         Deck test2 = new Deck("test2");
         FlashCard t1 = new FlashCard();
         t1.question = "q1";
