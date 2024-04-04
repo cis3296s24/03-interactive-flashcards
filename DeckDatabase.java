@@ -11,7 +11,7 @@ import org.json.JSONArray;  //Dependency org.json required - https://repo1.maven
 /**
  * Creates and manages JSON database (file)
  * Functionality to write to file and read from file
- * Save and update user Decks of FlashCards.
+ * Save, update, delete, and clear user Decks of FlashCards.
  */
 public class DeckDatabase {
     private static final String PATH = "user_data.json";
