@@ -80,6 +80,18 @@ public class DeckDatabase {
     }
 
     /**
+     * Clean all user data from file
+     */
+    public void clean() {
+        //Write empty string to file
+        try (FileWriter file = new FileWriter(PATH)) {
+            file.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Read content from file and convert to JSONArray
      * @return JSONArray
      */
