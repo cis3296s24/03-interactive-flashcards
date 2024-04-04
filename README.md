@@ -3,7 +3,7 @@ For students and professionals who need a way to memorize and/or study informati
 
 Unlike other flashcard applications like quizlet, the goal of our application is to drill our user on flashcard given their strengths and weaknesses rather then allow the user to judge their own grasp on the information. Our application enable users to assess themselves using custom created flashcards and then benefit from an algorithm that decides what fields they are strong in, where they need more improvement, and fields that need to be completely overhauled.
 
-![This is a screenshot.](app_image.png)
+![flashcards v1.0](app_image.png)
 # How to run
 Check the releases tab for the most recent binary/zip
 - Download .zip file
