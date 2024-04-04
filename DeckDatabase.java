@@ -188,6 +188,5 @@ public class DeckDatabase {
         DeckDatabase database = new DeckDatabase();
         database.write(test1);
         database.write(test2);
-        database.delete(test1);
     }
 }
