@@ -7,7 +7,7 @@ import javax.swing.*;
 public class FlashCardBuilder {
     private JTextArea question;
     private JTextArea answer;
-    private ArrayList<FlashCard> cardList = new ArrayList<>();
+    private Deck cardList = new Deck("cardList");
     private JFrame frame;
 
     public FlashCardBuilder() {
