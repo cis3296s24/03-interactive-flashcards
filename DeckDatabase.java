@@ -171,7 +171,6 @@ public class DeckDatabase {
         return arr;
     }
 
-    /*
     public static void main(String[] args) {
         Deck test1 = new Deck("test1");
         Deck test2 = new Deck("test2");
@@ -189,7 +188,5 @@ public class DeckDatabase {
         DeckDatabase database = new DeckDatabase();
         database.write(test1);
         database.write(test2);
-        database.delete(test1);
     }
-     */
 }
