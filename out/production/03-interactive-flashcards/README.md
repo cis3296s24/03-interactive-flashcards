@@ -1,6 +1,7 @@
 # Project Name
-Put here a short paragraph describing your project. 
-Adding an screenshot or a mockup of your application in action would be nice.  
+For students and professionals who need a way to memorize and/or study information pertinent to their field, our Interactive Flashcard Application is a web-based application that will virtualize the outdated flashcard and provide a more efficient study algorithm for the user to allow for them to achieve their goals.
+
+Unlike other flashcard applications like quizlet, the goal of our application is to drill our user on flashcard given their strengths and weaknesses rather then allow the user to judge their own grasp on the information. Our application enable users to assess themselves using custom created flashcards and then benefit from an algorithm that decides what fields they are strong in, where they need more improvement, and fields that need to be completely overhauled.
 
 ![This is a screenshot.](images.png)
 # How to run
