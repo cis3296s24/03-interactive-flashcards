@@ -44,15 +44,6 @@ public class FlashCardBuilder {
 
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
-        mainPanel.add(questionLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
-        mainPanel.add(questionScroll);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(answerLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        mainPanel.add(answerScroll);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(nextButton);
 
 
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -80,9 +71,13 @@ public class FlashCardBuilder {
         });
 
         mainPanel.add(questionLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
         mainPanel.add(questionScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(answerLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         mainPanel.add(answerScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(nextButton);
         mainPanel.add(reviewButton);
 
