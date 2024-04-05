@@ -41,9 +41,20 @@ public class FlashCardBuilder {
         answerScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         JButton nextButton = new JButton("Save Card");
+        JButton reviewButton = new JButton("Review");
 
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
+
+        // Center Buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(nextButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
+        buttonPanel.add(reviewButton);
+        buttonPanel.add(Box.createHorizontalGlue());
+        mainPanel.add(buttonPanel);
 
 
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -61,7 +72,7 @@ public class FlashCardBuilder {
         });
 
         // flashcard event button
-        JButton reviewButton = new JButton("Review");
+        //JButton reviewButton = new JButton("Review");
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
