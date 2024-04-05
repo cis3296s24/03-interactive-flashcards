@@ -46,19 +46,6 @@ public class FlashCardBuilder {
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
 
-        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        answerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        mainPanel.add(questionLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
-        mainPanel.add(questionScroll);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(answerLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        mainPanel.add(answerScroll);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(nextButton);
-
         // Center Buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -85,7 +72,7 @@ public class FlashCardBuilder {
         });
 
         // flashcard event button
-        //JButton reviewButton = new JButton("Review");
+        JButton reviewButton = new JButton("Review");
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,16 +81,20 @@ public class FlashCardBuilder {
             }
         });
 
-//        mainPanel.add(questionLabel);
-//        mainPanel.add(questionScroll);
-//        mainPanel.add(answerLabel);
-//        mainPanel.add(answerScroll);
-//        mainPanel.add(nextButton);
-//        mainPanel.add(reviewButton);
-//
-//        frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
-//        frame.setSize(450,600);
-//        frame.setVisible(true);
+        mainPanel.add(questionLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
+        mainPanel.add(questionScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(answerLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        mainPanel.add(answerScroll);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(nextButton);
+        mainPanel.add(reviewButton);
+
+        frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
+        frame.setSize(450,600);
+        frame.setVisible(true);
     }
 
     public FlashCard getData(JTextArea question, JTextArea answer) {
