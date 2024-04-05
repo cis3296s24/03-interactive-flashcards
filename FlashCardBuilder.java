@@ -72,7 +72,7 @@ public class FlashCardBuilder {
         });
 
         // flashcard event button
-        //JButton reviewButton = new JButton("Review");
+        JButton reviewButton = new JButton("Review");
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
