@@ -20,53 +20,47 @@ public class FlashCardBuilder {
 
         Font font = new Font("Helvetica", Font.BOLD,20);
 
+        //creates question box
         question = new JTextArea(6,20);
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
         question.setFont(font);
         question.setBorder(BorderFactory.createCompoundBorder(question.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
+        //creates scroll for question box
         JScrollPane questionScroll = new JScrollPane(question);
         questionScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         questionScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        //creates answer box
         answer = new JTextArea(6,20);
         answer.setLineWrap(true);
         answer.setWrapStyleWord(true);
         answer.setFont(font);
         answer.setBorder(BorderFactory.createCompoundBorder(answer.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
+        //creates scroll for answer box
         JScrollPane answerScroll = new JScrollPane(answer);
         answerScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         answerScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
 
         JButton nextButton = new JButton("Save Card");
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
 
-        JLabel questionLabel = new JLabel("Question");
-        JLabel answerLabel = new JLabel("Answer");
+        JLabel questionLabel = new JLabel("Question");  //creates question box label 
+        JLabel answerLabel = new JLabel("Answer");  //creates answer box label
+
 
 
         // Center Buttons
         JPanel buttonPanel = new JPanel();
-//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-//        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(nextButton, BorderLayout.EAST);
-//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
         buttonPanel.add(reviewButton, BorderLayout.CENTER);
-//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
         buttonPanel.add(tfButton, BorderLayout.WEST);
-//        buttonPanel.add(Box.createHorizontalGlue());
 
-//        buttonPanel.add(Box.createHorizontalGlue());
-
-
-//
-//        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-//        frame.setSize(450, 600);
-//        frame.setVisible(true);
-
+        //next button 
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,8 +71,6 @@ public class FlashCardBuilder {
             }
         });
 
-        // flashcard event button
-        // JButton reviewButton = new JButton("Review");
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,12 +78,13 @@ public class FlashCardBuilder {
 //                review.start(); this is causing double review tab
             }
         });
-
+      
         tfButton.addActionListener(e -> {
             TrueFalseQuiz quiz = new TrueFalseQuiz(cardList);
         });
 
-        mainPanel.add(questionLabel, BorderLayout.CENTER);
+        //adds everything to main panel
+        mainPanel.add(questionLabel);   
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
         mainPanel.add(questionScroll);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -99,7 +92,7 @@ public class FlashCardBuilder {
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         mainPanel.add(answerScroll);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(buttonPanel);
+        mainPanel.add(buttonPanel); //adds buttonPanel to mainPanel
 
         frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
         frame.setSize(450,600);
