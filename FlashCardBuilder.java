@@ -42,24 +42,30 @@ public class FlashCardBuilder {
 
         JButton nextButton = new JButton("Save Card");
         JButton reviewButton = new JButton("Review");
+        JButton tfButton = new JButton("Quiz");
 
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
 
+
         // Center Buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(nextButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
-        buttonPanel.add(reviewButton);
-        buttonPanel.add(Box.createHorizontalGlue());
-        mainPanel.add(buttonPanel);
+//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+//        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(nextButton, BorderLayout.EAST);
+//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
+        buttonPanel.add(reviewButton, BorderLayout.CENTER);
+//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add spacing between buttons
+        buttonPanel.add(tfButton, BorderLayout.WEST);
+//        buttonPanel.add(Box.createHorizontalGlue());
+
+//        buttonPanel.add(Box.createHorizontalGlue());
 
 
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setSize(450, 600);
-        frame.setVisible(true);
+//
+//        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+//        frame.setSize(450, 600);
+//        frame.setVisible(true);
 
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -72,25 +78,28 @@ public class FlashCardBuilder {
         });
 
         // flashcard event button
-        JButton reviewButton = new JButton("Review");
+        // JButton reviewButton = new JButton("Review");
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Review review = new Review(cardList);
-                review.start();
+//                review.start(); this is causing double review tab
             }
         });
 
-        mainPanel.add(questionLabel);
+        tfButton.addActionListener(e -> {
+            TrueFalseQuiz quiz = new TrueFalseQuiz(cardList);
+        });
+
+        mainPanel.add(questionLabel, BorderLayout.CENTER);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
         mainPanel.add(questionScroll);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(answerLabel);
+        mainPanel.add(answerLabel, BorderLayout.CENTER);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         mainPanel.add(answerScroll);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(nextButton);
-        mainPanel.add(reviewButton);
+        mainPanel.add(buttonPanel);
 
         frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
         frame.setSize(450,600);
