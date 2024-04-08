@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"test1":{"weird":"a2","aaaa":"a1"}},{"test2":{"weird":"a2","aaaa":"a1"}},{"cardList":{"pourquoi ":"why","goodbye":"au revoir","hello":"bonjour"}}]
+=======
+[{"test1":{"weird":"a2","aaaa":"a1"}},{"test2":{"weird":"a2","aaaa":"a1"}},{"cardList":{}}]
+>>>>>>> 3b0f324a34f54ba2a7850908d972c6bce57748a4
