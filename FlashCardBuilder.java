@@ -75,12 +75,13 @@ public class FlashCardBuilder {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Review review = new Review(cardList);
-//                review.start(); this is causing double review tab
+                frame.dispose();
             }
         });
       
         tfButton.addActionListener(e -> {
             TrueFalseQuiz quiz = new TrueFalseQuiz(cardList);
+            frame.dispose();
         });
 
         //adds everything to main panel
