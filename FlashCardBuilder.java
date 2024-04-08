@@ -44,7 +44,7 @@ public class FlashCardBuilder {
         answerScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         answerScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-
+        //create buttons
         JButton nextButton = new JButton("Save Card");
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
@@ -54,13 +54,14 @@ public class FlashCardBuilder {
 
 
 
-        // Center Buttons
+        // Create Button Panel - center buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(nextButton, BorderLayout.EAST);
         buttonPanel.add(reviewButton, BorderLayout.CENTER);
         buttonPanel.add(tfButton, BorderLayout.WEST);
-
-        //next button 
+        
+        /* action listener buttons */
+        //next button action
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +72,7 @@ public class FlashCardBuilder {
             }
         });
 
+        //review button action
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,6 +81,7 @@ public class FlashCardBuilder {
             }
         });
       
+        //tf button 
         tfButton.addActionListener(e -> {
             TrueFalseQuiz quiz = new TrueFalseQuiz(cardList);
         });

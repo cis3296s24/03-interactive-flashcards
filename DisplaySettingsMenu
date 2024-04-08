@@ -1,4 +1,40 @@
 /*object to create, display and get user changes from a display settings menu */
 public class DisplaySettingsMenu(){
+    public void start(){
+        // create frame
+        frame = new JFrame("Display Settings");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*  look: 
+         *  font: whateverFont  //if click, open a scroll menu, pickFont: if click, font = thisFont
+         *  size: whateverSize  //textbox: can change size, reject non numbers? prog might do that automically... reset if nonnumbers detected
+         *  ...color maybe
+         */
+
+    }
+    /*CURRENTLY IN ACTION LISTENER BUTTON IN REVIEW */
+                    //add method with creating buttons so user can see and pick which font they want 
+                    //maybe display those fonts in the fonts theyre in
+                
+                //getChosenFont(){
+                //list("...")
+                    //if(getSelection = thisFont)
+                        //return thisFont;     
+                //}
+
+                //if clicked, display all fonts to user in scroll menu, change to whatever font they click
+                Font []fontList; 
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                
+                fontList = ge.getAllFonts();    //returns array of all fonts available in graphical interface
+                
+                //should replace w/ method to display all options to screen and allow user to pick what they want 
+                for(int i = 0; i<fontList.length; i++){ //prints all fonts to output
+                    System.out.print(fontList[i].getName() + "\n"); 
+                }
+
+                
+                Font getNewFont = new Font("Roboto Black Italic", Font.BOLD,20);    //sets users font choice
+                reviewText.setFont(getNewFont); //changes font to getNewFont
 
 }
