@@ -7,11 +7,12 @@ import java.util.ArrayList;
 public class DeckMenu {
     private JFrame frame;
     private ArrayList<Deck> decks;
+    private Deck curr_deck;
     private DeckDatabase database = new DeckDatabase();
     private JPanel cardGrid = new JPanel();
 
     public DeckMenu() {
-        frame = new JFrame("Flash Card");
+        frame = new JFrame("Deck Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
@@ -29,27 +30,40 @@ public class DeckMenu {
         JComboBox<String> dropdown = new JComboBox<>(deckNames);
         JLabel dropdownLabel = new JLabel("Decks");
 
-        cardGrid.setLayout(new GridLayout((int)Math.ceil(decks.size()/4),4));
+        cardGrid.setLayout(new GridLayout((int)Math.ceil((decks.size())/4),4));
+
+        JPanel buttonPanel = new JPanel();
+        JButton reviewButton = new JButton("Review");
+        JButton tfButton = new JButton("Quiz");
+        buttonPanel.add(reviewButton, BorderLayout.EAST);
+        buttonPanel.add(tfButton, BorderLayout.WEST);
 
         mainPanel.add(dropdownLabel);
         mainPanel.add(dropdown);
 
         frame.getContentPane().add(BorderLayout.NORTH,mainPanel);
         frame.getContentPane().add(BorderLayout.CENTER, cardGrid);
+        frame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
         frame.setSize(450,600);
         frame.setVisible(true);
 
-        dropdown.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox<String> combo = (JComboBox<String>) e.getSource();
-                String selected = (String) combo.getSelectedItem();
-                Deck deck;
-                if (selected == "Select Deck...") {return;}
-                else if (selected == "+ Create New Deck") {return;}
-                else {
-                    displayCards(getDeck(selected));
-                }
+        reviewButton.addActionListener(e -> {
+            new Review(curr_deck);
+        });
+
+        tfButton.addActionListener(e -> {
+            new TrueFalseQuiz(curr_deck);
+        });
+
+        dropdown.addActionListener(e -> {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selected = (String) combo.getSelectedItem();
+            if (selected == "Select Deck...") {clearCardGrid();}
+            else if (selected == "+ Create New Deck") {}
+            else {
+                Deck temp = getDeck(selected);
+                displayCards(temp);
+                curr_deck = temp;
             }
         });
     }
@@ -72,6 +86,9 @@ public class DeckMenu {
             cardGrid.add(cardButton);
 
         }
+        JButton plus_button = new JButton("+ Add Card");
+        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+        cardGrid.add(plus_button);
         frame.revalidate();
         frame.repaint();
     }

@@ -22,16 +22,6 @@ public class FlashCardBuilder {
 
         Font font = new Font("Helvetica", Font.BOLD,20);
 
-        //Create deck dropdown
-        decks = database.read();
-        String[] deckNames = new String[decks.size()+2];
-        deckNames[0] = "Select Deck...";
-        for (int i = 1; i <= decks.size(); i++) {
-            deckNames[i] = decks.get(i-1).deck_name;
-        }
-        deckNames[decks.size()+1] = "+ Create New Deck";
-        JComboBox<String> dropdown = new JComboBox<>(deckNames);
-
         //creates question box
         question = new JTextArea(6,20);
         question.setLineWrap(true);
@@ -61,7 +51,6 @@ public class FlashCardBuilder {
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
 
-        JLabel dropdownLabel = new JLabel("Decks");
         JLabel questionLabel = new JLabel("Question");  //creates question box label 
         JLabel answerLabel = new JLabel("Answer");  //creates answer box label
 
@@ -73,14 +62,6 @@ public class FlashCardBuilder {
         buttonPanel.add(reviewButton, BorderLayout.CENTER);
         buttonPanel.add(tfButton, BorderLayout.WEST);
 
-        dropdown.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox<String> combo = (JComboBox<String>) e.getSource();
-                String selected = (String) combo.getSelectedItem();
-                System.out.println(selected);
-            }
-        });
 
         //next button 
         nextButton.addActionListener(new ActionListener() {
@@ -106,8 +87,6 @@ public class FlashCardBuilder {
         });
 
         //adds everything to main panel
-        mainPanel.add(dropdownLabel);
-        mainPanel.add(dropdown);
         mainPanel.add(questionLabel);   
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
         mainPanel.add(questionScroll);
