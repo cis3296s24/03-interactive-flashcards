@@ -1,0 +1,4 @@
+/*object to create, display and get user changes from a display settings menu */
+public class DisplaySettingsMenu(){
+
+}
