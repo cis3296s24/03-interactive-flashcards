@@ -123,6 +123,7 @@ public class DeckMenu {
             FlashCard new_flashcard = new FlashCard();
             curr_deck.add(new_flashcard);
             new FlashCardBuilder(new_flashcard,curr_deck);
+            frame.dispose();
         });
         frame.revalidate();
         frame.repaint();

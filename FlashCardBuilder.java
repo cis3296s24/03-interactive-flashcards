@@ -91,6 +91,7 @@ public class FlashCardBuilder {
         deck.add(card);
         database.write(deck);
         new DeckMenu();
+        frame.dispose();
     }
 
     /*
