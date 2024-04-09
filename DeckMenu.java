@@ -76,6 +76,7 @@ public class DeckMenu {
         frame.repaint();
     }
 
+
     private void clearCardGrid() {
         cardGrid.removeAll();
         frame.revalidate(); // Update layout
