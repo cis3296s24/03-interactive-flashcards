@@ -73,6 +73,15 @@ public class FlashCardBuilder {
         buttonPanel.add(reviewButton, BorderLayout.CENTER);
         buttonPanel.add(tfButton, BorderLayout.WEST);
 
+        dropdown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox<String> combo = (JComboBox<String>) e.getSource();
+                String selected = (String) combo.getSelectedItem();
+                System.out.println(selected);
+            }
+        });
+
         //next button 
         nextButton.addActionListener(new ActionListener() {
             @Override
