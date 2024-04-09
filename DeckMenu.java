@@ -21,6 +21,7 @@ public class DeckMenu {
         decks = database.read();
         String[] deckNames = new String[decks.size()+2];
         deckNames[0] = "Select Deck...";
+        //Iterate through decks
         for (int i = 1; i <= decks.size(); i++) {
             deckNames[i] = decks.get(i-1).deck_name;
         }
@@ -28,31 +29,38 @@ public class DeckMenu {
         JComboBox<String> dropdown = new JComboBox<>(deckNames);
         JLabel dropdownLabel = new JLabel("Decks");
 
+        //Create grid
         cardGrid.setLayout(new GridLayout((int)Math.ceil((decks.size())/4),4));
 
+        //Create panel and buttons, add to panel
         JPanel buttonPanel = new JPanel();
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
         buttonPanel.add(reviewButton, BorderLayout.EAST);
         buttonPanel.add(tfButton, BorderLayout.WEST);
 
+        //Add to mainPanel
         mainPanel.add(dropdownLabel);
         mainPanel.add(dropdown);
 
+        //Add to frame
         frame.getContentPane().add(BorderLayout.NORTH,mainPanel);
         frame.getContentPane().add(BorderLayout.CENTER, cardGrid);
         frame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
         frame.setSize(450,600);
         frame.setVisible(true);
 
+        //review button action listener
         reviewButton.addActionListener(e -> {
             new Review(curr_deck);
         });
 
+        //quiz button action listener
         tfButton.addActionListener(e -> {
             new TrueFalseQuiz(curr_deck);
         });
 
+        //dropdown action listener
         dropdown.addActionListener(e -> {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
             String selected = (String) combo.getSelectedItem();
@@ -91,6 +99,11 @@ public class DeckMenu {
         JButton plus_button = new JButton("+ Add Card");
         plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
         cardGrid.add(plus_button);
+        plus_button.addActionListener(e -> {
+            FlashCard new_flashcard = new FlashCard();
+            curr_deck.add(new_flashcard);
+            new FlashCardBuilder(new_flashcard,curr_deck);
+        });
         frame.revalidate();
         frame.repaint();
     }

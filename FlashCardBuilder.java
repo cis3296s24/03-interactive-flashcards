@@ -15,6 +15,8 @@ public class FlashCardBuilder {
     public FlashCardBuilder(FlashCard card, Deck deck){
         this.deck = deck;
         this.card = card;
+        //Delete existing card (overwrite)
+        //If not changed it will be added back in
         deck.delete(card);
         build_card();
     }
@@ -55,9 +57,8 @@ public class FlashCardBuilder {
         answerScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         answerScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-
+        //Create button and labels
         JButton nextButton = new JButton("Save Card");
-
         JLabel questionLabel = new JLabel("Question");  //creates question box label
         JLabel answerLabel = new JLabel("Answer");  //creates answer box label
 
@@ -86,6 +87,7 @@ public class FlashCardBuilder {
         frame.setVisible(true);
     }
 
+    //Update card, add card to deck, write deck to database, exit builder
     public void updateCard() {
         card.question = question.getText();
         card.answer = answer.getText();
