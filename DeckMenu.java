@@ -142,21 +142,28 @@ public class DeckMenu {
         frame.repaint(); // Redraw components
     }
 
+    /**
+     * Creates Popup to get deck name
+     * Updates dropdown, creates new deck
+     * Navigates to new deck
+     */
     private void createPopup() {
+        //Create popup frame
         JFrame popupFrame = new JFrame("Create Deck");
         popupFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         JPanel panel = new JPanel(new BorderLayout());
-
         JTextField textField = new JTextField(20);
         panel.add(textField, BorderLayout.CENTER);
 
+        //Create button and addActionListener
         JButton create = new JButton("Create");
         create.addActionListener(e -> {
             String inputText = textField.getText();
+            //If deck already exists
             if (getDeck(inputText) != null) {textField.setForeground(Color.RED);}
             else {
-                popupFrame.dispose();// Close the popup frame after OK button is clicked
+                //Dispose popup, update dropdown, create deck, navigate to new deck
+                popupFrame.dispose();
                 dropdown.removeItemAt(decks.size() + 1);
                 dropdown.addItem(inputText);
                 dropdown.addItem("+ Create New Deck");
@@ -166,13 +173,14 @@ public class DeckMenu {
                 dropdown.setSelectedIndex(decks.size());
             }
         });
+        //Configurations
         panel.add(create, BorderLayout.SOUTH);
-
         popupFrame.getContentPane().add(panel);
         popupFrame.setSize(300, 100);
         popupFrame.setLocationRelativeTo(null); // Center the frame on the screen
         popupFrame.setVisible(true);
     }
+
 
     /**
      * Main
