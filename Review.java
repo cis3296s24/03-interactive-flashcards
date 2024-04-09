@@ -87,7 +87,7 @@ public class Review {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FlashCardBuilder();
+                new DeckMenu();
             }
         });
 

@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DeckMenu {
@@ -84,6 +82,10 @@ public class DeckMenu {
             JButton cardButton = new JButton(card.question);
             cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
             cardGrid.add(cardButton);
+            int index = i;
+            cardButton.addActionListener(e -> {
+                new FlashCardBuilder(deck.get(index),curr_deck);
+            });
 
         }
         JButton plus_button = new JButton("+ Add Card");

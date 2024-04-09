@@ -7,12 +7,19 @@ import javax.swing.*;
 public class FlashCardBuilder {
     private JTextArea question;
     private JTextArea answer;
-    private Deck cardList;
-    private ArrayList<Deck> decks = new ArrayList<>();
     private DeckDatabase database = new DeckDatabase();
     private JFrame frame;
+    private FlashCard card;
+    private Deck deck;
 
-    public FlashCardBuilder() {
+    public FlashCardBuilder(FlashCard card, Deck deck){
+        this.deck = deck;
+        this.card = card;
+        deck.delete(card);
+        build_card();
+    }
+
+    private void build_card() {
         frame = new JFrame("Flash Card");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,6 +35,7 @@ public class FlashCardBuilder {
         question.setWrapStyleWord(true);
         question.setFont(font);
         question.setBorder(BorderFactory.createCompoundBorder(question.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        question.setText(card.question);
 
         //creates scroll for question box
         JScrollPane questionScroll = new JScrollPane(question);
@@ -40,6 +48,7 @@ public class FlashCardBuilder {
         answer.setWrapStyleWord(true);
         answer.setFont(font);
         answer.setBorder(BorderFactory.createCompoundBorder(answer.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        answer.setText(card.answer);
 
         //creates scroll for answer box
         JScrollPane answerScroll = new JScrollPane(answer);
@@ -48,46 +57,21 @@ public class FlashCardBuilder {
 
 
         JButton nextButton = new JButton("Save Card");
-        JButton reviewButton = new JButton("Review");
-        JButton tfButton = new JButton("Quiz");
 
-        JLabel questionLabel = new JLabel("Question");  //creates question box label 
+        JLabel questionLabel = new JLabel("Question");  //creates question box label
         JLabel answerLabel = new JLabel("Answer");  //creates answer box label
-
-
 
         // Center Buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(nextButton, BorderLayout.EAST);
-        buttonPanel.add(reviewButton, BorderLayout.CENTER);
-        buttonPanel.add(tfButton, BorderLayout.WEST);
+        buttonPanel.add(nextButton, BorderLayout.CENTER);
 
-
-        //next button 
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FlashCard card;
-                card = getData(question, answer);
-                cardList.add(card);
-                System.out.println("Question: " + cardList.get(cardList.size()-1).question + " Answer: " + cardList.get(cardList.size()-1).answer);
-            }
-        });
-
-        reviewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Review review = new Review(cardList);
-//                review.start(); this is causing double review tab
-            }
-        });
-      
-        tfButton.addActionListener(e -> {
-            TrueFalseQuiz quiz = new TrueFalseQuiz(cardList);
+        //next button
+        nextButton.addActionListener(e -> {
+            updateCard();
         });
 
         //adds everything to main panel
-        mainPanel.add(questionLabel);   
+        mainPanel.add(questionLabel);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Add spacing between components
         mainPanel.add(questionScroll);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -102,15 +86,15 @@ public class FlashCardBuilder {
         frame.setVisible(true);
     }
 
-    public FlashCard getData(JTextArea question, JTextArea answer) {
-        FlashCard card = new FlashCard();
+    public void updateCard() {
         card.question = question.getText();
         card.answer = answer.getText();
-        question.setText("");
-        answer.setText("");
-        return card;
+        deck.add(card);
+        database.write(deck);
+        new DeckMenu();
     }
 
+    /*
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -119,4 +103,5 @@ public class FlashCardBuilder {
             }
         });
     }
+    */
 }
