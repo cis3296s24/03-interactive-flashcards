@@ -1,0 +1,152 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
+public class DeckMenu {
+    private JFrame frame;
+    private ArrayList<Deck> decks;
+    private Deck curr_deck;
+    private DeckDatabase database = new DeckDatabase();
+    private JPanel cardGrid = new JPanel();
+
+    /**
+     * Creates a menu where user can select deck then view, edit, and add new cards
+     * User can quiz or review decks from this menu as well.
+     */
+    public DeckMenu() {
+        frame = new JFrame("Deck Menu");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        //Create deck dropdown
+        decks = database.read();
+        String[] deckNames = new String[decks.size()+2];
+        deckNames[0] = "Select Deck...";
+        //Iterate through decks
+        for (int i = 1; i <= decks.size(); i++) {
+            deckNames[i] = decks.get(i-1).deck_name;
+        }
+        deckNames[decks.size()+1] = "+ Create New Deck";
+        JComboBox<String> dropdown = new JComboBox<>(deckNames);
+        JLabel dropdownLabel = new JLabel("Decks");
+
+        //Create grid
+        cardGrid.setLayout(new GridLayout((int)Math.ceil((decks.size())/4),4));
+
+        //Create panel and buttons, add to panel
+        JPanel buttonPanel = new JPanel();
+        JButton reviewButton = new JButton("Review");
+        JButton tfButton = new JButton("Quiz");
+        buttonPanel.add(reviewButton, BorderLayout.EAST);
+        buttonPanel.add(tfButton, BorderLayout.WEST);
+
+        //Add to mainPanel
+        mainPanel.add(dropdownLabel);
+        mainPanel.add(dropdown);
+
+        //Add to frame
+        frame.getContentPane().add(BorderLayout.NORTH,mainPanel);
+        frame.getContentPane().add(BorderLayout.CENTER, cardGrid);
+        frame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
+        frame.setSize(450,600);
+        frame.setVisible(true);
+
+        //review button action listener
+        reviewButton.addActionListener(e -> {
+            new Review(curr_deck);
+        });
+
+        //quiz button action listener
+        tfButton.addActionListener(e -> {
+            new TrueFalseQuiz(curr_deck);
+        });
+
+        //dropdown action listener
+        dropdown.addActionListener(e -> {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selected = (String) combo.getSelectedItem();
+            if (selected == "Select Deck...") {clearCardGrid();}
+            else if (selected == "+ Create New Deck") {}
+            else {
+                Deck temp = getDeck(selected);
+                displayCards(temp);
+                curr_deck = temp;
+            }
+        });
+    }
+
+    /**
+     * returns Deck obj given deck name
+     * @param name
+     * @return Deck or null
+     */
+    private Deck getDeck(String name) {
+        for (Deck deck : decks) {
+            if (deck.deck_name == name) {
+                return deck;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Displays all card in deck in grid layout
+     * Assigns card buttons actionlisteners that open flashcardbuilder
+     * Either edit existing cards or create new cards
+     * @param deck
+     */
+    private void displayCards(Deck deck){
+        //Clear grid
+        clearCardGrid();
+        //Iterate through deck creating buttons for each card
+        for (int i = 0;i < deck.size();i++) {
+            FlashCard card = deck.get(i);
+            JButton cardButton = new JButton(card.question);
+            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+            cardGrid.add(cardButton);
+            int index = i;
+            //actionlistener for each card, allows flashcardbuilder to edit card
+            cardButton.addActionListener(e -> {
+                new FlashCardBuilder(deck.get(index),curr_deck);
+            });
+
+        }
+        //Create add new card button
+        JButton plus_button = new JButton("+ Add Card");
+        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+        cardGrid.add(plus_button);
+        //Actionlistener to create and edit new card
+        plus_button.addActionListener(e -> {
+            FlashCard new_flashcard = new FlashCard();
+            curr_deck.add(new_flashcard);
+            new FlashCardBuilder(new_flashcard,curr_deck);
+        });
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    /**
+     * Clear grid
+     */
+    private void clearCardGrid() {
+        cardGrid.removeAll();
+        frame.revalidate(); // Update layout
+        frame.repaint(); // Redraw components
+    }
+
+    /**
+     * Main
+     * @param args
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new DeckMenu();
+            }
+        });
+    }
+}

@@ -46,8 +46,7 @@ public class TrueFalseQuiz {
         });
 
         backButton.addActionListener(e -> {
-                new FlashCardBuilder();
-                frame.dispose();
+                new DeckMenu();
             }
         );
 
