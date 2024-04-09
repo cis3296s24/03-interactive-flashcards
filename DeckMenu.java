@@ -9,6 +9,10 @@ public class DeckMenu {
     private DeckDatabase database = new DeckDatabase();
     private JPanel cardGrid = new JPanel();
 
+    /**
+     * Creates a menu where user can select deck then view, edit, and add new cards
+     * User can quiz or review decks from this menu as well.
+     */
     public DeckMenu() {
         frame = new JFrame("Deck Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +78,11 @@ public class DeckMenu {
         });
     }
 
+    /**
+     * returns Deck obj given deck name
+     * @param name
+     * @return Deck or null
+     */
     private Deck getDeck(String name) {
         for (Deck deck : decks) {
             if (deck.deck_name == name) {
@@ -83,22 +92,33 @@ public class DeckMenu {
         return null;
     }
 
+    /**
+     * Displays all card in deck in grid layout
+     * Assigns card buttons actionlisteners that open flashcardbuilder
+     * Either edit existing cards or create new cards
+     * @param deck
+     */
     private void displayCards(Deck deck){
+        //Clear grid
         clearCardGrid();
+        //Iterate through deck creating buttons for each card
         for (int i = 0;i < deck.size();i++) {
             FlashCard card = deck.get(i);
             JButton cardButton = new JButton(card.question);
             cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
             cardGrid.add(cardButton);
             int index = i;
+            //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
                 new FlashCardBuilder(deck.get(index),curr_deck);
             });
 
         }
+        //Create add new card button
         JButton plus_button = new JButton("+ Add Card");
         plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
         cardGrid.add(plus_button);
+        //Actionlistener to create and edit new card
         plus_button.addActionListener(e -> {
             FlashCard new_flashcard = new FlashCard();
             curr_deck.add(new_flashcard);
@@ -108,13 +128,19 @@ public class DeckMenu {
         frame.repaint();
     }
 
-
+    /**
+     * Clear grid
+     */
     private void clearCardGrid() {
         cardGrid.removeAll();
         frame.revalidate(); // Update layout
         frame.repaint(); // Redraw components
     }
 
+    /**
+     * Main
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
