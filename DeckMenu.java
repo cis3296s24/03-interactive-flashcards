@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DeckMenu {
@@ -8,6 +10,8 @@ public class DeckMenu {
     private Deck curr_deck;
     private DeckDatabase database = new DeckDatabase();
     private JPanel cardGrid = new JPanel();
+    private JComboBox<String> dropdown;
+
 
     /**
      * Creates a menu where user can select deck then view, edit, and add new cards
@@ -30,11 +34,11 @@ public class DeckMenu {
             deckNames[i] = decks.get(i-1).deck_name;
         }
         deckNames[decks.size()+1] = "+ Create New Deck";
-        JComboBox<String> dropdown = new JComboBox<>(deckNames);
+        dropdown = new JComboBox<>(deckNames);
         JLabel dropdownLabel = new JLabel("Decks");
 
         //Create grid
-        cardGrid.setLayout(new GridLayout((int)Math.ceil((decks.size())/4),4));
+        cardGrid.setLayout(new GridLayout(0,4));
 
         //Create panel and buttons, add to panel
         JPanel buttonPanel = new JPanel();
@@ -69,7 +73,7 @@ public class DeckMenu {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
             String selected = (String) combo.getSelectedItem();
             if (selected == "Select Deck...") {clearCardGrid();}
-            else if (selected == "+ Create New Deck") {}
+            else if (selected == "+ Create New Deck") {createPopup();}
             else {
                 Deck temp = getDeck(selected);
                 displayCards(temp);
@@ -85,7 +89,7 @@ public class DeckMenu {
      */
     private Deck getDeck(String name) {
         for (Deck deck : decks) {
-            if (deck.deck_name == name) {
+            if (deck.deck_name.equals(name)) {
                 return deck;
             }
         }
@@ -123,6 +127,7 @@ public class DeckMenu {
             FlashCard new_flashcard = new FlashCard();
             curr_deck.add(new_flashcard);
             new FlashCardBuilder(new_flashcard,curr_deck);
+            frame.dispose();
         });
         frame.revalidate();
         frame.repaint();
@@ -136,6 +141,46 @@ public class DeckMenu {
         frame.revalidate(); // Update layout
         frame.repaint(); // Redraw components
     }
+
+    /**
+     * Creates Popup to get deck name
+     * Updates dropdown, creates new deck
+     * Navigates to new deck
+     */
+    private void createPopup() {
+        //Create popup frame
+        JFrame popupFrame = new JFrame("Create Deck");
+        popupFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = new JPanel(new BorderLayout());
+        JTextField textField = new JTextField(20);
+        panel.add(textField, BorderLayout.CENTER);
+
+        //Create button and addActionListener
+        JButton create = new JButton("Create");
+        create.addActionListener(e -> {
+            String inputText = textField.getText();
+            //If deck already exists
+            if (getDeck(inputText) != null) {textField.setForeground(Color.RED);}
+            else {
+                //Dispose popup, update dropdown, create deck, navigate to new deck
+                popupFrame.dispose();
+                dropdown.removeItemAt(decks.size() + 1);
+                dropdown.addItem(inputText);
+                dropdown.addItem("+ Create New Deck");
+                dropdown.repaint();
+                dropdown.revalidate();
+                decks.add(new Deck(inputText));
+                dropdown.setSelectedIndex(decks.size());
+            }
+        });
+        //Configurations
+        panel.add(create, BorderLayout.SOUTH);
+        popupFrame.getContentPane().add(panel);
+        popupFrame.setSize(300, 100);
+        popupFrame.setLocationRelativeTo(null); // Center the frame on the screen
+        popupFrame.setVisible(true);
+    }
+
 
     /**
      * Main

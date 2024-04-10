@@ -88,6 +88,7 @@ public class Review {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new DeckMenu();
+                frame.dispose();
             }
         });
 
