@@ -59,7 +59,7 @@ public class FlashCardBuilder {
         JLabel questionLabel = new JLabel("Question");  //creates question box label
         JLabel answerLabel = new JLabel("Answer");  //creates answer box label
 
-        // Center Buttons
+        // Create Button Panel - center buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(nextButton, BorderLayout.CENTER);
 

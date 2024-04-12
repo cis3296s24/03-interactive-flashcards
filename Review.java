@@ -14,6 +14,9 @@ public class Review {
     private int currentCard;
     private DeckDatabase database = new DeckDatabase();
 
+    String fontType; 
+    int fontSize;
+
     public Review(Deck cardList) {
         this.cardList = cardList;
         database.write(cardList);
@@ -28,7 +31,9 @@ public class Review {
 
         JPanel reviewPanel = new JPanel();
 
-        // set font
+        // set font - default font settings 
+        fontType = "Helvetica"; 
+        fontSize = 20;
         Font font = new Font("Helvetica", Font.BOLD,20);
 
         // first question shown
@@ -47,7 +52,7 @@ public class Review {
         JButton nextButton = new JButton("Next");
         JButton lastButton = new JButton("Last");
         JButton backButton = new JButton("Back");
-        JButton changeFontButton = new JButton("Change Font");  //creates changeFontButton
+        JButton displaySettingsMenuButton = new JButton("Display Settings Menu");  //creates changeFontButton
 
         // button listeners
         flipButton.addActionListener(new ActionListener() {
@@ -93,31 +98,18 @@ public class Review {
         });
 
         /*want user to be able to see all font options, pick one and change font of the flashcards */
-        changeFontButton.addActionListener(new ActionListener() {
+        displaySettingsMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                //add method with creating buttons so user can see and pick which font they want 
-                    //maybe display those fonts in the fonts theyre in
+            
+                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize); 
+                DSMenu.start(); 
+                fontType = DSMenu.getNewFont(); 
+                fontSize = DSMenu.getNewFontSize(); 
                 
-                //getChosenFont(){
-                //list("...")
-                    //if(getSelection = thisFont)
-                        //return thisFont;     
-                //}
-
-                Font []fontList; 
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                
-                fontList = ge.getAllFonts();    //returns array of all fonts available in graphical interface
-                
-                //should replace w/ method to display all options to screen and allow user to pick what they want 
-                for(int i = 0; i<fontList.length; i++){ //prints all fonts to output
-                    System.out.print(fontList[i].getName() + "\n"); 
-                }
-
-                
-                Font getNewFont = new Font("Roboto Black Italic", Font.BOLD,20);    //sets users font choice
+                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
                 reviewText.setFont(getNewFont); //changes font to getNewFont
+                
             }
         }); 
 
@@ -127,7 +119,7 @@ public class Review {
         reviewPanel.add(flipButton);
         reviewPanel.add(nextButton);
         reviewPanel.add(lastButton);
-        reviewPanel.add(changeFontButton);  //adds changeFontButton to panel
+        reviewPanel.add(displaySettingsMenuButton);  //adds changeFontButton to panel
 
         // format and set visible
         frame.getContentPane().add(BorderLayout.CENTER,reviewPanel);
