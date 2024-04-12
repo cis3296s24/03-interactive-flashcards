@@ -37,6 +37,7 @@ public class DeckMenu {
         dropdown = new JComboBox<>(deckNames);
         JLabel dropdownLabel = new JLabel("Decks");
 
+
         //Create grid
         cardGrid.setLayout(new GridLayout(0,4));
 
@@ -61,19 +62,21 @@ public class DeckMenu {
         //review button action listener
         reviewButton.addActionListener(e -> {
             new Review(curr_deck);
+            frame.dispose();
         });
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
             new TrueFalseQuiz(curr_deck);
+            frame.dispose();
         });
 
         //dropdown action listener
         dropdown.addActionListener(e -> {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
             String selected = (String) combo.getSelectedItem();
-            if (selected == "Select Deck...") {clearCardGrid();}
-            else if (selected == "+ Create New Deck") {createPopup();}
+            if (selected.equals( "Select Deck...")) {clearCardGrid();}
+            else if (selected.equals("+ Create New Deck")) {createPopup();}
             else {
                 Deck temp = getDeck(selected);
                 displayCards(temp);
@@ -115,6 +118,7 @@ public class DeckMenu {
             //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
                 new FlashCardBuilder(deck.get(index),curr_deck);
+                frame.dispose();
             });
 
         }
@@ -180,7 +184,6 @@ public class DeckMenu {
         popupFrame.setLocationRelativeTo(null); // Center the frame on the screen
         popupFrame.setVisible(true);
     }
-
 
     /**
      * Main
