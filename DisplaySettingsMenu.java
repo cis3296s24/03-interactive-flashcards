@@ -13,11 +13,13 @@ public class DisplaySettingsMenu{
     private JFrame DSFrame; 
     private JPopupMenu DSMenu; 
     private String newText; //should change to new font
+    private int newFontSize; 
 
-    private static String []fontStrings; //!!!!!!!!
+    private static String []fontStrings;
 
-    DisplaySettingsMenu(String fontType){
+    DisplaySettingsMenu(String fontType, int newFontSize){
         this.newText = fontType; //initializes newText to whatever font is initially in Review
+        this.newFontSize = newFontSize; 
     }
 
     public void start(){
@@ -25,8 +27,10 @@ public class DisplaySettingsMenu{
         DSFrame = new JFrame("Display Settings");
         DSFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        createFontStringArr(); 
+        /* change font */
+        createFontStringArr();  // gets all fonts in system and puts them into fontStrings list
 
+        JLabel selectFontLabel = new JLabel("font:");
         /*create comboBox fontList */
         JComboBox <String> fontList = new JComboBox<>(fontStrings); //creates fontList combobox
 
@@ -42,24 +46,48 @@ public class DisplaySettingsMenu{
             }
         });
 
-        JLabel selectFontLabel = new JLabel("font:"); 
+         
+        
+        /* change font size */
+        JLabel selectFontSizeLabel= new JLabel("font size:");
 
+        /* create combobox of font size list */
+        Integer []fontSizeList = new Integer[50]; 
+        for(int i = 0; i<50; i++){
+            fontSizeList[i] = i+1; 
+        }
+
+        JComboBox <Integer> fontSize = new JComboBox<>(fontSizeList);
+
+        /*Action listener for font size list */
+        fontSize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newFontSize = (Integer)fontSize.getSelectedItem(); 
+                System.out.print(newFontSize); 
+            }
+        });
+        
+        //add items to jpanel
         JPanel displaySettingsPanel = new JPanel(); //create panel
         displaySettingsPanel.add(selectFontLabel);  //add select font label
         displaySettingsPanel.add(fontList); 
-        
+        displaySettingsPanel.add(selectFontSizeLabel);  //add select font size label
+        displaySettingsPanel.add(fontSize); //add select font size jcombobox
 
-
-        /* change font size */
 
         DSFrame.add(displaySettingsPanel);  //add comboBox fontLIst to frame
-        DSFrame.setSize(600,600);   // format frame
+        DSFrame.setSize(400, 400);   // format frame
         DSFrame.setVisible(true);   //set visible    
     }
     
     
     public String getNewFont(){
         return newText; 
+    }
+
+    public int getNewFontSize(){
+        return newFontSize; 
     }
 
 
@@ -76,12 +104,12 @@ public class DisplaySettingsMenu{
             fontStrings[i] = getFonts[i].getName(); 
         }
     }
-}
+
 
 
     
 
-/*     public static void main(String []args){
+ //    public static void main(String []args){
         /*SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -89,9 +117,10 @@ public class DisplaySettingsMenu{
             }
         }); */
 
-    //    DisplaySettingsMenu try1 = new DisplaySettingsMenu("Arial"); 
-    //    try1.start(); 
-    //}
+ //       DisplaySettingsMenu try1 = new DisplaySettingsMenu("Arial", 12); 
+ //       try1.start(); 
+ //   }
+}
 
 
 

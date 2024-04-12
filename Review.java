@@ -15,6 +15,7 @@ public class Review {
     private DeckDatabase database = new DeckDatabase();
 
     String fontType; 
+    int fontSize;
 
     public Review(Deck cardList) {
         this.cardList = cardList;
@@ -30,8 +31,9 @@ public class Review {
 
         JPanel reviewPanel = new JPanel();
 
-        // set font
+        // set font - default font settings 
         fontType = "Helvetica"; 
+        fontSize = 20;
         Font font = new Font("Helvetica", Font.BOLD,20);
 
         // first question shown
@@ -100,11 +102,12 @@ public class Review {
             @Override
             public void actionPerformed(ActionEvent e){
             
-                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType); 
+                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize); 
                 DSMenu.start(); 
                 fontType = DSMenu.getNewFont(); 
+                fontSize = DSMenu.getNewFontSize(); 
                 
-                Font getNewFont = new Font(fontType, Font.BOLD,20);    //sets users font choice
+                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
                 reviewText.setFont(getNewFont); //changes font to getNewFont
                 
             }
