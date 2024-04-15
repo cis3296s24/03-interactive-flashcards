@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DeckMenu {
     private JFrame frame;
@@ -17,7 +18,11 @@ public class DeckMenu {
      * Creates a menu where user can select deck then view, edit, and add new cards
      * User can quiz or review decks from this menu as well.
      */
-    public DeckMenu() {
+    public DeckMenu() {start(null);}
+
+    public DeckMenu(String selectedDeck) { start(selectedDeck); }
+
+    public void start(String selectedDeck) {
         frame = new JFrame("Deck Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,15 +32,29 @@ public class DeckMenu {
 
         //Create deck dropdown
         decks = database.read();
-        String[] deckNames = new String[decks.size()+2];
-        deckNames[0] = "Select Deck...";
+        String[] deckNamesArr = new String[decks.size()+2];
+        deckNamesArr[0] = "Select Deck...";
         //Iterate through decks
         for (int i = 1; i <= decks.size(); i++) {
-            deckNames[i] = decks.get(i-1).deck_name;
+            deckNamesArr[i] = decks.get(i-1).deck_name;
         }
-        deckNames[decks.size()+1] = "+ Create New Deck";
-        dropdown = new JComboBox<>(deckNames);
+        curr_deck = getDeck(selectedDeck);
+        deckNamesArr[decks.size()+1] = "+ Create New Deck";
+        ArrayList<String> deckNames = new ArrayList<String>(Arrays.asList(deckNamesArr));
+        if (selectedDeck == null) { dropdown = new JComboBox<>(deckNames.toArray(deckNamesArr));}
+        else {
+            for (int i = 1; i <= decks.size(); i++) {
+                if (deckNames.get(i).equals(selectedDeck)) {
+                    deckNames.add(0,deckNames.remove(i));
+                    displayCards(getDeck(deckNames.get(0)));
+                    deckNames.remove(1);
+                }
+            }
+            dropdown = new JComboBox<>(deckNames.toArray(deckNamesArr));
+        }
+
         JLabel dropdownLabel = new JLabel("Decks");
+
 
         //Create grid
         cardGrid.setLayout(new GridLayout(0,4));
@@ -61,11 +80,13 @@ public class DeckMenu {
         //review button action listener
         reviewButton.addActionListener(e -> {
             new Review(curr_deck);
+            frame.dispose();
         });
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
             new TrueFalseQuiz(curr_deck);
+            frame.dispose();
         });
 
         //dropdown action listener

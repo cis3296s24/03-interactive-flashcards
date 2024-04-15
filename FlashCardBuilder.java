@@ -90,7 +90,7 @@ public class FlashCardBuilder {
         card.answer = answer.getText();
         deck.add(card);
         database.write(deck);
-        new DeckMenu();
+        new DeckMenu(deck.deck_name);
         frame.dispose();
     }
 

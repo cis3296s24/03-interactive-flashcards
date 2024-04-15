@@ -92,7 +92,7 @@ public class Review {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DeckMenu();
+                new DeckMenu(cardList.deck_name);
                 frame.dispose();
             }
         });

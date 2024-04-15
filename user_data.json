@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-[{"test1":{"weird":"a2","aaaa":"a1"}},{"test2":{"weird":"a2","aaaa":"a1"}},{"cardList":{"pourquoi ":"why","goodbye":"au revoir","hello":"bonjour"}}]
-=======
-[{"test1":{"weird":"a2","aaaa":"a1"}},{"test2":{"weird":"a2","aaaa":"a1"}},{"cardList":{}}]
->>>>>>> 3b0f324a34f54ba2a7850908d972c6bce57748a4
-=======
-[{"cardList":{"jq":"wkl"}},{"test1":{"new test updated":"aewgasfgear","b":"a1","c":"a1","d":"a1","e":"a1","f":"a1","old":"test","g":"a1","cool":"a2","h":"aerg"}},{"test2":{"weird":"a2","aaaa":"a1"}},{"temp":{"test new deck":"damnnn"}},{"another new deck":{"another new card\t":"arg"}}]
->>>>>>> bcd2075a8bd01dfd8f7acd69ccf13f1023c3cbb6
+[{"Test Deck":{"Question":"Answer"}},{"Another Deck":{"Another Question":"Another Answer"}},{"State Capitals":{"New York":"Albany","California":"Sacramento","New Jersey":"Trenton","Pennsylvania":"Harrisburg"}},{"Math Problems":{"7*3":"21"}},{"Countries in North America":{"Canada":"Yes","Colombia":"No"}}]
