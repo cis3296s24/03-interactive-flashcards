@@ -9,7 +9,7 @@ public class DeckMenu2 extends JDialog {
     private JButton createNewDeckButton;
     private JPanel MainPanel;
     private JLabel IconImage;
-    private JComboBox comboBox1;
+    private JComboBox<String> dropdown;
     private ArrayList<Deck> decks;
     private Deck curr_deck;
     private DeckDatabase database = new DeckDatabase();
@@ -25,16 +25,15 @@ public class DeckMenu2 extends JDialog {
 
         decks = database.read();
         addDecks();
-        comboBox1.addActionListener(new ActionListener() {
+        dropdown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedDeck = (String) comboBox1.getSelectedItem();
+                String selectedDeck = (String) dropdown.getSelectedItem();
                 if (selectedDeck.equals("+ Create New Deck")) {
                     createPopup();
                 } else {
                     curr_deck = getDeck(selectedDeck);
-                    // Perform actions based on the selected deck
-                    // For example, displayCards(curr_deck);
+                    openCardGrid(curr_deck);
                 }
             }
         });
@@ -43,11 +42,11 @@ public class DeckMenu2 extends JDialog {
 
     // Method to populate JComboBox with deck names
     private void addDecks() {
-        comboBox1.addItem("Select Deck...");
+        dropdown.addItem("Select Deck...");
         for (Deck deck : decks) {
-            comboBox1.addItem(deck.deck_name);
+            dropdown.addItem(deck.deck_name);
         }
-        comboBox1.addItem("+ Create New Deck");
+        dropdown.addItem("+ Create New Deck");
     }
 
     // Method to get Deck object given deck name
@@ -71,14 +70,28 @@ public class DeckMenu2 extends JDialog {
                 // Create a new deck
                 decks.add(new Deck(inputText));
                 // Update the JComboBox
-                comboBox1.addItem(inputText);
-                comboBox1.setSelectedItem(inputText);
+                dropdown.removeItemAt(dropdown.getItemCount() - 1 );
+                dropdown.addItem(inputText);
+                dropdown.addItem("+ Create New Deck");
+                decks.add(new Deck(inputText));
+                dropdown.setSelectedItem(inputText);
                 // Perform actions for the new deck
                 curr_deck = getDeck(inputText);
                 // For example, displayCards(curr_deck);
             }
         }
 
+    }
+
+    private void openCardGrid(Deck deck) {
+        System.out.println("Selected deck: " + deck); // Add this line to check the selected deck
+        if (deck != null) { // Check if deck is not null
+            // Create and display the cardGrid dialog
+            cardGrid grid = new cardGrid(null, deck);
+            grid.initializeUI();
+        } else {
+            System.out.println("Error: Deck is null");
+        }
     }
 
     public static void main(String[] args){
