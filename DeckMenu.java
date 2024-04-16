@@ -84,8 +84,8 @@ public class DeckMenu {
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
-            new TrueFalseQuiz(curr_deck);
-            frame.dispose();
+            TrueFalseQuiz tfQuiz = new TrueFalseQuiz(curr_deck);
+            if (tfQuiz.sufficientFlashcards()) { frame.dispose(); }
         });
 
         //dropdown action listener
