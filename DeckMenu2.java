@@ -18,6 +18,7 @@ public class DeckMenu2 extends JDialog {
 
         super(parent);
         setTitle("Interactive Flashcards");
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(MainPanel);
         setMinimumSize(new Dimension(800, 800));
         setModal(true);
@@ -70,9 +71,7 @@ public class DeckMenu2 extends JDialog {
                 // Create a new deck
                 decks.add(new Deck(inputText));
                 // Update the JComboBox
-                dropdown.removeItemAt(dropdown.getItemCount() - 1 );
                 dropdown.addItem(inputText);
-                dropdown.addItem("+ Create New Deck");
                 decks.add(new Deck(inputText));
                 dropdown.setSelectedItem(inputText);
                 // Perform actions for the new deck
@@ -84,14 +83,9 @@ public class DeckMenu2 extends JDialog {
     }
 
     private void openCardGrid(Deck deck) {
-        System.out.println("Selected deck: " + deck); // Add this line to check the selected deck
-        if (deck != null) { // Check if deck is not null
-            // Create and display the cardGrid dialog
-            cardGrid grid = new cardGrid(null, deck);
-            grid.initializeUI();
-        } else {
-            System.out.println("Error: Deck is null");
-        }
+        cardGrid grid = new cardGrid(null);
+        grid.setDeck(deck);
+        grid.initializeUI();
     }
 
     public static void main(String[] args){

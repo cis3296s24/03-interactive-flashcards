@@ -10,14 +10,14 @@ public class cardGrid extends JDialog {
     private Deck curr_deck;
     private DeckDatabase database = new DeckDatabase();
 
-    public cardGrid(JFrame parent, Deck deck){
+    public cardGrid(JFrame parent){
         super(parent);
         setTitle("Study Set");
+        setContentPane(cardsPanel);
         setSize(800, 800);
         setModal(true);
         setLocationRelativeTo(parent);
 
-        curr_deck = deck;
         gridPanel = new JPanel(new GridLayout(0, 1));
 
         reviewButton.addActionListener(e -> new Review(curr_deck));
@@ -27,7 +27,8 @@ public class cardGrid extends JDialog {
             new DeckMenu2(null); // Open a new instance of DeckMenu2
         });
 
-        setVisible(true);
+        //createUIComponents();
+        //setVisible(true);
     }
 
     private void createUIComponents() {
@@ -35,31 +36,38 @@ public class cardGrid extends JDialog {
         //Clear grid
         //clearCardGrid();
         //Iterate through deck creating buttons for each card
-        for (int i = 0;i < curr_deck.size();i++) {
-            FlashCard card = curr_deck.get(i);
-            JButton cardButton = new JButton(card.question);
-            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
-            gridPanel.add(cardButton);
-            int index = i;
-            //actionlistener for each card, allows flashcardbuilder to edit card
-            cardButton.addActionListener(e -> {
-                new FlashCardBuilder(curr_deck.get(index),curr_deck);
+        if(curr_deck == null ){
+            return;
+        }else{
+            for (int i = 0;i < curr_deck.size();i++) {
+                FlashCard card = curr_deck.get(i);
+                JButton cardButton = new JButton(card.question);
+                cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+                gridPanel.add(cardButton);
+                int index = i;
+                //actionlistener for each card, allows flashcardbuilder to edit card
+                cardButton.addActionListener(e -> {
+                    new FlashCardBuilder(curr_deck.get(index),curr_deck);
+                });
+            }
+            //Create add new card button
+            JButton plus_button = new JButton("+ Add Card");
+            plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+            gridPanel.add(plus_button);
+            //Actionlistener to create and edit new card
+            plus_button.addActionListener(e -> {
+                FlashCard new_flashcard = new FlashCard();
+                curr_deck.add(new_flashcard);
+                new FlashCardBuilder(new_flashcard,curr_deck);
+                dispose();
             });
+            revalidate();
+            repaint();
+
+            setVisible(true);
 
         }
-        //Create add new card button
-        JButton plus_button = new JButton("+ Add Card");
-        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
-        gridPanel.add(plus_button);
-        //Actionlistener to create and edit new card
-        plus_button.addActionListener(e -> {
-            FlashCard new_flashcard = new FlashCard();
-            curr_deck.add(new_flashcard);
-            new FlashCardBuilder(new_flashcard,curr_deck);
-            dispose();
-        });
-        revalidate();
-        repaint();
+
     }
 
     public void initializeUI(){
@@ -73,6 +81,17 @@ public class cardGrid extends JDialog {
         gridPanel.removeAll();
         revalidate(); // Update layout
         repaint(); // Redraw components
+    }
+
+    public void setDeck(Deck deck){
+        curr_deck = deck;
+    }
+
+    public static void main(String[] args){
+
+        cardGrid test = new cardGrid(null);
+
+
     }
 
 }
