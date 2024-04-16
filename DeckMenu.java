@@ -50,9 +50,8 @@ public class DeckMenu {
                     deckNames.remove(1);
                 }
             }
-            dropdown = new JComboBox<>(deckNames.toArray(deckNamesArr));
+            dropdown = new JComboBox<>(deckNames.toArray(new String[deckNames.size()]));
         }
-
         JLabel dropdownLabel = new JLabel("Decks");
 
 
@@ -185,13 +184,15 @@ public class DeckMenu {
             else {
                 //Dispose popup, update dropdown, create deck, navigate to new deck
                 popupFrame.dispose();
-                dropdown.removeItemAt(decks.size() + 1);
+                System.out.println(dropdown.size() + " / " + decks.size());
+
+                dropdown.removeItemAt(decks.size());
                 dropdown.addItem(inputText);
                 dropdown.addItem("+ Create New Deck");
                 dropdown.repaint();
                 dropdown.revalidate();
                 decks.add(new Deck(inputText));
-                dropdown.setSelectedIndex(decks.size());
+                dropdown.setSelectedIndex(decks.size()-1);
             }
         });
         //Configurations
