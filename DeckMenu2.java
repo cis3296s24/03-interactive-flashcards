@@ -28,6 +28,8 @@ public class DeckMenu2 extends JDialog {
 
         decks = database.read();
         addDecks();
+
+        cardGrid.setLayout(new GridLayout(0,4));
         dropdown.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,34 +92,40 @@ public class DeckMenu2 extends JDialog {
 
     // Method to display cards in a grid layout
     private void displayCards(Deck deck) {
-        clearCardGrid();
-        for (int i = 0;i < deck.size();i++) {
-            FlashCard card = deck.get(i);
-            JButton cardButton = new JButton(card.getQuestion());
-            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-            cardGrid.add(cardButton);
-            int index = i;
-            cardButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    new FlashCardBuilder2(null, curr_deck, deck.get(index));
-                }
-            });
-        }
-        JButton plus_button = new JButton("+ Add Card");
-        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-        cardGrid.add(plus_button);
-        plus_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FlashCard new_flashcard = new FlashCard();
-                curr_deck.add(new_flashcard);
-                new FlashCardBuilder2(null, curr_deck, new_flashcard);
-                dispose();
-            }
-        });
-        revalidate();
-        repaint();
+        new DeckDisplay(deck);
+        dispose();
+//        frame = new JFrame("Deck Display");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//
+//        clearCardGrid();
+//        for (int i = 0;i < deck.size();i++) {
+//            FlashCard card = deck.get(i);
+//            JButton cardButton = new JButton(card.getQuestion());
+//            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+//            cardGrid.add(cardButton);
+//            int index = i;
+//            cardButton.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    new FlashCardBuilder2(null, curr_deck, deck.get(index));
+//                }
+//            });
+//        }
+//        JButton plus_button = new JButton("+ Add Card");
+//        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+//        cardGrid.add(plus_button);
+//        plus_button.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                FlashCard new_flashcard = new FlashCard();
+//                curr_deck.add(new_flashcard);
+//                new FlashCardBuilder2(null, curr_deck, new_flashcard);
+//                dispose();
+//            }
+//        });
+//        revalidate();
+//        repaint();
     }
     private void clearCardGrid() {
         cardGrid.removeAll();
