@@ -34,19 +34,25 @@ public class DeckMenu2 extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedDeck = (String) dropdown.getSelectedItem();
-                if (selectedDeck.equals("+ Create New Deck")) {
-                    createPopup();
-                } else {
+//                if (selectedDeck.equals("+ Create New Deck")) {
+//                    createPopup();
+//                } else {
                     Deck temp = getDeck(selectedDeck);
                     displayCards(temp);
                     curr_deck = temp;
-                }
+                //}
             }
         });
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
 
+        createNewDeckButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createPopup();
+            }
+        });
     }
 
     // Method to populate JComboBox with deck names
@@ -55,7 +61,6 @@ public class DeckMenu2 extends JDialog {
         for (Deck deck : decks) {
             dropdown.addItem(deck.deck_name);
         }
-        dropdown.addItem("+ Create New Deck");
     }
 
     // Method to get Deck object given deck name

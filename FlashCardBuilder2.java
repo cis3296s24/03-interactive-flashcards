@@ -8,6 +8,7 @@ public class FlashCardBuilder2 extends JDialog{
     private JTextArea QuestiontextArea;
     private JTextArea AnswertextArea;
     private JButton saveCardButton;
+    private JButton BACKButton;
     private Deck deck;
     private FlashCard card;
     private DeckDatabase database = new DeckDatabase();
@@ -16,7 +17,7 @@ public class FlashCardBuilder2 extends JDialog{
 
         super(parent);
         setTitle("Edit Card");
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setContentPane(CardBuilder);
         setMinimumSize(new Dimension(600, 600));
         setModal(true);
@@ -24,9 +25,23 @@ public class FlashCardBuilder2 extends JDialog{
 
         deck = d;
         card = c;
+
+        QuestiontextArea.setText(card.question);
+        QuestiontextArea.setLineWrap(true);
+        QuestiontextArea.setWrapStyleWord(true);
+        AnswertextArea.setText(card.answer);
+        AnswertextArea.setLineWrap(true);
+        AnswertextArea.setWrapStyleWord(true);
+
         d.delete(c);
 
         saveCardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCard();
+            }
+        });
+        BACKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCard();
@@ -39,8 +54,12 @@ public class FlashCardBuilder2 extends JDialog{
     private void updateCard() {
         card.question = QuestiontextArea.getText();
         card.answer = AnswertextArea.getText();
-        deck.add(card);
-        database.write(deck);
+        if( card.question.equals("") || card.answer.equals("")){}
+        else {
+            deck.add(card);
+            database.write(deck);
+        }
+        new DeckDisplay(deck);
         dispose();
     }
 
