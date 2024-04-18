@@ -35,14 +35,16 @@ public class DeckMenu2 extends JDialog {
                 if (selectedDeck.equals("+ Create New Deck")) {
                     createPopup();
                 } else {
-                    System.out.println(" in else ");
-                    DeckDisplay display = new DeckDisplay(selectedDeck);
-//                    curr_deck = getDeck(selectedDeck);
-//                    openCardGrid(curr_deck);
+                    Deck temp = getDeck(selectedDeck);
+                    displayCards(temp);
+                    curr_deck = temp;
                 }
             }
         });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+
     }
 
     // Method to populate JComboBox with deck names
@@ -86,11 +88,43 @@ public class DeckMenu2 extends JDialog {
 
     }
 
-    private void openCardGrid(Deck deck) {
-        cardGrid grid = new cardGrid(null, deck);
-        //grid.setDeck(deck);
-        //grid.initializeUI();
+    // Method to display cards in a grid layout
+    private void displayCards(Deck deck) {
+        clearCardGrid();
+        for (int i = 0;i < deck.size();i++) {
+            FlashCard card = deck.get(i);
+            JButton cardButton = new JButton(card.getQuestion());
+            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+            cardGrid.add(cardButton);
+            int index = i;
+            cardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new FlashCardBuilder2(null, curr_deck, deck.get(index));
+                }
+            });
+        }
+        JButton plus_button = new JButton("+ Add Card");
+        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+        cardGrid.add(plus_button);
+        plus_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FlashCard new_flashcard = new FlashCard();
+                curr_deck.add(new_flashcard);
+                new FlashCardBuilder2(null, curr_deck, new_flashcard);
+                dispose();
+            }
+        });
+        revalidate();
+        repaint();
     }
+    private void clearCardGrid() {
+        cardGrid.removeAll();
+        revalidate();
+        repaint();
+    }
+
 
     public static void main(String[] args){
 
