@@ -13,6 +13,8 @@ public class DeckMenu2 extends JDialog {
     private ArrayList<Deck> decks;
     private Deck curr_deck;
     private DeckDatabase database = new DeckDatabase();
+    private JFrame frame;
+    private JPanel cardGrid = new JPanel();
 
     public DeckMenu2(JFrame parent){
 
@@ -33,8 +35,10 @@ public class DeckMenu2 extends JDialog {
                 if (selectedDeck.equals("+ Create New Deck")) {
                     createPopup();
                 } else {
-                    curr_deck = getDeck(selectedDeck);
-                    openCardGrid(curr_deck);
+                    System.out.println(" in else ");
+                    DeckDisplay display = new DeckDisplay(selectedDeck);
+//                    curr_deck = getDeck(selectedDeck);
+//                    openCardGrid(curr_deck);
                 }
             }
         });
@@ -83,9 +87,9 @@ public class DeckMenu2 extends JDialog {
     }
 
     private void openCardGrid(Deck deck) {
-        cardGrid grid = new cardGrid(null);
-        grid.setDeck(deck);
-        grid.initializeUI();
+        cardGrid grid = new cardGrid(null, deck);
+        //grid.setDeck(deck);
+        //grid.initializeUI();
     }
 
     public static void main(String[] args){
