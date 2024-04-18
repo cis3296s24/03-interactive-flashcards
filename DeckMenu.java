@@ -9,8 +9,8 @@ public class DeckMenu {
     private JFrame frame;
     private ArrayList<Deck> decks;
     private Deck curr_deck;
-    private DeckDatabase database = new DeckDatabase();
-    private JPanel cardGrid = new JPanel();
+    private final DeckDatabase database = new DeckDatabase();
+    private final JPanel cardGrid = new JPanel();
     private JComboBox<String> dropdown;
 
 
@@ -184,7 +184,7 @@ public class DeckMenu {
             else {
                 //Dispose popup, update dropdown, create deck, navigate to new deck
                 popupFrame.dispose();
-                System.out.println(dropdown.size() + " / " + decks.size());
+                System.out.println(dropdown.getSize() + " / " + decks.size());
 
                 dropdown.removeItemAt(decks.size());
                 dropdown.addItem(inputText);
