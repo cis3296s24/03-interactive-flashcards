@@ -46,7 +46,7 @@ public class TrueFalseQuiz {
         });
 
         backButton.addActionListener(e -> {
-                new DeckMenu(deck.deck_name);
+                new DeckDisplay(deck);
                 frame.dispose();
             }
         );
