@@ -25,10 +25,7 @@ public class TrueFalseQuiz {
 
         // Setting up the question label
         questionLabel = new JLabel("", SwingConstants.CENTER);
-        if (!updateQuestion()) {
-            sufficientFlashcards = false;
-            return;
-        }
+        updateQuestion();
 
         // Setting up True and False buttons
         JButton trueButton = new JButton("True");
@@ -49,11 +46,13 @@ public class TrueFalseQuiz {
             }
         });
 
-        backButton.addActionListener(e -> {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 new DeckMenu(deck.deck_name);
                 frame.dispose();
             }
-        );
+        });
 
         JPanel backPanel = new JPanel();
         backPanel.add(backButton);
@@ -73,7 +72,7 @@ public class TrueFalseQuiz {
         frame.setVisible(true);
     }
 
-    private boolean updateQuestion() {
+    private void updateQuestion() {
         // Get a random card from the deck
         Random random = new Random();
         int pickNum = random.nextInt(deck.size());
@@ -81,18 +80,20 @@ public class TrueFalseQuiz {
         if (Math.random() > 0.5) {
             answer = true;
             questionLabel.setText("Q: " + currentCard.getQuestion() + "\n" + "A: " + currentCard.getAnswer());
-            if (!checkDeckSize()) { return false; }
         } else {
             answer = false;
             int newNum = random.nextInt(deck.size());
-            if (!checkDeckSize()) { return false; }
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(frame, "Add at least two flashcards to your deck to play!");
+                return;
+            }
             while (newNum == pickNum) {
                 newNum = random.nextInt(deck.size());
             }
             FlashCard fc = deck.get(newNum);
             questionLabel.setText("Q: " + currentCard.getQuestion() + "\n" + "A: " + fc.getAnswer());
         }
-        return true;
+
     }
 
     private void checkAnswer(boolean userAnswer) {
@@ -105,7 +106,6 @@ public class TrueFalseQuiz {
         // Load new question
         updateQuestion();
     }
-
     private boolean checkDeckSize() {
         if (deck.size() < 2) {
             JOptionPane.showMessageDialog(frame, "Add at least two flashcards to your deck to play!");

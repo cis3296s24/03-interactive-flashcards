@@ -24,4 +24,8 @@ public class Deck {
         return deck.size();
     }
 
+    public ArrayList<FlashCard> getDeck() {
+        return new ArrayList<>(deck);
+    }
+
 }
