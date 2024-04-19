@@ -13,6 +13,9 @@ public class DeckMenu {
     private JPanel cardGrid = new JPanel();
     private JComboBox<String> dropdown;
 
+    // *** MAIN CODE PRE UI UPDATE *** //
+    // *** DO NOT EDIT *** //
+    // This branch was created to keep a copy of our original classes without the UI updates
 
     /**
      * Creates a menu where user can select deck then view, edit, and add new cards
