@@ -1,17 +1,66 @@
+import javax.swing.*;
+import javax.swing.border.Border;
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.BrokenBarrierException;
+
+import static java.awt.Color.black;
 
 public class Learn {
 
     private final Deck deck;
+    private JFrame frame;
+    private int current_card;
 
     private static HashMap<FlashCard, Integer> weights = new HashMap<>();
 
     public Learn (Deck deck) {
         this.deck = deck;
+        current_card = 0;
         initialize_map();
+        start();
+    }
+
+    private void start() {
+        frame = new JFrame("Learn");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel answerPanel = new JPanel();
+        JPanel continuePanel = new JPanel();
+
+        Font font = new Font("Helvetica", Font.BOLD,20);
+
+        // first question shown
+        JLabel reviewText = new JLabel(deck.get(current_card).question,SwingConstants.CENTER);
+        reviewText.setFont(font);
+
+        JTextArea answer_box = new JTextArea(1,20);
+
+        Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
+        reviewText.setBorder(blackBorder);
+        reviewText.setMinimumSize(new Dimension(430,250));
+        reviewText.setPreferredSize(new Dimension(430,250));
+        reviewText.setMaximumSize(new Dimension(430,250));
+
+        JButton backButton = new JButton("Back");
+        JButton submit = new JButton("Submit");
+        JButton continue_button = new JButton("Continue");
+
+        mainPanel.add(BorderLayout.NORTH,backButton);
+        mainPanel.add(BorderLayout.CENTER,reviewText);
+        answerPanel.add(BorderLayout.WEST, answer_box);
+        answerPanel.add(BorderLayout.EAST, submit);
+        continuePanel.add(BorderLayout.SOUTH, continue_button);
+
+        frame.getContentPane().add(BorderLayout.NORTH, mainPanel);
+        frame.getContentPane().add(BorderLayout.CENTER, answerPanel);
+        frame.getContentPane().add(BorderLayout.SOUTH, continuePanel);
+        frame.setSize(450,600);
+        frame.setVisible(true);
     }
 
     private void initialize_map() {
@@ -44,6 +93,12 @@ public class Learn {
     public static void main(String[] args) {
         DeckDatabase db = new DeckDatabase();
         Deck deck = db.read().get(2);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {new Learn(deck);}
+        });
+        /*
+
         Learn temp = new Learn(deck);
         weights.replace(deck.get(0), 9);
         weights.replace(deck.get(1), 1);
@@ -55,5 +110,7 @@ public class Learn {
 
 
         //System.out.println(weights);
+
+         */
     }
 }
