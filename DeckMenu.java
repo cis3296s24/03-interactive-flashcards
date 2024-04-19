@@ -62,7 +62,9 @@ public class DeckMenu {
         JPanel buttonPanel = new JPanel();
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
+        JButton matchingButton = new JButton("Match");
         buttonPanel.add(reviewButton, BorderLayout.EAST);
+        buttonPanel.add(matchingButton, BorderLayout.CENTER);
         buttonPanel.add(tfButton, BorderLayout.WEST);
 
         //Add to mainPanel
@@ -86,6 +88,12 @@ public class DeckMenu {
         tfButton.addActionListener(e -> {
             TrueFalseQuiz tfQuiz = new TrueFalseQuiz(curr_deck);
             if (tfQuiz.sufficientFlashcards()) { frame.dispose(); }
+        });
+
+        //match button action listener
+        matchingButton.addActionListener(e -> {
+            new MatchingGame(curr_deck);
+            frame.dispose();
         });
 
         //dropdown action listener
