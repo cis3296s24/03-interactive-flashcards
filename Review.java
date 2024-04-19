@@ -14,8 +14,10 @@ public class Review {
     private int currentCard;
     private DeckDatabase database = new DeckDatabase();
 
+    Font font;
     String fontType; 
     int fontSize;
+    Font getNewFont;    //temp var to getnewfont
 
     public Review(Deck cardList) {
         this.cardList = cardList;
@@ -24,6 +26,7 @@ public class Review {
         currentCard = 0;
         start();
     }
+
     public void start() {
         // create frame
         frame = new JFrame("Review");
@@ -34,7 +37,7 @@ public class Review {
         // set font - default font settings 
         fontType = "Helvetica"; 
         fontSize = 20;
-        Font font = new Font("Helvetica", Font.BOLD,20);
+        font = new Font("Helvetica", Font.BOLD,20);
 
         // first question shown
         JLabel reviewText = new JLabel(cardList.get(currentCard).question,SwingConstants.CENTER);
@@ -102,14 +105,11 @@ public class Review {
             @Override
             public void actionPerformed(ActionEvent e){
             
-                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize); 
+                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize, Review.this); 
                 DSMenu.start(); 
-                fontType = DSMenu.getNewFont(); 
-                fontSize = DSMenu.getNewFontSize(); 
-                
-                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
-                reviewText.setFont(getNewFont); //changes font to getNewFont
-                
+
+                font = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
+                reviewText.setFont(font); //changes font to getNewFont
             }
         }); 
 
@@ -125,5 +125,14 @@ public class Review {
         frame.getContentPane().add(BorderLayout.CENTER,reviewPanel);
         frame.setSize(450,600);
         frame.setVisible(true);
+    }
+
+    public void setNewFont(String newFontTemp){
+        this.fontType = newFontTemp; 
+    }
+
+    /*setter for newFontSize */
+    public void setNewFontSize(int newFontSizeTemp){
+        this.fontSize= newFontSizeTemp; 
     }
 }
