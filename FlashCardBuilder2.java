@@ -19,7 +19,7 @@ public class FlashCardBuilder2 extends JDialog{
         setTitle("Edit Card");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setContentPane(CardBuilder);
-        setMinimumSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(500, 500));
         setModal(true);
         setLocationRelativeTo(parent);
 

@@ -22,7 +22,7 @@ public class DeckMenu2 extends JDialog {
         setTitle("Interactive Flashcards");
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(MainPanel);
-        setMinimumSize(new Dimension(800, 800));
+        setMinimumSize(new Dimension(500, 500));
         setModal(true);
         setLocationRelativeTo(parent);
 

@@ -9,7 +9,7 @@ public class DeckDisplay extends JFrame {
         clearCardPanel();
         setTitle("Deck Display");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setPreferredSize(new Dimension(500, 600));
+        setPreferredSize(new Dimension(500, 500));
 
         // Set background color
         getContentPane().setBackground(new Color(225, 252, 255));
@@ -90,7 +90,7 @@ public class DeckDisplay extends JFrame {
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
-            new TrueFalseQuiz(deck);
+            new TrueFalse(null, deck);
             dispose();
         });
 
