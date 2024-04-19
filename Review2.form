@@ -65,7 +65,7 @@
           <text value="Back"/>
         </properties>
       </component>
-      <component id="617af" class="javax.swing.JLabel">
+      <component id="617af" class="javax.swing.JLabel" binding="reviewLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

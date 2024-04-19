@@ -84,7 +84,7 @@ public class DeckDisplay extends JFrame {
 
         //review button action listener
         reviewButton.addActionListener(e -> {
-            new Review(deck);
+            new Review2(null, deck);
             dispose();
         });
 

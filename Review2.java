@@ -1,8 +1,11 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static java.awt.Color.black;
 
 public class Review2 extends JDialog{
     private JButton flipButton;
@@ -11,6 +14,7 @@ public class Review2 extends JDialog{
     private JButton lastButton;
     private JButton displaySettingsButton;
     private JButton backButton;
+    private JLabel reviewLabel;
     private Deck cardList;
     private ArrayList<Deck> deckList;
     private int currentCard;
@@ -20,41 +24,74 @@ public class Review2 extends JDialog{
     public Review2(JFrame parent, Deck d) {
 
         super(parent);
-        cardList = d;
         setTitle("Review");
         setContentPane(panel1);
         setMinimumSize(new Dimension(500, 500));
         setModal(true);
         setLocationRelativeTo(parent);
 
+        cardList = d;
+        database.write(cardList);
+        this.deckList = database.read();
+        currentCard = 0;
+
+        reviewLabel.setText(cardList.get(currentCard).question);
+        Border blackBorder = BorderFactory.createLineBorder(black);
+        reviewLabel.setBorder(blackBorder);
+        reviewLabel.setMinimumSize(new Dimension(430,250));
+        reviewLabel.setPreferredSize(new Dimension(430,250));
+        reviewLabel.setMaximumSize(new Dimension(430,250));
+        reviewLabel.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // button listeners
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new DeckDisplay(cardList);
+                dispose();
             }
         });
         flipButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (reviewLabel.getText() == cardList.get(currentCard).question) {
+                    reviewLabel.setText(cardList.get(currentCard).answer);
+                }
+                else if (reviewLabel.getText() == cardList.get(currentCard).answer) {
+                    reviewLabel.setText(cardList.get(currentCard).question);
+                }
             }
         });
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (currentCard + 1 == cardList.size()) {
+                    currentCard = -1;
+                }
+                currentCard++;
+                reviewLabel.setText(cardList.get(currentCard).question);
             }
         });
         lastButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (currentCard - 1 < 0) {
+                    currentCard = cardList.size();
+                }
+                currentCard--;
+                reviewLabel.setText(cardList.get(currentCard).question);
             }
         });
         displaySettingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+//                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
+//                DSMenu.start();
+//                fontType = DSMenu.getNewFont();
+//                fontSize = DSMenu.getNewFontSize();
+//
+//                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
+//                reviewText.setFont(getNewFont); //changes font to getNewFont
             }
         });
 
