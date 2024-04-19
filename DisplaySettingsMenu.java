@@ -15,11 +15,11 @@ public class DisplaySettingsMenu{
     
     private String newFont; //should change to new font
     private int newFontSize; 
-    private Review thisReview; 
+    private Review2 thisReview;
 
     private static String []fontStrings;
 
-    DisplaySettingsMenu(String fontType, int newFontSize, Review thisReview){
+    DisplaySettingsMenu(String fontType, int newFontSize, Review2 thisReview){
         this.newFont = fontType; //initializes newText to whatever font is initially in Review
         this.newFontSize = newFontSize; 
         this.thisReview = thisReview; 
@@ -43,7 +43,7 @@ public class DisplaySettingsMenu{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newFontTemp = (String) fontList.getSelectedItem();  //sets newText to whatever is selected
-                thisReview.setNewFont(newFontTemp);    //setter for newFont
+                //thisReview.setNewFont(newFontTemp);    //setter for newFont
                 // TODO Auto-generated method stub
                 //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
@@ -67,7 +67,7 @@ public class DisplaySettingsMenu{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int newFontSizeTemp = (Integer)fontSize.getSelectedItem(); 
-                thisReview.setNewFontSize(newFontSizeTemp); //set newFontSize for review object 
+                //thisReview.setNewFontSize(newFontSizeTemp); //set newFontSize for review object
             }
         });
 
