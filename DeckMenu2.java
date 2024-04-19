@@ -53,6 +53,14 @@ public class DeckMenu2 extends JDialog {
                 createPopup();
             }
         });
+        createNewDeckButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //new_deck =
+                //new DeckDisplay(new Deck(new_deck));
+            }
+        });
     }
 
     // Method to populate JComboBox with deck names

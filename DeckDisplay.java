@@ -65,13 +65,18 @@ public class DeckDisplay extends JFrame {
         buttonPanel.setBackground(new Color(225, 252, 255));
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
+        JButton backButton = new JButton("Back");
         reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
         reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
         reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         tfButton.setBackground(new Color(225, 252, 255)); // Set background color
         tfButton.setForeground(new Color(75, 90, 152)); // Set text color
         tfButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        backButton.setBackground(new Color(225, 252, 255)); // Set background color
+        backButton.setForeground(new Color(75, 90, 152)); // Set text color
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
 
+        buttonPanel.add(backButton);
         buttonPanel.add(reviewButton);
         buttonPanel.add(tfButton);
 
@@ -81,6 +86,12 @@ public class DeckDisplay extends JFrame {
         getContentPane().add(BorderLayout.CENTER, cardPanel);
         getContentPane().add(BorderLayout.SOUTH,buttonPanel);
         setSize(450,600);
+
+        //back button action listener
+        backButton.addActionListener(e -> {
+            new DeckMenu2(null);
+            dispose();
+        });
 
         //review button action listener
         reviewButton.addActionListener(e -> {
