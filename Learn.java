@@ -13,13 +13,15 @@ public class Learn {
 
     private final Deck deck;
     private JFrame frame;
-    private int current_card;
+    private FlashCard current_card;
+    private JTextArea answer_box;
+    private JLabel reviewText;
 
     private static HashMap<FlashCard, Integer> weights = new HashMap<>();
 
     public Learn (Deck deck) {
         this.deck = deck;
-        current_card = 0;
+        current_card = deck.get(0);
         initialize_map();
         start();
     }
@@ -35,12 +37,14 @@ public class Learn {
         Font font = new Font("Helvetica", Font.BOLD,20);
 
         // first question shown
-        JLabel reviewText = new JLabel(deck.get(current_card).question,SwingConstants.CENTER);
+        reviewText = new JLabel(current_card.question,SwingConstants.CENTER);
         reviewText.setFont(font);
 
-        JTextArea answer_box = new JTextArea(1,20);
-
         Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
+
+        answer_box = new JTextArea(1,20);
+        answer_box.setBorder(blackBorder);
+
         reviewText.setBorder(blackBorder);
         reviewText.setMinimumSize(new Dimension(430,250));
         reviewText.setPreferredSize(new Dimension(430,250));
@@ -61,7 +65,31 @@ public class Learn {
         frame.getContentPane().add(BorderLayout.SOUTH, continuePanel);
         frame.setSize(450,600);
         frame.setVisible(true);
+
+        submit.addActionListener(e -> {
+            String inputText = answer_box.getText();
+            if (inputText.isEmpty()) {
+                answer_box.setBorder(BorderFactory.createLineBorder(Color.RED));
+            }
+            else {
+                if (inputText.toLowerCase().contains(current_card.answer.toLowerCase()) || current_card.answer.toLowerCase().contains(inputText.toLowerCase())) {
+                    reviewText.setForeground(Color.decode("#91FF8A"));
+                    reviewText.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+                    answer_box.setEnabled(false);
+                    reviewText.setText("<html>" + current_card.question + "<br><br>" + current_card.answer + "<html>");
+                }
+                else {
+                    reviewText.setForeground(Color.RED);
+                    reviewText.setBorder(BorderFactory.createLineBorder(Color.RED));
+                    answer_box.setEnabled(false);
+                    reviewText.setText("<html>" + current_card.question + "<br><br>" + current_card.answer + "<html>");
+                }
+            }
+        });
+
+
     }
+
 
     private void initialize_map() {
         for (int i = 0; i < deck.size(); i++) {
@@ -92,7 +120,7 @@ public class Learn {
 
     public static void main(String[] args) {
         DeckDatabase db = new DeckDatabase();
-        Deck deck = db.read().get(2);
+        Deck deck = db.read().get(1);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {new Learn(deck);}
