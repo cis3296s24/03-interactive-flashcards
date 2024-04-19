@@ -37,7 +37,7 @@ public class MatchingGame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DeckMenu(deck.deck_name);
+                new DeckDisplay(deck);
                 frame.dispose();
             }
         });
@@ -114,7 +114,7 @@ public class MatchingGame {
             matchedPairs++;
             if (matchedPairs == totalPairs) {
                 JOptionPane.showMessageDialog(frame, "Congratulations! You've matched all pairs!");
-                new DeckMenu(deck.deck_name);
+                new DeckDisplay(deck);
                 frame.dispose();
             }
         } else {
