@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+[{"Math Problems":{"7*3":"21"}},{"State Capitals":{"New York":"Albany","California":"Sacramento","New Jersey":"Trenton","Pennsylvania":"Harrisburg"}},{"Countries in North America":{"Canada":"Yes","Colombia":"No"}}]
+=======
 [{"Test Deck":{"Question":"Answer"}},{"Countries in North America":{"Canada":"Yes","Colombia":"No"}},{"Another Deck":{"Another Question":"Another Answer"}},{"Math Problems":{"7*3":"21","10 + 10":"20\n"}},{"Math Problems":{"7*3":"21"}},{"State Capitals":{"Deleware":"Dover","New York":"Albany","Georgia":"Atlanta","New Jersey":"Trenton","Pennsylvania":"Harrisburg"}}]
+>>>>>>> main
