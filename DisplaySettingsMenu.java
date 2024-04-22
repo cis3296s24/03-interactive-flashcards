@@ -12,14 +12,17 @@ import java.awt.event.ActionListener;
 public class DisplaySettingsMenu{
     private JFrame DSFrame; 
     private JPopupMenu DSMenu; 
-    private String newText; //should change to new font
+    
+    private String newFont; //should change to new font
     private int newFontSize; 
+    private Review2 thisReview;
 
     private static String []fontStrings;
 
-    DisplaySettingsMenu(String fontType, int newFontSize){
-        this.newText = fontType; //initializes newText to whatever font is initially in Review
+    DisplaySettingsMenu(String fontType, int newFontSize, Review2 thisReview){
+        this.newFont = fontType; //initializes newText to whatever font is initially in Review
         this.newFontSize = newFontSize; 
+        this.thisReview = thisReview; 
     }
 
     public void start(){
@@ -39,8 +42,8 @@ public class DisplaySettingsMenu{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                newText = (String) fontList.getSelectedItem();  //sets newText to whatever is selected
-                System.out.print(newText);
+                String newFontTemp = (String) fontList.getSelectedItem();  //sets newText to whatever is selected
+                //thisReview.setNewFont(newFontTemp);    //setter for newFont
                 // TODO Auto-generated method stub
                 //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
@@ -63,8 +66,17 @@ public class DisplaySettingsMenu{
         fontSize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                newFontSize = (Integer)fontSize.getSelectedItem(); 
-                System.out.print(newFontSize); 
+                int newFontSizeTemp = (Integer)fontSize.getSelectedItem(); 
+                //thisReview.setNewFontSize(newFontSizeTemp); //set newFontSize for review object
+            }
+        });
+
+        /*add set changes button - disposes frame when clicked*/
+        JButton setChanges = new JButton("ok"); 
+        setChanges.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DSFrame.dispose(); 
             }
         });
         
@@ -74,21 +86,14 @@ public class DisplaySettingsMenu{
         displaySettingsPanel.add(fontList); 
         displaySettingsPanel.add(selectFontSizeLabel);  //add select font size label
         displaySettingsPanel.add(fontSize); //add select font size jcombobox
+        displaySettingsPanel.add(setChanges);   //add selectChanges button 
 
 
         DSFrame.add(displaySettingsPanel);  //add comboBox fontLIst to frame
         DSFrame.setSize(400, 400);   // format frame
         DSFrame.setVisible(true);   //set visible    
     }
-    
-    
-    public String getNewFont(){
-        return newText; 
-    }
 
-    public int getNewFontSize(){
-        return newFontSize; 
-    }
 
 
     /* gets all fonts in system and puts them into fontStrings list */
@@ -100,7 +105,6 @@ public class DisplaySettingsMenu{
 
         //gets names of all fonts and puts into fontStrings array
         for(int i = 0; i<getFonts.length; i++){ //prints all fonts to output
-            //System.out.print(getFonts[i].getName() + "\n"); //prints all fonts to screen DELETE (eventually)
             fontStrings[i] = getFonts[i].getName(); 
         }
     }
