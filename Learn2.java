@@ -67,6 +67,7 @@ public class Learn2 extends JDialog{
             reviewLabel.setForeground(Color.BLACK);
             reviewLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             inputBox.setEnabled(true);
+            inputBox.setText("");
         });
 
         backButton.addActionListener(e -> {
