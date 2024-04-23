@@ -43,17 +43,6 @@
           <text value="Last"/>
         </properties>
       </component>
-      <component id="861cd" class="javax.swing.JButton" binding="displaySettingsButton" default-binding="true">
-        <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-1966849"/>
-          <font name="Avenir Next Condensed" size="20" style="0"/>
-          <foreground color="-11838824"/>
-          <text value="Display Settings"/>
-        </properties>
-      </component>
       <component id="1524d" class="javax.swing.JButton" binding="backButton" default-binding="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
