@@ -75,7 +75,7 @@ public class DeckMenu2 extends JDialog {
 
     // Method to create a new deck
     private void createPopup() {
-
+        System.out.println("check");
         String inputText = JOptionPane.showInputDialog(this, "Enter the name of the new deck:");
         if (inputText != null && !inputText.isEmpty()) {
             if (getDeck(inputText) != null) {
