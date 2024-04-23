@@ -33,13 +33,9 @@ public class DeckMenu2 extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedDeck = (String) dropdown.getSelectedItem();
-//                if (selectedDeck.equals("+ Create New Deck")) {
-//                    createPopup();
-//                } else {
                     Deck temp = getDeck(selectedDeck);
                     displayCards(temp);
                     curr_deck = temp;
-                //}
             }
         });
 
@@ -74,21 +70,16 @@ public class DeckMenu2 extends JDialog {
 
     // Method to create a new deck
     private void createPopup() {
-        System.out.println("check");
         String inputText = JOptionPane.showInputDialog(this, "Enter the name of the new deck:");
         if (inputText != null && !inputText.isEmpty()) {
             if (getDeck(inputText) != null) {
                 JOptionPane.showMessageDialog(this, "A deck with this name already exists!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                // Create a new deck
-                decks.add(new Deck(inputText));
-                // Update the JComboBox
-                //dropdown.addItem(inputText);
-                //dropdown.setSelectedItem(inputText);
-                // Perform actions for the new deck
+                Deck d = new Deck(inputText);
+                decks.add(d);
                 curr_deck = getDeck(inputText);
-                displayCards(curr_deck);
-                // For example, displayCards(curr_deck);
+                displayCards(d);
+                curr_deck = d;
             }
         }
 
@@ -98,43 +89,6 @@ public class DeckMenu2 extends JDialog {
     private void displayCards(Deck deck) {
         new DeckDisplay(deck);
         dispose();
-//        frame = new JFrame("Deck Display");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//
-//        clearCardGrid();
-//        for (int i = 0;i < deck.size();i++) {
-//            FlashCard card = deck.get(i);
-//            JButton cardButton = new JButton(card.getQuestion());
-//            cardButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-//            cardGrid.add(cardButton);
-//            int index = i;
-//            cardButton.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    new FlashCardBuilder2(null, curr_deck, deck.get(index));
-//                }
-//            });
-//        }
-//        JButton plus_button = new JButton("+ Add Card");
-//        plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-//        cardGrid.add(plus_button);
-//        plus_button.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                FlashCard new_flashcard = new FlashCard();
-//                curr_deck.add(new_flashcard);
-//                new FlashCardBuilder2(null, curr_deck, new_flashcard);
-//                dispose();
-//            }
-//        });
-//        revalidate();
-//        repaint();
-    }
-    private void clearCardGrid() {
-        cardGrid.removeAll();
-        revalidate();
-        repaint();
     }
 
 
