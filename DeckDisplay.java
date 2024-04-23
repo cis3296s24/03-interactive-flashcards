@@ -10,7 +10,7 @@ public class DeckDisplay extends JFrame {
         clearCardPanel();
         setTitle("Deck Display");
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setPreferredSize(new Dimension(500, 500));
+        setPreferredSize(new Dimension(750, 500));
 
         // Set background color
         getContentPane().setBackground(new Color(225, 252, 255));
@@ -64,10 +64,13 @@ public class DeckDisplay extends JFrame {
         //Create panel and buttons, add to panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Align buttons to center
         buttonPanel.setBackground(new Color(225, 252, 255));
+
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
         JButton backButton = new JButton("Back");
         JButton learnButton = new JButton("Learn");
+        JButton mcButton = new JButton("Multiple Choice");
+
         reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
         reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
         reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
@@ -78,10 +81,15 @@ public class DeckDisplay extends JFrame {
         learnButton.setForeground(new Color(75, 90, 152)); // Set text color
         learnButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
 
+        mcButton.setBackground(new Color(225, 252, 255)); // Set background color
+        mcButton.setForeground(new Color(75, 90, 152)); // Set text color
+        mcButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
         //buttonPanel.add(backButton);
         buttonPanel.add(reviewButton);
         buttonPanel.add(tfButton);
         buttonPanel.add(learnButton);
+        buttonPanel.add(mcButton);
 
         JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,10));
         backButtonPanel.setBackground(new Color(225, 252, 255)); // Set background color
@@ -106,6 +114,12 @@ public class DeckDisplay extends JFrame {
         getContentPane().add(BorderLayout.NORTH,buttonPanel);
 
         setSize(450,600);
+
+        //MC quiz button action listener
+        mcButton.addActionListener(e -> {
+            dispose();
+            new MCQuiz(deck);
+        });
 
         //back button action listener
         backButton.addActionListener(e -> {
@@ -135,6 +149,7 @@ public class DeckDisplay extends JFrame {
             dispose();
             new DeckMenu2(null);
         });
+
 
         pack();
         setLocationRelativeTo(null);
