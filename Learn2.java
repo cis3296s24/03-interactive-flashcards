@@ -12,7 +12,6 @@ public class Learn2 extends JDialog{
     private JPanel panel1;
     private JButton backButton;
     private JButton submitButton;
-    private JButton displaySettingsButton;
     private JButton continueButton;
     private JTextField inputBox;
     private JLabel reviewLabel;
@@ -67,7 +66,7 @@ public class Learn2 extends JDialog{
             reviewLabel.setForeground(Color.BLACK);
             reviewLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             inputBox.setEnabled(true);
-            inputBox.setText("");
+            inputBox.setText("Please Enter Answer");
         });
 
         backButton.addActionListener(e -> {
@@ -75,18 +74,6 @@ public class Learn2 extends JDialog{
             dispose();
         });
 
-        displaySettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
-//                DSMenu.start();
-//                fontType = DSMenu.getNewFont();
-//                fontSize = DSMenu.getNewFontSize();
-//
-//                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
-//                reviewText.setFont(getNewFont); //changes font to getNewFont
-            }
-        });
 
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
