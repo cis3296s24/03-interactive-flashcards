@@ -9,7 +9,7 @@ public class DeckDisplay extends JFrame {
     public DeckDisplay(Deck deck) {
         clearCardPanel();
         setTitle("Deck Display");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(500, 500));
 
         // Set background color
@@ -111,6 +111,7 @@ public class DeckDisplay extends JFrame {
         backButton.addActionListener(e -> {
             new DeckMenu2(null);
             dispose();
+            setVisible(false);
         });
 
         //review button action listener
@@ -130,10 +131,10 @@ public class DeckDisplay extends JFrame {
             dispose();
         });
 
-        backButton.addActionListener(e -> {
-            new DeckMenu2(null);
-            dispose();
-        });
+//        backButton.addActionListener(e -> {
+//            new DeckMenu2(null);
+//            dispose();
+//        });
 
         deleteButton.addActionListener(e -> {
             database.delete(deck);
@@ -143,6 +144,7 @@ public class DeckDisplay extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
