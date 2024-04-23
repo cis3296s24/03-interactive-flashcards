@@ -4,6 +4,7 @@ import java.awt.*;
 public class DeckDisplay extends JFrame {
     private JPanel cardPanel;
     private JPanel mainPanel;
+    private DeckDatabase database = new DeckDatabase();
 
     public DeckDisplay(Deck deck) {
         clearCardPanel();
@@ -66,16 +67,12 @@ public class DeckDisplay extends JFrame {
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
         JButton learnButton = new JButton("Learn");
-        JButton backButton = new JButton("Back");
         reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
         reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
         reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         tfButton.setBackground(new Color(225, 252, 255)); // Set background color
         tfButton.setForeground(new Color(75, 90, 152)); // Set text color
         tfButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
-        backButton.setBackground(new Color(225, 252, 255)); // Set background color
-        backButton.setForeground(new Color(75, 90, 152)); // Set text color
-        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         learnButton.setBackground(new Color(225, 252, 255)); // Set background color
         learnButton.setForeground(new Color(75, 90, 152)); // Set text color
         learnButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
@@ -89,6 +86,18 @@ public class DeckDisplay extends JFrame {
         JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,10));
         backButtonPanel.setBackground(new Color(225, 252, 255)); // Set background color
         backButtonPanel.setForeground(new Color(75, 90, 152)); // Set text color
+
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(new Color(225, 252, 255)); // Set background color
+        backButton.setForeground(new Color(75, 90, 152)); // Set text color
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.setBackground(new Color(225, 252, 255)); // Set background color
+        deleteButton.setForeground(new Color(75, 90, 152)); // Set text color
+        deleteButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+        backButtonPanel.add(deleteButton);
         backButtonPanel.add(backButton);
 
 
@@ -117,6 +126,12 @@ public class DeckDisplay extends JFrame {
         });
 
         backButton.addActionListener(e -> {
+            new DeckMenu2(null);
+            dispose();
+        });
+
+        deleteButton.addActionListener(e -> {
+            database.delete(deck);
             new DeckMenu2(null);
             dispose();
         });
