@@ -38,8 +38,8 @@ public class DeckDisplay extends JFrame {
             cardPanel.add(cardButton);
             //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
-                new FlashCardBuilder2(null, deck, card);
                 dispose();
+                new FlashCardBuilder2(null, deck, card);
             });
         }
 
@@ -55,8 +55,8 @@ public class DeckDisplay extends JFrame {
         plus_button.addActionListener(e -> {
             FlashCard new_flashcard = new FlashCard();
             deck.add(new_flashcard);
-            new FlashCardBuilder2(null, deck, new_flashcard);
             dispose();
+            new FlashCardBuilder2(null, deck, new_flashcard);
         });
         revalidate();
         repaint();
@@ -109,37 +109,31 @@ public class DeckDisplay extends JFrame {
 
         //back button action listener
         backButton.addActionListener(e -> {
-            new DeckMenu2(null);
             dispose();
-            setVisible(false);
+            new DeckMenu2(null);
         });
 
         //review button action listener
         reviewButton.addActionListener(e -> {
-            new Review2(null, deck);
             dispose();
+            new Review2(null, deck);
         });
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
-            new TrueFalse(null, deck);
             dispose();
+            new TrueFalse(null, deck);
         });
 
         learnButton.addActionListener(e -> {
-            new Learn2(null, deck);
             dispose();
+            new Learn2(null, deck);
         });
-
-//        backButton.addActionListener(e -> {
-//            new DeckMenu2(null);
-//            dispose();
-//        });
 
         deleteButton.addActionListener(e -> {
             database.delete(deck);
-            new DeckMenu2(null);
             dispose();
+            new DeckMenu2(null);
         });
 
         pack();
