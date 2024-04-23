@@ -66,24 +66,37 @@ public class DeckDisplay extends JFrame {
         JButton reviewButton = new JButton("Review");
         JButton tfButton = new JButton("Quiz");
         JButton learnButton = new JButton("Learn");
+        JButton backButton = new JButton("Back");
         reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
         reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
         reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         tfButton.setBackground(new Color(225, 252, 255)); // Set background color
         tfButton.setForeground(new Color(75, 90, 152)); // Set text color
         tfButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        backButton.setBackground(new Color(225, 252, 255)); // Set background color
+        backButton.setForeground(new Color(75, 90, 152)); // Set text color
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         learnButton.setBackground(new Color(225, 252, 255)); // Set background color
         learnButton.setForeground(new Color(75, 90, 152)); // Set text color
         learnButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+
 
         buttonPanel.add(reviewButton);
         buttonPanel.add(tfButton);
         buttonPanel.add(learnButton);
 
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,10));
+        backButtonPanel.setBackground(new Color(225, 252, 255)); // Set background color
+        backButtonPanel.setForeground(new Color(75, 90, 152)); // Set text color
+        backButtonPanel.add(backButton);
+
 
         //Add to frame
+        getContentPane().add(BorderLayout.SOUTH,backButtonPanel);
         getContentPane().add(BorderLayout.CENTER, cardPanel);
         getContentPane().add(BorderLayout.NORTH,buttonPanel);
+
         setSize(450,600);
 
         //review button action listener
@@ -100,6 +113,11 @@ public class DeckDisplay extends JFrame {
 
         learnButton.addActionListener(e -> {
             new Learn2(null, deck);
+            dispose();
+        });
+
+        backButton.addActionListener(e -> {
+            new DeckMenu2(null);
             dispose();
         });
 
