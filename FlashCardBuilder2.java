@@ -9,6 +9,7 @@ public class FlashCardBuilder2 extends JDialog{
     private JTextArea AnswertextArea;
     private JButton saveCardButton;
     private JButton BACKButton;
+    private JButton DELETEButton;
     private Deck deck;
     private FlashCard card;
     private DeckDatabase database = new DeckDatabase();
@@ -48,6 +49,13 @@ public class FlashCardBuilder2 extends JDialog{
             }
         });
 
+        DELETEButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                deleteCard();
+            }
+        });
+
         setVisible(true);
     }
 
@@ -59,6 +67,13 @@ public class FlashCardBuilder2 extends JDialog{
             deck.add(card);
             database.write(deck);
         }
+        new DeckDisplay(deck);
+        dispose();
+    }
+
+    private void deleteCard() {
+        deck.delete(card);
+        database.write(deck);
         new DeckDisplay(deck);
         dispose();
     }

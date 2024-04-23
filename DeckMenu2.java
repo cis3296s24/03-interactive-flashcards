@@ -17,7 +17,6 @@ public class DeckMenu2 extends JDialog {
     private JPanel cardGrid = new JPanel();
 
     public DeckMenu2(JFrame parent){
-
         super(parent);
         setTitle("Interactive Flashcards");
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
