@@ -3,8 +3,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +27,8 @@ public class Learn2 extends JDialog{
 
     /**
      * The constructor creates the UI, buttons, and action listeners for the learn functionalisty
-     * @param parent
-     * @param deck
+     * @param parent JFrame Parent
+     * @param deck Deck
      */
     public Learn2 (JFrame parent, Deck deck) {
         super(parent);
@@ -86,16 +84,13 @@ public class Learn2 extends JDialog{
             new DeckDisplay(deck);
             dispose();
         });
-        inputBox.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                inputBox.setText("");
-            }
-        });
+
+
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
+
+
     }
 
     /**
@@ -109,8 +104,8 @@ public class Learn2 extends JDialog{
 
     /**
      * Updates weight of the card depending on whether the user gets the question right or wrong
-     * @param card
-     * @param isCorrect
+     * @param card Flashcard
+     * @param isCorrect boolean
      */
     private void update_weight(FlashCard card, boolean isCorrect) {
         if (isCorrect && weights.get(card) != 1) { weights.replace(card, weights.get(card) - 1); }

@@ -15,7 +15,7 @@ public class DeckDisplay extends JFrame {
 
     /**
      * Constructor performs the UI and the population of the buttons and images.
-     * @param deck
+     * @param deck Deck
      */
     public DeckDisplay(Deck deck) {
         clearCardPanel();
@@ -136,9 +136,8 @@ public class DeckDisplay extends JFrame {
 
         //MC quiz button action listener
         mcButton.addActionListener(e -> {
-            System.out.println("check");
-            new MCQuiz(deck);
             dispose();
+            new MCQuiz(deck);
         });
 
         //back button action listener

@@ -9,7 +9,7 @@ public class Deck {
 
     /**
      * Constructor takes name for deck
-     * @param deck_name
+     * @param deck_name deck name
      */
     public Deck(String deck_name) {
         this.deck_name = deck_name;
@@ -17,7 +17,7 @@ public class Deck {
 
     /**
      * add function adds card to the deck
-     * @param card
+     * @param card Flashcard
      */
     public void add(FlashCard card) {
         deck.add(card);
@@ -25,7 +25,7 @@ public class Deck {
 
     /**
      * get function gets card at specified indeck and returns card
-     * @param index
+     * @param index index
      * @return Flashcard
      */
     public FlashCard get(int index) {
@@ -34,7 +34,7 @@ public class Deck {
 
     /**
      * delete function deletes the flashcard provided
-     * @param card
+     * @param card Flashcard
      */
     public void delete(FlashCard card) {
         deck.remove(card);
@@ -42,7 +42,7 @@ public class Deck {
 
     /**
      * size function returns the size of the deck
-     * @return
+     * @return size of deck
      */
     public int size() {
         return deck.size();
