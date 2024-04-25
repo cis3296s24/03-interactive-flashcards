@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Learn allows the user be tested on their knowledge by inputting an answer into a text
+ * field and being notified that they were correct or incorrect. If the user is correct,
+ * the weight of the card decreases, making it less likely to be seen again, and if they get it
+ * incorrect, it is more likely they will see that card again.
+ */
 public class Learn2 extends JDialog{
     private JPanel panel1;
     private JButton backButton;
@@ -21,6 +27,11 @@ public class Learn2 extends JDialog{
     private FlashCard curr_card;
     private static HashMap<FlashCard, Integer> weights = new HashMap<>();
 
+    /**
+     * The constructor creates the UI, buttons, and action listeners for the learn functionalisty
+     * @param parent
+     * @param deck
+     */
     public Learn2 (JFrame parent, Deck deck) {
         super(parent);
         this.deck = deck;
@@ -87,20 +98,30 @@ public class Learn2 extends JDialog{
         setVisible(true);
     }
 
-
-
+    /**
+     * Initializes the Hashmap for weights to a weight ot 5 each
+     */
     private void initialize_map() {
         for (int i = 0; i < deck.size(); i++) {
             weights.put(deck.get(i), 5);
         }
     }
 
+    /**
+     * Updates weight of the card depending on whether the user gets the question right or wrong
+     * @param card
+     * @param isCorrect
+     */
     private void update_weight(FlashCard card, boolean isCorrect) {
         if (isCorrect && weights.get(card) != 1) { weights.replace(card, weights.get(card) - 1); }
         else if (!isCorrect && weights.get(card) != 10) { weights.replace(card, weights.get(card) + 1); }
     }
 
-    //Cumulative Density Function
+    /**
+     * the cumulative density function returns a flashcard randomly based on the weights of the cards.
+     * A card with a larger weight is more likely to be chosen and a card with a lower weight is less likely to be chosen.
+     * @return Flashcard
+     */
     private FlashCard cdf() {
 
         int cumulative_sum = weights.values().stream().mapToInt(Integer::intValue).sum();

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static java.awt.Color.black;
 
+/**
+ * The review class allows for users to iterate through and flip cards much like how physical flashcards would work.
+ */
 public class Review2 extends JDialog{
     private JButton flipButton;
     private JPanel panel1;
@@ -20,7 +23,12 @@ public class Review2 extends JDialog{
     private int currentCard;
     private DeckDatabase database = new DeckDatabase();
 
-
+    /**
+     * Constructor takes the parent frame and the deck, and creates the UI, the buttons and the actionlisteners.
+     * Allows user to move through deck either forwards ot backwards, and the ability to flip each card to see the back/front question/answer.
+     * @param parent
+     * @param d
+     */
     public Review2(JFrame parent, Deck d) {
 
         super(parent);

@@ -2,11 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.math.MathContext;
 
+/**
+ * DeckDisplay creates the deck display panel and automatically populates it with the flashcard buttons
+ * Allows for user to perform any of the quiz functionality on the deck passed to it and enter the flashcard builder from
+ * any of the flashcard buttons
+ * Option to delete the deck as well.
+ */
 public class DeckDisplay extends JFrame {
     private JPanel cardPanel;
     private JPanel mainPanel;
     private DeckDatabase database = new DeckDatabase();
 
+    /**
+     * Constructor performs the UI and the population of the buttons and images.
+     * @param deck
+     */
     public DeckDisplay(Deck deck) {
         clearCardPanel();
         setTitle("Deck Display");
@@ -173,6 +183,9 @@ public class DeckDisplay extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * ClearCardPanel clears the grid of flashcard buttons
+     */
     private void clearCardPanel() {
         if(this.cardPanel != null) {
             cardPanel.removeAll();

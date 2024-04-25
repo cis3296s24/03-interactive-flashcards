@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Flashcard Builder allows user to create, edit, and delete flashcard questions and answers
+ */
 public class FlashCardBuilder2 extends JDialog{
     private JPanel CardBuilder;
     private JTextArea QuestiontextArea;
@@ -14,6 +17,13 @@ public class FlashCardBuilder2 extends JDialog{
     private FlashCard card;
     private DeckDatabase database = new DeckDatabase();
 
+    /**
+     * Constructor creates the UI, the buttons, and populates the flashcard text boxes given that the user
+     * is editing the flashcards.
+     * @param parent
+     * @param d
+     * @param c
+     */
     public FlashCardBuilder2(JFrame parent, Deck d, FlashCard c){
 
         super(parent);
@@ -59,6 +69,10 @@ public class FlashCardBuilder2 extends JDialog{
         setVisible(true);
     }
 
+    /**
+     * Updates card updates the current cards question and answer with the question and answer
+     * entered by the user, and returns to the DeckDisplay
+     */
     private void updateCard() {
         card.question = QuestiontextArea.getText();
         card.answer = AnswertextArea.getText();
@@ -71,6 +85,9 @@ public class FlashCardBuilder2 extends JDialog{
         dispose();
     }
 
+    /**
+     * Deletes card and returns the user to the DeckDisplay
+     */
     private void deleteCard() {
         deck.delete(card);
         database.write(deck);

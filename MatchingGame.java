@@ -5,6 +5,11 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Matching game takes 4 flashcard and places them in a grad to be compared.
+ * The user must choose the correct question and answer correctly and they will be blanked out.
+ * When the user correctly gets all the matches correct, a new selection is shown.
+ */
 public class MatchingGame {
     private JFrame frame;
     private JButton[] answerButtons;
@@ -16,6 +21,11 @@ public class MatchingGame {
     private int matchedPairs;
     private final int totalPairs;
 
+    /**
+     * Constructor takes the current deck and initializes two new arraylists, previous card, pairs, and total pairs.
+     * It calls the prepareCards and the initializeUI function.
+     * @param deck
+     */
     public MatchingGame(Deck deck) {
         this.deck = deck;
         this.cards = new ArrayList<>();
@@ -27,6 +37,9 @@ public class MatchingGame {
         initializeUI();
     }
 
+    /**
+     * InitializeUI initializes the UI and creates the buttons, the action listeners, and the formatting.
+     */
     private void initializeUI() {
         frame = new JFrame("Matching Game");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,6 +103,9 @@ public class MatchingGame {
         frame.setVisible(true);
     }
 
+    /**
+     * prepareCards creates the deck of cards used for the current matching game
+     */
     private void prepareCards() {
         // Copy the deck and shuffle the cards
         List<FlashCard> tempCards = deck.getDeck();
@@ -105,6 +121,11 @@ public class MatchingGame {
         Collections.shuffle(cards);
     }
 
+    /**
+     * selectCard provides the functionality for clicking and matching the cards and recognizing the matching question and answer.
+     * It then updates the buttons accordingly.
+     * @param index
+     */
     private void selectCard(int index) {
         JButton selectedButton = answerButtons[index];
         Map.Entry<Boolean, FlashCard> selectedCard = cards.get(index);
@@ -144,6 +165,9 @@ public class MatchingGame {
         updateButtons();
     }
 
+    /**
+     * updateButtons updates the card buttons after a match has been successfully made or not successfully made.
+     */
     private void updateButtons() {
         for (int i = 0; i < totalPairs * 2; i++) {
             JButton button = answerButtons[i];
