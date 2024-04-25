@@ -100,7 +100,7 @@ public class MCQuiz {
                     MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                     JPanel resultsPanel = new JPanel(); 
-                    
+
                     JLabel scoreLabel = new JLabel("score: " + score); 
                     
                     JButton exitResultsPage = new JButton("exit");
@@ -165,9 +165,13 @@ public class MCQuiz {
 
     /*creates QuizQuestions array. sets quiz questions and answer options for each quiz question. */ 
     public void makeQuizQArray(){
+        //Scanner getInput = new Scanner(System.in); //TESTING
+        //int kb; 
+
         QuizQuestions = new MCQuizSetup[deckLength]; 
         Random random = new Random(); 
         
+        //initial random number
         int ranNum = random.nextInt(deckLength);    //set first ranNum 
         UsedQuizQIndex.add(ranNum);  //add to usedQuizQIndex ArrayList
         int usedCount = 1; 
@@ -177,20 +181,28 @@ public class MCQuiz {
         while(i<10 && i<deckLength){
             QuizQuestions[i] = new MCQuizSetup();
             QuizQuestions[i].setQuizCard(deck.get(ranNum));   //picks quiz questions at random from any card in deck 
-            chooseAnswerOptions(i);     //creates answer options for quizQuestions[i] 
-
-            //check if index has been used already, changes ranNum if so 
-            while(!canUseQuizQIndex(ranNum) && usedCount < deckLength){   //stop when that array is all full
-                ranNum = random.nextInt(deckLength);    //get new random number 
-            }
+            chooseAnswerOptions(i, ranNum);     //creates answer options for quizQuestions[i] 
 
             //TESTING
             System.out.println("Quiz Question " + i + " is: "+ QuizQuestions[i].getQuizCard().getQuestion());  
-            System.out.println("correct answer " + i + " is: " + QuizQuestions[i].getQuizCard().getAnswer());
-            for(int j= 0; j<3; j++){
+            for(int j= 0; j<4; j++){
                 System.out.println("answer option " + j + ": " + QuizQuestions[i].getAnswerOptionsAtIndex(j)); 
             }
             System.out.println("\n"); 
+
+            //check if index has been used already, changes ranNum if so 
+            ranNum = random.nextInt(deckLength);    //get new random number 
+            while(UsedQuizQIndex.contains(ranNum) && usedCount < deckLength && usedCount < 10){   //stop when that array is all full
+                ranNum = random.nextInt(deckLength);    //get new random number 
+                
+            /*    System.out.println("press 6 to stop"); //TESTING
+                kb = getInput.nextInt(); 
+                if(kb == 6){
+                    return; 
+                }
+            */
+            }
+
 
             UsedQuizQIndex.add(ranNum); //add ranNum to usedQuizQIndex ArrayList
             usedCount++;  
@@ -199,38 +211,51 @@ public class MCQuiz {
     }
 
 
+    public void chooseAnswerOptions(int questionNum, int correctAnswerIndex){
+        Random random = new Random(); 
+        int ranNum = 0; 
 
-    /*choose answer options for each quiz questions */
-    public void chooseAnswerOptions(int questionNum){ 
-        Random random = new Random();
-        int ranNum; 
-        String []answerOptions2 = new String[4]; 
+        String []answerOptions = new String[4]; 
+        ArrayList <Integer> usedAnswerOptionsIndex = new ArrayList<Integer>();   //keeps track of index nums that have been used for answerOption
+        
+        //int answersCreatedCount = 0;    //use if needed
 
-        //gets 3 random answers 
-        for(int i = 0; i<3; i++){ 
-            ranNum = random.nextInt(deckLength);    //need a way to check for repetitions/...
-            answerOptions2[i] = deck.get(ranNum).getAnswer(); 
+
+        Scanner ns = new Scanner(System.in); 
+        int in = 0; 
+
+
+        boolean redo = true; 
+
+        answerOptions[0] = deck.get(correctAnswerIndex).getAnswer();    //sets correct answer as first in deck
+        usedAnswerOptionsIndex.add(correctAnswerIndex);
+        
+
+        for(int i = 0; i<3; i++){
+            ranNum = random.nextInt(deckLength); 
+
+            do{
+                /*System.out.println("press 4 to stop \n"); 
+                in = ns.nextInt();*/    
+
+                if(usedAnswerOptionsIndex.contains(ranNum)){
+                        redo = true; 
+                        ranNum = random.nextInt(deckLength); 
+                }
+                else{
+                    redo = false; 
+                }
+            }while(redo && usedAnswerOptionsIndex.size() < 4);
+
+
+            answerOptions[i+1] = deck.get(ranNum).getAnswer();
+            usedAnswerOptionsIndex.add(ranNum); 
+        
         }
 
-        answerOptions2[3] = QuizQuestions[questionNum].getCorrectAnswer(); //adds correct answer to list
-        QuizQuestions[questionNum].setAnswerOptionsArr(answerOptions2);
+        QuizQuestions[questionNum].setAnswerOptionsArr(answerOptions); 
     }
 
-
-
-    /*check if num is index in UsedQuizQIndex*/
-    public static boolean canUseQuizQIndex(int num){
-        int stop = UsedQuizQIndex.size();   
-
-        //checks if num is in UsedQuizQIndex array, returns false 
-        for(int i = 0; i<stop; i++){
-            if(num == UsedQuizQIndex.get(i)){
-                return false;   //index has already been used 
-                //get new random num 
-            }
-        }
-        return true; 
-    }
 
     public static boolean checkAnswer(String userAnswerTemp, String correctAnswerTemp){
         //if userAnswer == correctanswer
@@ -273,14 +298,51 @@ public class MCQuiz {
         t4.question = "poubelle";
         t4.answer = "trash";
 
+        FlashCard t5 = new FlashCard();
+        t5.question = "la hyene";
+        t5.answer = "hyena";
+
+        FlashCard t6 = new FlashCard();
+        t6.question = "manger";
+        t6.answer = "to eat";
+
+        FlashCard t7 = new FlashCard();
+        t7.question = "dormir";
+        t7.answer = "to sleep";
+
+        FlashCard t8 = new FlashCard();
+        t8.question = "voir";
+        t8.answer = "to see";
+
+        FlashCard t9 = new FlashCard();
+        t9.question = "comment dit-on";
+        t9.answer = "how do you say";
+        
+        FlashCard t10 = new FlashCard();
+        t10.question = "chocolat";
+        t10.answer = "chocolate";
+        
+        FlashCard t11 = new FlashCard();
+        t11.question = "the";
+        t11.answer = "tea";
+
+
         deck1.add(t1);
         deck1.add(t2);
         deck1.add(t3); 
         deck1.add(t4); 
+        deck1.add(t5); 
+        deck1.add(t6); 
+        deck1.add(t7); 
+        deck1.add(t8); 
+        deck1.add(t9); 
+        deck1.add(t10); 
+        deck1.add(t11); 
 
         MCQuiz MCQuiz1 = new MCQuiz(deck1); 
         //MCQuiz1.makeQuizQArray(); 
         MCQuiz1.runMCQUiz(); 
+        
 
 
     }
