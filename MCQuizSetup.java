@@ -5,6 +5,11 @@
 /**
  * Setup class for the multiple choice quiz
  */
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class MCQuizSetup{
     private FlashCard quizCard; 
     String []answerOptions; //array of strings of answer options  for question 
@@ -87,6 +92,12 @@ public class MCQuizSetup{
      */
     public String getCorrectAnswer(){
         return quizCard.getAnswer();
+    }
+
+    public void shuffle() {
+        List<String> temp = Arrays.asList(answerOptions);
+        Collections.shuffle(temp);
+        temp.toArray(answerOptions);
     }
     
 }
