@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -137,6 +135,13 @@ public class MCQuiz extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 QuizQuestions[currentQuestion].setUserAnswer(selectedUserAnswer);
 
+                //if answer is correct, add to score
+                if(checkAnswer(QuizQuestions[currentQuestion].getUserAnswer(), QuizQuestions[currentQuestion].getCorrectAnswer())){
+                    score++; //add to score
+                    //something like
+                    //QuizQuestions[currentQuestion].isCorrect(); //sets if question is correct or not
+                }
+
                 //END OF QUIZ
                 if ((currentQuestion + 1 == deckLength) || (currentQuestion + 1 == 10)) {    
                     //add submit test button, popup score page, make into its own method/class
@@ -178,13 +183,6 @@ public class MCQuiz extends JFrame{
                     resultsPageFrame.setVisible(true);
 
                     return;
-                }            
-
-                //if answer is correct, add to score 
-                if(checkAnswer(QuizQuestions[currentQuestion].getUserAnswer(), QuizQuestions[currentQuestion].getCorrectAnswer())){
-                    score++; //add to score
-                    //something like 
-                        //QuizQuestions[currentQuestion].isCorrect(); //sets if question is correct or not 
                 }
 
                 currentQuestion++;
@@ -238,8 +236,11 @@ public class MCQuiz extends JFrame{
     /*creates QuizQuestions array. sets quiz questions and answer options for each quiz question. */ 
     public void makeQuizQArray(){
         QuizQuestions = new MCQuizSetup[deckLength]; 
-        Random random = new Random(); 
-        
+        Random random = new Random();
+
+
+        UsedQuizQIndex.clear();
+
         int ranNum = random.nextInt(deckLength);    //set first ranNum 
         UsedQuizQIndex.add(ranNum);  //add to usedQuizQIndex ArrayList
         int usedCount = 1; 
@@ -249,15 +250,15 @@ public class MCQuiz extends JFrame{
         while(i<10 && i<deckLength){
             QuizQuestions[i] = new MCQuizSetup();
             QuizQuestions[i].setQuizCard(deck.get(ranNum));   //picks quiz questions at random from any card in deck 
-            chooseAnswerOptions(i);     //creates answer options for quizQuestions[i] 
+            chooseAnswerOptions(i);     //creates answer options for quizQuestions[i]
 
             //check if index has been used already, changes ranNum if so 
             while(!canUseQuizQIndex(ranNum) && usedCount < deckLength){   //stop when that array is all full
-                ranNum = random.nextInt(deckLength);    //get new random number 
+                ranNum = random.nextInt(deckLength);    //get new random number
             }
 
             //TESTING
-            System.out.println("Quiz Question " + i + " is: "+ QuizQuestions[i].getQuizCard().getQuestion());  
+            System.out.println("Quiz Question " + i + " is: "+ QuizQuestions[i].getQuizCard().getQuestion());
             System.out.println("correct answer " + i + " is: " + QuizQuestions[i].getQuizCard().getAnswer());
             for(int j= 0; j<3; j++){
                 System.out.println("answer option " + j + ": " + QuizQuestions[i].getAnswerOptionsAtIndex(j)); 
@@ -280,7 +281,15 @@ public class MCQuiz extends JFrame{
 
         //gets 3 random answers 
         for(int i = 0; i<3; i++){ 
-            ranNum = random.nextInt(deckLength);    //need a way to check for repetitions/...
+            ranNum = random.nextInt(deckLength); //need a way to check for repetitions/...
+            if (Arrays.asList(answerOptions2).contains(deck.get(ranNum).getAnswer())) {
+                i--;
+                continue;
+            }
+            if (deck.get(ranNum).getAnswer() == QuizQuestions[questionNum].getCorrectAnswer()) {
+                i--;
+                continue;
+            }
             answerOptions2[i] = deck.get(ranNum).getAnswer(); 
         }
 
@@ -314,9 +323,11 @@ public class MCQuiz extends JFrame{
 
 
     public void setNextQuizQuestion(){
-        QuizQLabel.setText("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion()); 
-        
-        option1Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(0)); 
+        QuizQLabel.setText("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
+
+        QuizQuestions[currentQuestion].shuffle();
+
+        option1Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(0));
         option2Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(1)); 
         option3Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(2)); 
         option4Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(3)); 
