@@ -126,8 +126,9 @@ public class DeckDisplay extends JFrame {
 
         //MC quiz button action listener
         mcButton.addActionListener(e -> {
-            dispose();
+            System.out.println("check");
             new MCQuiz(deck);
+            dispose();
         });
 
         //back button action listener
