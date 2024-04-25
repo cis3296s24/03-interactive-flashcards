@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Creates the main menu for the flashcard application
+ * Has a dropdown for existing decks loaded in from the user_data and
+ * a create deck button that will prompt the user to create a new deck
+ */
 public class DeckMenu2 extends JDialog {
 
     private JButton createNewDeckButton;
@@ -16,6 +21,10 @@ public class DeckMenu2 extends JDialog {
     private JFrame frame;
     private JPanel cardGrid = new JPanel();
 
+    /**
+     * Constructor decks the JFrame parent creates the UI, buttons, dropdown, and actionlisteners.
+     * @param parent
+     */
     public DeckMenu2(JFrame parent){
         super(parent);
         setTitle("Interactive Flashcards");
@@ -50,7 +59,9 @@ public class DeckMenu2 extends JDialog {
         setVisible(true);
     }
 
-    // Method to populate JComboBox with deck names
+    /**
+     * Adds decks to the dropdown menu
+     */
     private void addDecks() {
         dropdown.addItem("Select Deck...");
         for (Deck deck : decks) {
@@ -58,7 +69,11 @@ public class DeckMenu2 extends JDialog {
         }
     }
 
-    // Method to get Deck object given deck name
+    /**
+     * Gets deck object given deck name
+     * @param name
+     * @return deck
+     */
     private Deck getDeck(String name) {
         for (Deck deck : decks) {
             if (deck.deck_name.equals(name)) {
@@ -68,7 +83,9 @@ public class DeckMenu2 extends JDialog {
         return null;
     }
 
-    // Method to create a new deck
+    /**
+     * Create new deck popup that prompts the user to input name of the new deck
+     */
     private void createPopup() {
         String inputText = JOptionPane.showInputDialog(this, "Enter the name of the new deck:");
         if (inputText != null && !inputText.isEmpty()) {
@@ -85,13 +102,19 @@ public class DeckMenu2 extends JDialog {
 
     }
 
-    // Method to display cards in a grid layout
+    /**
+     * Displays card in a grid layout
+     * @param deck
+     */
     private void displayCards(Deck deck) {
         new DeckDisplay(deck);
         dispose();
     }
 
-
+    /**
+     * Main
+     * @param args
+     */
     public static void main(String[] args){
 
         DeckMenu2 menu = new DeckMenu2(null);

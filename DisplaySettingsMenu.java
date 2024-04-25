@@ -8,7 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Opens popup frame to display an options menu where the user can edit font size and the font of the text
+ * for the current working pane/panel
+ */
 public class DisplaySettingsMenu{
     private JFrame DSFrame; 
     private JPopupMenu DSMenu; 
@@ -19,12 +22,23 @@ public class DisplaySettingsMenu{
 
     private static String []fontStrings;
 
+    /**
+     * Constructor takes fontType to switch the font to, the new font size,
+     * and the panel/frame.
+     * @param fontType
+     * @param newFontSize
+     * @param thisReview
+     */
     DisplaySettingsMenu(String fontType, int newFontSize, Review2 thisReview){
         this.newFont = fontType; //initializes newText to whatever font is initially in Review
         this.newFontSize = newFontSize; 
         this.thisReview = thisReview; 
     }
 
+    /**
+     * start begins the UI popup and the action listeners
+     * Is called from the constructor
+     */
     public void start(){
         // create frame
         DSFrame = new JFrame("Display Settings");
@@ -95,8 +109,9 @@ public class DisplaySettingsMenu{
     }
 
 
-
-    /* gets all fonts in system and puts them into fontStrings list */
+    /**
+     * gets all fonts in system and puts them into fontStrings list
+     */
     public static void createFontStringArr(){
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 

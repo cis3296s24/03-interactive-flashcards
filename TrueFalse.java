@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * True and false quiz takes a question from the deck and a randomized answer and tests the user if the pair is either true or false.
+ * If the user gets it right they are notified correct, and vice verse.
+ */
 public class TrueFalse extends JDialog{
     private JButton trueButton;
     private JPanel panel1;
@@ -15,6 +19,12 @@ public class TrueFalse extends JDialog{
     private FlashCard currentCard;
     private boolean answer;
 
+    /**
+     * Constructor initializes UI, buttons, and actionlisteners.
+     *
+     * @param parent
+     * @param d
+     */
     public TrueFalse(JFrame parent, Deck d) {
 
         super(parent);
@@ -51,6 +61,10 @@ public class TrueFalse extends JDialog{
         setVisible(true);
     }
 
+    /**
+     * Updates question after user completes previous true false question, and updates UI
+     * accordingly.
+     */
     private void updateQuestion() {
         // Get a random card from the deck
         Random random = new Random();
@@ -77,6 +91,10 @@ public class TrueFalse extends JDialog{
 
     }
 
+    /**
+     * Checks whether the answer it true or false and displays message to the user
+     * @param userAnswer
+     */
     private void checkAnswer(boolean userAnswer) {
         if (userAnswer == answer) {
             JOptionPane.showMessageDialog(this, "Correct!");

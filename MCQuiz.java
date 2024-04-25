@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
+/**
+ * Multiple Choice quiz gets a random set of answers from the questions in the deck, one of which being the correct
+ * answer for the current Flashcard, and creates a multiple choice quiz for the user.
+ */
 public class MCQuiz extends JFrame{
     private Deck deck; 
     private int deckLength; 
@@ -26,6 +30,11 @@ public class MCQuiz extends JFrame{
     JButton option3Button;
     JButton option4Button;
 
+    /**
+     * Constructor is passed a deck and initializes deckLength and score
+     * It calls runMCQuiz function
+     * @param deck
+     */
     public MCQuiz(Deck deck){
         this.deck = deck; 
         this.deckLength = deck.size();
@@ -33,6 +42,11 @@ public class MCQuiz extends JFrame{
         runMCQUiz();
     }
 
+    /**
+     * runMCQuiz creates the UI, buttons, and actionlisteners for the mcquiz
+     * It creates a panel for the card question and displays four buttons for the answers.
+     * The user selects an answer and tells the user it is correct or incorrect, then moves to the next
+     */
     public void runMCQUiz(){
 
         makeQuizQArray();   //makes array of all quiz qs, answer options etc 
@@ -234,8 +248,9 @@ public class MCQuiz extends JFrame{
         setVisible(true);
     }
 
-
-    /*creates QuizQuestions array. sets quiz questions and answer options for each quiz question. */ 
+    /**
+     * creates QuizQuestions array. sets quiz questions and answer options for each quiz question.
+     */
     public void makeQuizQArray(){
         QuizQuestions = new MCQuizSetup[deckLength]; 
         Random random = new Random(); 
@@ -271,8 +286,10 @@ public class MCQuiz extends JFrame{
     }
 
 
-
-    /*choose answer options for each quiz questions */
+    /**
+     * choose answer options for each quiz questions
+     * @param questionNum
+     */
     public void chooseAnswerOptions(int questionNum){ 
         Random random = new Random();
         int ranNum; 
@@ -289,8 +306,11 @@ public class MCQuiz extends JFrame{
     }
 
 
-
-    /*check if num is index in UsedQuizQIndex*/
+    /**
+     * check if num is index in UsedQuizQIndex
+     * @param num
+     * @return boolean
+     */
     public static boolean canUseQuizQIndex(int num){
         int stop = UsedQuizQIndex.size();   
 
@@ -304,6 +324,12 @@ public class MCQuiz extends JFrame{
         return true; 
     }
 
+    /**
+     * checks if answer is correct or incorrect
+     * @param userAnswerTemp
+     * @param correctAnswerTemp
+     * @return boolean
+     */
     public static boolean checkAnswer(String userAnswerTemp, String correctAnswerTemp){
         //if userAnswer == correctanswer
         if(userAnswerTemp.equals(correctAnswerTemp)){
@@ -312,7 +338,9 @@ public class MCQuiz extends JFrame{
         return false; 
     }
 
-
+    /**
+     * sets the next quiz question
+     */
     public void setNextQuizQuestion(){
         QuizQLabel.setText("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion()); 
         
