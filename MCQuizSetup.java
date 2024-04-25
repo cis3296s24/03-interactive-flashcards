@@ -5,11 +5,6 @@
 /**
  * Setup class for the multiple choice quiz
  */
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class MCQuizSetup{
     private FlashCard quizCard; 
     String []answerOptions; //array of strings of answer options  for question 
@@ -17,9 +12,9 @@ public class MCQuizSetup{
 
     /**
      * Constructor takes quizCard, array of answerOptions, and userAnswer
-     * @param quizCard
-     * @param answerOptions
-     * @param userAnswer
+     * @param quizCard Flashcard
+     * @param answerOptions List of answers
+     * @param userAnswer user answer
      */
     public MCQuizSetup(FlashCard quizCard, String []answerOptions, String userAnswer){
         this.quizCard = quizCard; 
@@ -30,7 +25,7 @@ public class MCQuizSetup{
 
     /**
      * Set quiz card to qc provided
-     * @param qc
+     * @param qc Flashcard
      */
     public void setQuizCard(FlashCard qc){
         this.quizCard = qc; 
@@ -38,7 +33,7 @@ public class MCQuizSetup{
 
     /**
      * setAnswer to Ao provided
-     * @param Ao
+     * @param Ao list of answers
      */
     public void setAnswerOptionsArr(String []Ao){
         this.answerOptions = Ao; 
@@ -46,7 +41,7 @@ public class MCQuizSetup{
 
     /**
      * setUserAnswer to userAnswer provided
-     * @param userAnswer
+     * @param userAnswer user answer
      */
     public void setUserAnswer(String userAnswer){
         this.userAnswer = userAnswer; 
@@ -55,7 +50,7 @@ public class MCQuizSetup{
 
     /**
      * get quiz card
-     * @return
+     * @return Flashcard
      */
     public FlashCard getQuizCard(){
         return quizCard; 
@@ -63,7 +58,7 @@ public class MCQuizSetup{
 
     /**
      * get list of answer options
-     * @return
+     * @return list of answers
      */
     public String []getAnswerOptions(){
         return answerOptions; 
@@ -92,12 +87,6 @@ public class MCQuizSetup{
      */
     public String getCorrectAnswer(){
         return quizCard.getAnswer();
-    }
-
-    public void shuffle() {
-        List<String> temp = Arrays.asList(answerOptions);
-        Collections.shuffle(temp);
-        temp.toArray(answerOptions);
     }
     
 }

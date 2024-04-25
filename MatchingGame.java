@@ -24,7 +24,7 @@ public class MatchingGame {
     /**
      * Constructor takes the current deck and initializes two new arraylists, previous card, pairs, and total pairs.
      * It calls the prepareCards and the initializeUI function.
-     * @param deck
+     * @param deck Deck
      */
     public MatchingGame(Deck deck) {
         this.deck = deck;
@@ -54,7 +54,7 @@ public class MatchingGame {
         JButton backButton = new JButton("Back");
         backButton.setBackground(new Color(225, 252, 255)); // Set background color
         backButton.setForeground(new Color(75, 90, 152)); // Set text color
-        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
 
 
         backButton.addActionListener(new ActionListener() {
@@ -124,7 +124,7 @@ public class MatchingGame {
     /**
      * selectCard provides the functionality for clicking and matching the cards and recognizing the matching question and answer.
      * It then updates the buttons accordingly.
-     * @param index
+     * @param index index
      */
     private void selectCard(int index) {
         JButton selectedButton = answerButtons[index];

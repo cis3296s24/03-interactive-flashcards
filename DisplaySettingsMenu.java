@@ -25,9 +25,9 @@ public class DisplaySettingsMenu{
     /**
      * Constructor takes fontType to switch the font to, the new font size,
      * and the panel/frame.
-     * @param fontType
-     * @param newFontSize
-     * @param thisReview
+     * @param fontType String fonttype
+     * @param newFontSize integer size
+     * @param thisReview Review2 obj
      */
     DisplaySettingsMenu(String fontType, int newFontSize, Review2 thisReview){
         this.newFont = fontType; //initializes newText to whatever font is initially in Review

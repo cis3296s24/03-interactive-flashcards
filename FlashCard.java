@@ -16,13 +16,13 @@ public class FlashCard {
 
     /**
      * getQuestion returns the question of the flashcard
-     * @return
+     * @return question
      */
     public String getQuestion() { return question;}
 
     /**
      * getAnswer returns the answer of the flashcard
-     * @return
+     * @return answer
      */
     public String getAnswer() { return answer;}
 }

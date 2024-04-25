@@ -21,7 +21,7 @@ public class DeckDatabase {
      * Writes new deck to user_data.json file
      * Reads and updates existing data in file
      * Updates existing deck (overwrites)
-     * @param deck
+     * @param deck Deck
      */
     public void write(Deck deck) {
         JSONArray current_json;
@@ -61,7 +61,7 @@ public class DeckDatabase {
     /**
      * Removes the deck from the user_data.json file
      * Deletes deck JSONObj wrapper from JSONArray
-     * @param deck
+     * @param deck Deck
      */
     public void delete(Deck deck) {
         JSONArray current_json;
@@ -110,7 +110,7 @@ public class DeckDatabase {
      * Take Deck argument and return JSONObject
      * Key: Deck.question
      * Value: Deck.answer
-     * @param deck
+     * @param deck Deck
      * @return JSONObject
      */
     private JSONObject get_json(Deck deck) {
@@ -125,7 +125,7 @@ public class DeckDatabase {
     /**
      * Takes argument JSONArray and
      * converts it to ArrayList of type Deck
-     * @param arr
+     * @param arr JSONArray
      * @return ArrayList of type Deck
      */
     private ArrayList<Deck> json_to_decks(JSONArray arr) {
@@ -156,7 +156,7 @@ public class DeckDatabase {
      * Take key, read jsonarr from file and delete wrapper obj w/ dup key
      * Otherwise return read JSONArray
      * Allows for write() to add updated deck (jsonobj wrapper) to JSONArray
-     * @param key
+     * @param key String key
      * @return JSONArray
      */
     private JSONArray remove_obj(String key) {

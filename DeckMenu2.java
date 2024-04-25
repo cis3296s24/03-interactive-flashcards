@@ -23,7 +23,7 @@ public class DeckMenu2 extends JDialog {
 
     /**
      * Constructor decks the JFrame parent creates the UI, buttons, dropdown, and actionlisteners.
-     * @param parent
+     * @param parent JFrame parent
      */
     public DeckMenu2(JFrame parent){
         super(parent);
@@ -71,7 +71,7 @@ public class DeckMenu2 extends JDialog {
 
     /**
      * Gets deck object given deck name
-     * @param name
+     * @param name deck name
      * @return deck
      */
     private Deck getDeck(String name) {
@@ -104,7 +104,7 @@ public class DeckMenu2 extends JDialog {
 
     /**
      * Displays card in a grid layout
-     * @param deck
+     * @param deck Deck
      */
     private void displayCards(Deck deck) {
         new DeckDisplay(deck);
@@ -113,7 +113,7 @@ public class DeckMenu2 extends JDialog {
 
     /**
      * Main
-     * @param args
+     * @param args args
      */
     public static void main(String[] args){
 

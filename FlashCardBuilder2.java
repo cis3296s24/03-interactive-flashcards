@@ -20,9 +20,9 @@ public class FlashCardBuilder2 extends JDialog{
     /**
      * Constructor creates the UI, the buttons, and populates the flashcard text boxes given that the user
      * is editing the flashcards.
-     * @param parent
-     * @param d
-     * @param c
+     * @param parent JFrame parent
+     * @param d Deck
+     * @param c Flashcard
      */
     public FlashCardBuilder2(JFrame parent, Deck d, FlashCard c){
 
