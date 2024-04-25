@@ -29,29 +29,44 @@ public class MatchingGame {
 
     private void initializeUI() {
         frame = new JFrame("Matching Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
+        frame.setTitle("Multiple Choice Quiz Frame");
+        //frame.setPreferredSize(new Dimension(500, 500));
+
+        // Set background color
+        frame.getContentPane().setBackground(new Color(225, 252, 255));
+
         JButton backButton = new JButton("Back");
+        backButton.setBackground(new Color(225, 252, 255)); // Set background color
+        backButton.setForeground(new Color(75, 90, 152)); // Set text color
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
+
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DeckDisplay(deck);
                 frame.dispose();
+                new DeckDisplay(deck);
             }
         });
 
         JPanel backPanel = new JPanel();
+        backPanel.setBackground(new Color(225, 252, 255));
         backPanel.add(backButton);
 
         // Setting up answer buttons
         answerButtons = new JButton[totalPairs * 2];
         JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
+        buttonPanel.setBackground(new Color(225, 252, 255));
 
         for (int i = 0; i < totalPairs * 2; i++) {
             String questionText = cards.get(i).getKey() ? cards.get(i).getValue().getQuestion() : cards.get(i).getValue().getAnswer();
             JButton button = new JButton(questionText);
+            button.setBackground(new Color(225, 252, 255)); // Set background color
+            button.setForeground(new Color(75, 90, 152)); // Set text color
+            button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 @Override
@@ -71,6 +86,7 @@ public class MatchingGame {
 
         // Frame settings
         frame.setSize(400, 300);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

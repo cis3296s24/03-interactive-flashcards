@@ -1,15 +1,13 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-public class MCQuiz {
+public class MCQuiz extends JFrame{
     private Deck deck; 
     private int deckLength; 
 
@@ -21,7 +19,7 @@ public class MCQuiz {
     private int score; 
 
     //JFrame
-    private JFrame MCQuizFrame; 
+    //private JFrame MCQuizFrame;
     JLabel QuizQLabel; 
     JButton option1Button;
     JButton option2Button;
@@ -31,7 +29,8 @@ public class MCQuiz {
     public MCQuiz(Deck deck){
         this.deck = deck; 
         this.deckLength = deck.size();
-        this.score = 0;   
+        this.score = 0;
+        runMCQUiz();
     }
 
     public void runMCQUiz(){
@@ -39,21 +38,62 @@ public class MCQuiz {
         makeQuizQArray();   //makes array of all quiz qs, answer options etc 
 
         // create frame
-        MCQuizFrame = new JFrame("Multiple Choice Quiz Frame");
-        MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        MCQuizFrame = new JFrame("Multiple Choice Quiz Frame");
+//        MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Multiple Choice Quiz Frame");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(500, 500));
 
-        JPanel answersPanel = new JPanel(); 
+        // Set background color
+        getContentPane().setBackground(new Color(225, 252, 255));
 
-        currentQuestion = 0; //initialises current question number 
+
+        JPanel questionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        questionPanel.setBackground(new Color(225, 252, 255));
+        questionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        questionPanel.setLayout(new BoxLayout(questionPanel, BoxLayout.Y_AXIS));
+
+        optionsPanel.setBackground(new Color(225, 252, 255));
+        optionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+
+        buttonPanel.setBackground(new Color(225, 252, 255));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+
+        currentQuestion = 1; //initialises current question number
         /* initialize, then change to question # -- for each q  */
-        QuizQLabel = new JLabel("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion()); 
+        //QuizQLabel = new JLabel("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
+        QuizQLabel = new JLabel("Question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
+        QuizQLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        QuizQLabel.setFont(new Font("AppleGothic", Font.PLAIN, 24));
+        QuizQLabel.setForeground(new Color(75, 90, 152));
+        questionPanel.add(QuizQLabel, BorderLayout.CENTER);
 
         //initialise answer options buttons
         option1Button = new JButton(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(0));
         option2Button = new JButton(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(1));
         option3Button = new JButton(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(2));
-        option4Button = new JButton(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(3)); 
+        option4Button = new JButton(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(3));
 
+        option1Button.setBackground(new Color(225, 252, 255)); // Set background color
+        option1Button.setForeground(new Color(75, 90, 152)); // Set text color
+        option1Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+        option2Button.setBackground(new Color(225, 252, 255)); // Set background color
+        option2Button.setForeground(new Color(75, 90, 152)); // Set text color
+        option2Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+        option3Button.setBackground(new Color(225, 252, 255)); // Set background color
+        option3Button.setForeground(new Color(75, 90, 152)); // Set text color
+        option3Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+        option4Button.setBackground(new Color(225, 252, 255)); // Set background color
+        option4Button.setForeground(new Color(75, 90, 152)); // Set text color
+        option4Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
 
         //option button action listeners 
         option1Button.addActionListener(new ActionListener(){
@@ -87,32 +127,46 @@ public class MCQuiz {
 
 
 
-        JButton submitAnswerButton = new JButton("submit"); 
+        JButton submitAnswerButton = new JButton("submit");
+
+        submitAnswerButton.setBackground(new Color(225, 252, 255)); // Set background color
+        submitAnswerButton.setForeground(new Color(75, 90, 152)); // Set text color
+        submitAnswerButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
         submitAnswerButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                QuizQuestions[currentQuestion].setUserAnswer(selectedUserAnswer); 
+                QuizQuestions[currentQuestion].setUserAnswer(selectedUserAnswer);
 
                 //END OF QUIZ
                 if ((currentQuestion + 1 == deckLength) || (currentQuestion + 1 == 10)) {    
                     //add submit test button, popup score page, make into its own method/class
+                    dispose();
                     JFrame resultsPageFrame = new JFrame("Results");
-                    MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    resultsPageFrame.getContentPane().setBackground(new Color(225, 252, 255));
+                    resultsPageFrame.setSize(400, 100);
+                    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JPanel resultsPanel = new JPanel(); 
-
+                    
                     JLabel scoreLabel = new JLabel("score: " + score); 
                     
                     JButton exitResultsPage = new JButton("exit");
+
+                    exitResultsPage.setBackground(new Color(225, 252, 255)); // Set background color
+                    exitResultsPage.setForeground(new Color(75, 90, 152)); // Set text color
+                    exitResultsPage.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
                     exitResultsPage.addActionListener(new ActionListener(){
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            resultsPageFrame.dispose(); 
+
+                            resultsPageFrame.dispose();
+                            new DeckDisplay(deck);
+
                         }
                     }); 
 
                     resultsPanel.add(scoreLabel); 
-                    resultsPanel.add(exitResultsPage); 
+                    resultsPanel.add(exitResultsPage);
 
                     resultsPageFrame.add(resultsPanel); 
 
@@ -134,32 +188,46 @@ public class MCQuiz {
             }
         });
 
-        JButton exitQuiz = new JButton("exit"); 
+        JButton exitQuiz = new JButton("exit");
+
+        exitQuiz.setBackground(new Color(225, 252, 255)); // Set background color
+        exitQuiz.setForeground(new Color(75, 90, 152)); // Set text color
+        exitQuiz.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+
+
         exitQuiz.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                MCQuizFrame.dispose(); 
+                dispose();
+                new DeckDisplay(deck);
             }
         }); 
 
         
 
         //add question and option buttons to answersPanel 
-        answersPanel.add(QuizQLabel); 
-        answersPanel.add(option1Button);
-        answersPanel.add(option2Button);
-        answersPanel.add(option3Button);
-        answersPanel.add(option4Button);
-        answersPanel.add(submitAnswerButton);
-        answersPanel.add(exitQuiz);
-        
-        MCQuizFrame.add(answersPanel);
+        questionPanel.add(QuizQLabel);
+        optionsPanel.add(option1Button);
+        optionsPanel.add(option2Button);
+        optionsPanel.add(option3Button);
+        optionsPanel.add(option4Button);
+        buttonPanel.add(submitAnswerButton);
+        buttonPanel.add(exitQuiz);
+
+        //Add to frame
+        getContentPane().add(BorderLayout.SOUTH,buttonPanel);
+        getContentPane().add(BorderLayout.CENTER, optionsPanel);
+        getContentPane().add(BorderLayout.NORTH,questionPanel);
+        //MCQuizFrame.add(answersPanel);
 
         // format and set visible
-        MCQuizFrame.getContentPane().add(answersPanel);
-        MCQuizFrame.setSize(1000,1000);
-        MCQuizFrame.setVisible(true);
-
+//        MCQuizFrame.getContentPane().add(answersPanel);
+//        MCQuizFrame.setSize(1000,1000);
+//        MCQuizFrame.setVisible(true);
+        setSize(450,450);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 
@@ -298,51 +366,14 @@ public class MCQuiz {
         t4.question = "poubelle";
         t4.answer = "trash";
 
-        FlashCard t5 = new FlashCard();
-        t5.question = "la hyene";
-        t5.answer = "hyena";
-
-        FlashCard t6 = new FlashCard();
-        t6.question = "manger";
-        t6.answer = "to eat";
-
-        FlashCard t7 = new FlashCard();
-        t7.question = "dormir";
-        t7.answer = "to sleep";
-
-        FlashCard t8 = new FlashCard();
-        t8.question = "voir";
-        t8.answer = "to see";
-
-        FlashCard t9 = new FlashCard();
-        t9.question = "comment dit-on";
-        t9.answer = "how do you say";
-        
-        FlashCard t10 = new FlashCard();
-        t10.question = "chocolat";
-        t10.answer = "chocolate";
-        
-        FlashCard t11 = new FlashCard();
-        t11.question = "the";
-        t11.answer = "tea";
-
-
         deck1.add(t1);
         deck1.add(t2);
         deck1.add(t3); 
         deck1.add(t4); 
-        deck1.add(t5); 
-        deck1.add(t6); 
-        deck1.add(t7); 
-        deck1.add(t8); 
-        deck1.add(t9); 
-        deck1.add(t10); 
-        deck1.add(t11); 
 
         MCQuiz MCQuiz1 = new MCQuiz(deck1); 
         //MCQuiz1.makeQuizQArray(); 
         MCQuiz1.runMCQUiz(); 
-        
 
 
     }
