@@ -94,7 +94,6 @@ public class MatchingGame {
         frame.add(backPanel, BorderLayout.NORTH);
 
         // Add components to frame
-//        frame.add(questionLabel, BorderLayout.NORTH);
         frame.add(buttonPanel, BorderLayout.CENTER);
 
         // Frame settings

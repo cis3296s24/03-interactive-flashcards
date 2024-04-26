@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class MCQuizSetup{
     private FlashCard quizCard; 
-    String []answerOptions; //array of strings of answer options  for question 
-    String userAnswer;
+    private String []answerOptions; //array of strings of answer options  for question
+    private String userAnswer;
 
     /**
      * Constructor takes quizCard, array of answerOptions, and userAnswer

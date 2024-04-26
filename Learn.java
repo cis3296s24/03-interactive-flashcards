@@ -41,8 +41,8 @@ public class Learn extends JDialog{
         setLocationRelativeTo(parent);
 
         reviewLabel.setText(curr_card.question);
-        Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
-        reviewLabel.setBorder(blackBorder);
+        Border border = BorderFactory.createLineBorder(new Color(75, 90, 152));
+        reviewLabel.setBorder(border);
         reviewLabel.setMinimumSize(new Dimension(430,250));
         reviewLabel.setPreferredSize(new Dimension(430,250));
         reviewLabel.setMaximumSize(new Dimension(430,250));
@@ -51,6 +51,7 @@ public class Learn extends JDialog{
 
         submitButton.addActionListener(e -> {
             String inputText = inputBox.getText();
+            inputBox.setBorder(BorderFactory.createLineBorder(new Color(75, 90, 152)));
             if (inputText.isEmpty()) {
                 inputBox.setBorder(BorderFactory.createLineBorder(Color.RED));
             }
@@ -74,9 +75,10 @@ public class Learn extends JDialog{
         continueButton.addActionListener(e -> {
             curr_card = cdf();
             reviewLabel.setText(curr_card.question);
-            reviewLabel.setForeground(Color.BLACK);
-            reviewLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            reviewLabel.setForeground(new Color(75, 90, 152));
+            reviewLabel.setBorder(BorderFactory.createLineBorder(new Color(75, 90, 152)));
             inputBox.setEnabled(true);
+            inputBox.setBorder(BorderFactory.createLineBorder(new Color(75, 90, 152)));
             inputBox.setText("Please Enter Answer");
         });
 

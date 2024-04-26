@@ -15,7 +15,6 @@ public class Review extends JDialog{
     private JPanel panel1;
     private JButton nextButton;
     private JButton lastButton;
-    private JButton displaySettingsButton;
     private JButton backButton;
     private JLabel reviewLabel;
     private Deck cardList;
@@ -46,7 +45,7 @@ public class Review extends JDialog{
         currentCard = 0;
 
         reviewLabel.setText(cardList.get(currentCard).question);
-        Border blackBorder = BorderFactory.createLineBorder(black);
+        Border blackBorder = BorderFactory.createLineBorder(new Color(75, 90, 152));
         reviewLabel.setBorder(blackBorder);
         reviewLabel.setMinimumSize(new Dimension(430,250));
         reviewLabel.setPreferredSize(new Dimension(430,250));
@@ -92,18 +91,6 @@ public class Review extends JDialog{
                 reviewLabel.setText(cardList.get(currentCard).question);
             }
         });
-//        displaySettingsButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
-////                DSMenu.start();
-////                fontType = DSMenu.getNewFont();
-////                fontSize = DSMenu.getNewFontSize();
-////
-////                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
-////                reviewText.setFont(getNewFont); //changes font to getNewFont
-//            }
-//        });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
