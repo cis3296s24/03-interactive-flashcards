@@ -11,17 +11,12 @@ import javax.swing.*;
  */
 public class MCQuiz extends JFrame{
     private Deck deck; 
-    private int deckLength; 
-
-
+    private int deckLength;
     private MCQuizSetup []QuizQuestions;
     private static ArrayList <Integer> UsedQuizQIndex = new ArrayList<Integer>();   //keeps track of index nums that have been used for quizQuestions
     private String selectedUserAnswer; //sets selected answer for each quiz question
     private int currentQuestion;    //index of current question 
-    private int score; 
-
-    //JFrame
-    //private JFrame MCQuizFrame;
+    private int score;
     JLabel QuizQLabel; 
     JButton option1Button;
     JButton option2Button;
@@ -37,7 +32,7 @@ public class MCQuiz extends JFrame{
         this.deck = deck; 
         this.deckLength = deck.size();
         this.score = 0;
-        runMCQUiz();
+        runMCQuiz();
     }
 
     /**
@@ -45,20 +40,15 @@ public class MCQuiz extends JFrame{
      * It creates a panel for the card question and displays four buttons for the answers.
      * The user selects an answer and tells the user it is correct or incorrect, then moves to the next
      */
-    public void runMCQUiz(){
+    public void runMCQuiz(){
 
         makeQuizQArray();   //makes array of all quiz qs, answer options etc 
-
-        // create frame
-//        MCQuizFrame = new JFrame("Multiple Choice Quiz Frame");
-//        MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Multiple Choice Quiz");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(500, 500));
 
         // Set background color
         getContentPane().setBackground(new Color(225, 252, 255));
-
 
         JPanel questionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -144,9 +134,7 @@ public class MCQuiz extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 selectedUserAnswer = QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(3);
             }
-        }); 
-
-
+        });
 
         JButton submitAnswerButton = new JButton("Submit");
 
@@ -163,12 +151,9 @@ public class MCQuiz extends JFrame{
                 //if answer is correct, add to score
                 if(checkAnswer(QuizQuestions[currentQuestion].getUserAnswer(), QuizQuestions[currentQuestion].getCorrectAnswer())){
                     score++; //add to score
-                    //something like
-                    //QuizQuestions[currentQuestion].isCorrect(); //sets if question is correct or not
                 }
                 //END OF QUIZ
                 if ((currentQuestion + 1 == deckLength) || (currentQuestion + 1 == 10)) {    
-                    //add submit test button, popup score page, make into its own method/class
                     dispose();
                     JFrame resultsPageFrame = new JFrame("Results");
                     resultsPageFrame.getContentPane().setBackground(new Color(225, 252, 255));
@@ -201,13 +186,11 @@ public class MCQuiz extends JFrame{
                     resultsPanel.add(scoreLabel); 
                     resultsPanel.add(exitResultsPage);
 
-                    resultsPageFrame.add(resultsPanel); 
-
+                    resultsPageFrame.add(resultsPanel);
                     resultsPageFrame.setSize(200,200);
                     resultsPageFrame.setBackground(new Color(225, 252, 255));
                     resultsPageFrame.setLocationRelativeTo(null);
                     resultsPageFrame.setVisible(true);
-
                     return;
                 }
 
@@ -221,7 +204,6 @@ public class MCQuiz extends JFrame{
         exitQuiz.setBackground(new Color(225, 252, 255)); // Set background color
         exitQuiz.setForeground(new Color(75, 90, 152)); // Set text color
         exitQuiz.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
-
         exitQuiz.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         exitQuiz.addActionListener(new ActionListener(){
@@ -230,9 +212,7 @@ public class MCQuiz extends JFrame{
                 dispose();
                 new DeckDisplay(deck);
             }
-        }); 
-
-        
+        });
 
         //add question and option buttons to answersPanel 
         questionPanel.add(QuizQLabel);
@@ -247,12 +227,8 @@ public class MCQuiz extends JFrame{
         getContentPane().add(BorderLayout.SOUTH,buttonPanel);
         getContentPane().add(BorderLayout.CENTER, optionsPanel);
         getContentPane().add(BorderLayout.NORTH,questionPanel);
-        //MCQuizFrame.add(answersPanel);
 
         // format and set visible
-//        MCQuizFrame.getContentPane().add(answersPanel);
-//        MCQuizFrame.setSize(1000,1000);
-//        MCQuizFrame.setVisible(true);
         setSize(450,450);
         pack();
         setLocationRelativeTo(null);
@@ -296,7 +272,6 @@ public class MCQuiz extends JFrame{
             i++; 
         }
     }
-
 
     /**
      * choose answer options for each quiz questions
@@ -372,64 +347,4 @@ public class MCQuiz extends JFrame{
         option4Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(3)); 
     }
 
-
-
-
-//    public static void main(String []args){
-//        //TESTING
-//        Deck deck1 = new Deck("test1");
-//
-//        FlashCard t1 = new FlashCard();
-//        t1.question = "bonjour";
-//        t1.answer = "hello";
-//
-//        FlashCard t2 = new FlashCard();
-//        t2.question = "au revoir";
-//        t2.answer = "goodbye";
-//
-//        FlashCard t3 = new FlashCard();
-//        t3.question = "pourquoi";
-//        t3.answer = "why";
-//
-//        FlashCard t4 = new FlashCard();
-//        t4.question = "poubelle";
-//        t4.answer = "trash";
-//
-//        deck1.add(t1);
-//        deck1.add(t2);
-//        deck1.add(t3);
-//        deck1.add(t4);
-//
-//        MCQuiz MCQuiz1 = new MCQuiz(deck1);
-//        //MCQuiz1.makeQuizQArray();
-//        MCQuiz1.runMCQUiz();
-//
-//
-//    }
 }
-
-
-
-
-
-
-    /*********NOTES***************/
-    /* test -10 qs(for now) give(defintion) match with answer 
-        - def: random, but cant be repeated!!
-        - options: random from 4 cards 
-        - keep score 
-        - show score and questions you got wrong
-
-    if user clicks answer -> next question and set is revealed
-    */
-    //create frame
-    //quiz questions
-        //max 10 questions(for now)
-            //if under 10-> quiz = length of list
-            //definitions can be random but NOT REPEATED
-        //get definition
-        //get correct question, and 3 random answers
-        //display options on screen as button
-        //either have submit button or submit automatically
-    //keep track of score and which questions you got right
-    //at the end reveal score and what questions you got right

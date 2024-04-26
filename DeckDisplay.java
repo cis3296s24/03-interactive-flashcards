@@ -72,7 +72,6 @@ public class DeckDisplay extends JFrame {
 
         //Create panel and buttons, add to panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Align buttons to center
-        //JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Align buttons to center
         buttonPanel.setBackground(new Color(225, 252, 255));
 
         JButton reviewButton = new JButton("Review");
@@ -110,12 +109,10 @@ public class DeckDisplay extends JFrame {
         backButtonPanel.add(deleteButton);
         backButtonPanel.add(backButton);
 
-
         //Add to frame
         getContentPane().add(BorderLayout.SOUTH,backButtonPanel);
         getContentPane().add(BorderLayout.CENTER, cardPanel);
         getContentPane().add(BorderLayout.NORTH,buttonPanel);
-
         setSize(450,600);
 
         //MC quiz button action listener

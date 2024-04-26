@@ -28,7 +28,6 @@ public class DeckMenu extends JDialog {
     public DeckMenu(JFrame parent){
         super(parent);
         setTitle("Interactive Flashcards");
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(MainPanel);
         setMinimumSize(new Dimension(500, 500));
         setModal(true);
