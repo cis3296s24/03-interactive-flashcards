@@ -137,7 +137,7 @@ public class DeckDisplay extends JFrame {
         //review button action listener
         reviewButton.addActionListener(e -> {
             if (deck.size() < 2) {
-                JOptionPane.showMessageDialog(this, "Add at least one flashcards to your deck to review!");
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to review!");
                 return;
             }
             dispose();
