@@ -135,6 +135,10 @@ public class DeckDisplay extends JFrame {
 
         //MC quiz button action listener
         mcButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least four flashcards to your deck to play!");
+                return;
+            }
             dispose();
             new MCQuiz(deck);
         });
@@ -153,6 +157,10 @@ public class DeckDisplay extends JFrame {
 
         //quiz button action listener
         tfButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least two flashcards to your deck to play!");
+                return;
+            }
             dispose();
             new TrueFalse(null, deck);
         });
@@ -169,9 +177,13 @@ public class DeckDisplay extends JFrame {
         });
 
         deleteButton.addActionListener(e -> {
-            database.delete(deck);
-            dispose();
-            new DeckMenu(null);
+            int choice = JOptionPane.showConfirmDialog(DeckDisplay.this, "Are you sure you want to delete this deck?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                // User clicked Yes, perform deletion
+                database.delete(deck);
+                dispose();
+                new DeckMenu(null);
+            }
         });
 
 

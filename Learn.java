@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -82,12 +84,16 @@ public class Learn extends JDialog{
             dispose();
         });
 
-
+        inputBox.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                inputBox.setText("");
+            }
+        });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-
-
     }
 
     /**

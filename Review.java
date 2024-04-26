@@ -38,6 +38,8 @@ public class Review extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
 
+        reviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         cardList = d;
         database.write(cardList);
         this.deckList = database.read();
@@ -90,18 +92,18 @@ public class Review extends JDialog{
                 reviewLabel.setText(cardList.get(currentCard).question);
             }
         });
-        displaySettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
-//                DSMenu.start();
-//                fontType = DSMenu.getNewFont();
-//                fontSize = DSMenu.getNewFontSize();
-//
-//                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
-//                reviewText.setFont(getNewFont); //changes font to getNewFont
-            }
-        });
+//        displaySettingsButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+////                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
+////                DSMenu.start();
+////                fontType = DSMenu.getNewFont();
+////                fontSize = DSMenu.getNewFontSize();
+////
+////                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
+////                reviewText.setFont(getNewFont); //changes font to getNewFont
+//            }
+//        });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
