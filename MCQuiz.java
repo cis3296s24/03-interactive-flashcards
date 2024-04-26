@@ -54,7 +54,7 @@ public class MCQuiz extends JFrame{
         // create frame
 //        MCQuizFrame = new JFrame("Multiple Choice Quiz Frame");
 //        MCQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Multiple Choice Quiz Frame");
+        setTitle("Multiple Choice Quiz");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(500, 500));
 

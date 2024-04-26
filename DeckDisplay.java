@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.math.MathContext;
 
 /**
  * DeckDisplay creates the deck display panel and automatically populates it with the flashcard buttons
@@ -20,7 +19,6 @@ public class DeckDisplay extends JFrame {
     public DeckDisplay(Deck deck) {
         clearCardPanel();
         setTitle("Deck Display");
-        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(750, 500));
 
         // Set background color
@@ -33,7 +31,6 @@ public class DeckDisplay extends JFrame {
 
         cardPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         cardPanel.setAlignmentY(JPanel.TOP_ALIGNMENT); // Align at the top
-        //cardPanel = new JPanel(new GridLayout(0, 4));
         cardPanel.setBackground(new Color(225, 252, 255));
         JScrollPane scrollPane = new JScrollPane(cardPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -50,7 +47,7 @@ public class DeckDisplay extends JFrame {
             //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
                 dispose();
-                new FlashCardBuilder2(null, deck, card);
+                new FlashCardBuilder(null, deck, card);
             });
         }
 
@@ -62,12 +59,13 @@ public class DeckDisplay extends JFrame {
         plus_button.setFont(new Font("AppleGothic", Font.PLAIN, 22)); // Set font
         plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
         cardPanel.add(plus_button);
+
         //Actionlistener to create and edit new card
         plus_button.addActionListener(e -> {
             FlashCard new_flashcard = new FlashCard();
             deck.add(new_flashcard);
             dispose();
-            new FlashCardBuilder2(null, deck, new_flashcard);
+            new FlashCardBuilder(null, deck, new_flashcard);
         });
         revalidate();
         repaint();
@@ -84,26 +82,12 @@ public class DeckDisplay extends JFrame {
         JButton mcButton = new JButton("Multiple Choice");
         JButton matchingButton = new JButton("Matching");
 
+        setbutton(reviewButton);
+        setbutton(tfButton);
+        setbutton(learnButton);
+        setbutton(mcButton);
+        setbutton(matchingButton);
 
-        reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
-        reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
-        reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-        tfButton.setBackground(new Color(225, 252, 255)); // Set background color
-        tfButton.setForeground(new Color(75, 90, 152)); // Set text color
-        tfButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-        learnButton.setBackground(new Color(225, 252, 255)); // Set background color
-        learnButton.setForeground(new Color(75, 90, 152)); // Set text color
-        learnButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        mcButton.setBackground(new Color(225, 252, 255)); // Set background color
-        mcButton.setForeground(new Color(75, 90, 152)); // Set text color
-        mcButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        matchingButton.setBackground(new Color(225, 252, 255)); // Set background color
-        matchingButton.setForeground(new Color(75, 90, 152)); // Set text color
-        matchingButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        //buttonPanel.add(backButton);
         buttonPanel.add(reviewButton);
         buttonPanel.add(tfButton);
         buttonPanel.add(learnButton);
@@ -136,6 +120,10 @@ public class DeckDisplay extends JFrame {
 
         //MC quiz button action listener
         mcButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least four flashcards to your deck to play!");
+                return;
+            }
             dispose();
             new MCQuiz(deck);
         });
@@ -143,43 +131,74 @@ public class DeckDisplay extends JFrame {
         //back button action listener
         backButton.addActionListener(e -> {
             dispose();
-            new DeckMenu2(null);
+            new DeckMenu(null);
         });
 
         //review button action listener
         reviewButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to review!");
+                return;
+            }
             dispose();
-            new Review2(null, deck);
+            new Review(null, deck);
         });
 
-        //quiz button action listener
+        //TF quiz button action listener
         tfButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least two flashcards to your deck to play!");
+                return;
+            }
             dispose();
             new TrueFalse(null, deck);
         });
 
+        //learn button action listener
         learnButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to learn!");
+                return;
+            }
             dispose();
-            new Learn2(null, deck);
+            new Learn(null, deck);
         });
 
         //matching button action listener
         matchingButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to play!");
+                return;
+            }
             dispose();
             new MatchingGame(deck);
         });
 
+        //delete button action listener
         deleteButton.addActionListener(e -> {
-            database.delete(deck);
-            dispose();
-            new DeckMenu2(null);
+            int choice = JOptionPane.showConfirmDialog(DeckDisplay.this, "Are you sure you want to delete this deck?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                // User clicked Yes, perform deletion
+                database.delete(deck);
+                dispose();
+                new DeckMenu(null);
+            }
         });
-
 
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+    }
+
+    /**
+     * setbutton sets up the look of a specified button
+     * @param button JButton
+     */
+    public void setbutton(JButton button){
+        button.setBackground(new Color(225, 252, 255)); // Set background color
+        button.setForeground(new Color(75, 90, 152)); // Set text color
+        button.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
     }
 
     /**

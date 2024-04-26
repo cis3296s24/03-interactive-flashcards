@@ -1,8 +1,5 @@
 /*object to create, display and get user changes from a display settings menu */
 import javax.swing.*;
-import javax.swing.border.Border;
-
-import static java.awt.Color.black;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +15,7 @@ public class DisplaySettingsMenu{
     
     private String newFont; //should change to new font
     private int newFontSize; 
-    private Review2 thisReview;
+    private Review thisReview;
 
     private static String []fontStrings;
 
@@ -29,7 +26,7 @@ public class DisplaySettingsMenu{
      * @param newFontSize integer size
      * @param thisReview Review2 obj
      */
-    DisplaySettingsMenu(String fontType, int newFontSize, Review2 thisReview){
+    DisplaySettingsMenu(String fontType, int newFontSize, Review thisReview){
         this.newFont = fontType; //initializes newText to whatever font is initially in Review
         this.newFontSize = newFontSize; 
         this.thisReview = thisReview; 

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Flashcard Builder allows user to create, edit, and delete flashcard questions and answers
  */
-public class FlashCardBuilder2 extends JDialog{
+public class FlashCardBuilder extends JDialog{
     private JPanel CardBuilder;
     private JTextArea QuestiontextArea;
     private JTextArea AnswertextArea;
@@ -24,7 +24,7 @@ public class FlashCardBuilder2 extends JDialog{
      * @param d Deck
      * @param c Flashcard
      */
-    public FlashCardBuilder2(JFrame parent, Deck d, FlashCard c){
+    public FlashCardBuilder(JFrame parent, Deck d, FlashCard c){
 
         super(parent);
         setTitle("Edit Card");

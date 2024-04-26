@@ -1,9 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,7 +13,7 @@ import java.util.Random;
  * the weight of the card decreases, making it less likely to be seen again, and if they get it
  * incorrect, it is more likely they will see that card again.
  */
-public class Learn2 extends JDialog{
+public class Learn extends JDialog{
     private JPanel panel1;
     private JButton backButton;
     private JButton submitButton;
@@ -30,12 +29,12 @@ public class Learn2 extends JDialog{
      * @param parent JFrame Parent
      * @param deck Deck
      */
-    public Learn2 (JFrame parent, Deck deck) {
+    public Learn(JFrame parent, Deck deck) {
         super(parent);
         this.deck = deck;
         initialize_map();
         curr_card = this.deck.get(0);
-        setTitle("Review");
+        setTitle("Learn");
         setContentPane(panel1);
         setMinimumSize(new Dimension(500, 500));
         setModal(true);
@@ -48,6 +47,7 @@ public class Learn2 extends JDialog{
         reviewLabel.setPreferredSize(new Dimension(430,250));
         reviewLabel.setMaximumSize(new Dimension(430,250));
         reviewLabel.setVerticalTextPosition(SwingConstants.CENTER);
+        reviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         submitButton.addActionListener(e -> {
             String inputText = inputBox.getText();
@@ -85,12 +85,16 @@ public class Learn2 extends JDialog{
             dispose();
         });
 
-
+        inputBox.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                inputBox.setText("");
+            }
+        });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-
-
     }
 
     /**

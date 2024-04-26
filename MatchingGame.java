@@ -45,7 +45,7 @@ public class MatchingGame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        frame.setTitle("Multiple Choice Quiz Frame");
+        frame.setTitle("Matching");
         //frame.setPreferredSize(new Dimension(500, 500));
 
         // Set background color
@@ -54,7 +54,7 @@ public class MatchingGame {
         JButton backButton = new JButton("Back");
         backButton.setBackground(new Color(225, 252, 255)); // Set background color
         backButton.setForeground(new Color(75, 90, 152)); // Set text color
-        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
 
 
         backButton.addActionListener(new ActionListener() {

@@ -10,7 +10,7 @@ import static java.awt.Color.black;
 /**
  * The review class allows for users to iterate through and flip cards much like how physical flashcards would work.
  */
-public class Review2 extends JDialog{
+public class Review extends JDialog{
     private JButton flipButton;
     private JPanel panel1;
     private JButton nextButton;
@@ -29,7 +29,7 @@ public class Review2 extends JDialog{
      * @param parent JFrame parent
      * @param d Deck
      */
-    public Review2(JFrame parent, Deck d) {
+    public Review(JFrame parent, Deck d) {
 
         super(parent);
         setTitle("Review");
@@ -37,6 +37,8 @@ public class Review2 extends JDialog{
         setMinimumSize(new Dimension(500, 500));
         setModal(true);
         setLocationRelativeTo(parent);
+
+        reviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         cardList = d;
         database.write(cardList);
@@ -90,18 +92,18 @@ public class Review2 extends JDialog{
                 reviewLabel.setText(cardList.get(currentCard).question);
             }
         });
-        displaySettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
-//                DSMenu.start();
-//                fontType = DSMenu.getNewFont();
-//                fontSize = DSMenu.getNewFontSize();
-//
-//                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
-//                reviewText.setFont(getNewFont); //changes font to getNewFont
-            }
-        });
+//        displaySettingsButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+////                DisplaySettingsMenu DSMenu = new DisplaySettingsMenu(fontType, fontSize);
+////                DSMenu.start();
+////                fontType = DSMenu.getNewFont();
+////                fontSize = DSMenu.getNewFontSize();
+////
+////                Font getNewFont = new Font(fontType, Font.BOLD,fontSize);    //sets users font choice
+////                reviewText.setFont(getNewFont); //changes font to getNewFont
+//            }
+//        });
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
