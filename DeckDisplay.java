@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.math.MathContext;
 
 /**
  * DeckDisplay creates the deck display panel and automatically populates it with the flashcard buttons
@@ -50,7 +49,7 @@ public class DeckDisplay extends JFrame {
             //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
                 dispose();
-                new FlashCardBuilder2(null, deck, card);
+                new FlashCardBuilder(null, deck, card);
             });
         }
 
@@ -67,7 +66,7 @@ public class DeckDisplay extends JFrame {
             FlashCard new_flashcard = new FlashCard();
             deck.add(new_flashcard);
             dispose();
-            new FlashCardBuilder2(null, deck, new_flashcard);
+            new FlashCardBuilder(null, deck, new_flashcard);
         });
         revalidate();
         repaint();
@@ -143,13 +142,13 @@ public class DeckDisplay extends JFrame {
         //back button action listener
         backButton.addActionListener(e -> {
             dispose();
-            new DeckMenu2(null);
+            new DeckMenu(null);
         });
 
         //review button action listener
         reviewButton.addActionListener(e -> {
             dispose();
-            new Review2(null, deck);
+            new Review(null, deck);
         });
 
         //quiz button action listener
@@ -160,7 +159,7 @@ public class DeckDisplay extends JFrame {
 
         learnButton.addActionListener(e -> {
             dispose();
-            new Learn2(null, deck);
+            new Learn(null, deck);
         });
 
         //matching button action listener
@@ -172,7 +171,7 @@ public class DeckDisplay extends JFrame {
         deleteButton.addActionListener(e -> {
             database.delete(deck);
             dispose();
-            new DeckMenu2(null);
+            new DeckMenu(null);
         });
 
 

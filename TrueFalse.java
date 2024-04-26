@@ -13,8 +13,8 @@ public class TrueFalse extends JDialog{
     private JPanel panel1;
     private JButton falseButton;
     private JButton backButton;
-    private JTextArea testQTextArea;
-    private JTextArea testATextArea;
+    private JLabel TestQ;
+    private JLabel TestA;
     private Deck deck;
     private FlashCard currentCard;
     private boolean answer;
@@ -72,8 +72,8 @@ public class TrueFalse extends JDialog{
         currentCard = deck.get(pickNum);
         if (Math.random() > 0.5) {
             answer = true;
-            testQTextArea.setText("Q: " + currentCard.getQuestion());
-            testATextArea.setText("A: " + currentCard.getAnswer());
+            TestQ.setText("Q: " + currentCard.getQuestion());
+            TestA.setText("A: " + currentCard.getAnswer());
         } else {
             answer = false;
             int newNum = random.nextInt(deck.size());
@@ -85,8 +85,8 @@ public class TrueFalse extends JDialog{
                 newNum = random.nextInt(deck.size());
             }
             FlashCard fc = deck.get(newNum);
-            testQTextArea.setText("Q: " + currentCard.getQuestion());
-            testATextArea.setText("A: " + fc.getAnswer());
+            TestQ.setText("Q: " + currentCard.getQuestion());
+            TestA.setText("A: " + fc.getAnswer());
         }
 
     }

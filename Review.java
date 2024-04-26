@@ -10,7 +10,7 @@ import static java.awt.Color.black;
 /**
  * The review class allows for users to iterate through and flip cards much like how physical flashcards would work.
  */
-public class Review2 extends JDialog{
+public class Review extends JDialog{
     private JButton flipButton;
     private JPanel panel1;
     private JButton nextButton;
@@ -29,7 +29,7 @@ public class Review2 extends JDialog{
      * @param parent JFrame parent
      * @param d Deck
      */
-    public Review2(JFrame parent, Deck d) {
+    public Review(JFrame parent, Deck d) {
 
         super(parent);
         setTitle("Review");

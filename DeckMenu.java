@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Has a dropdown for existing decks loaded in from the user_data and
  * a create deck button that will prompt the user to create a new deck
  */
-public class DeckMenu2 extends JDialog {
+public class DeckMenu extends JDialog {
 
     private JButton createNewDeckButton;
     private JPanel MainPanel;
@@ -25,7 +25,7 @@ public class DeckMenu2 extends JDialog {
      * Constructor decks the JFrame parent creates the UI, buttons, dropdown, and actionlisteners.
      * @param parent JFrame parent
      */
-    public DeckMenu2(JFrame parent){
+    public DeckMenu(JFrame parent){
         super(parent);
         setTitle("Interactive Flashcards");
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -117,7 +117,7 @@ public class DeckMenu2 extends JDialog {
      */
     public static void main(String[] args){
 
-        DeckMenu2 menu = new DeckMenu2(null);
+        DeckMenu menu = new DeckMenu(null);
 
 
     }

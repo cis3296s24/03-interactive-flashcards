@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="DeckMenu2">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="DeckMenu">
   <grid id="27dc6" binding="MainPanel" layout-manager="GridBagLayout">
     <constraints>
       <xy x="80" y="127" width="546" height="444"/>
@@ -28,7 +28,7 @@
         <properties>
           <background color="-534"/>
           <enabled value="true"/>
-          <font name="DIN Condensed" size="36" style="1"/>
+          <font name="Avenir Next Condensed" size="36" style="1"/>
           <foreground color="-11838824"/>
           <horizontalTextPosition value="0"/>
           <text value="Create New Deck "/>
@@ -49,7 +49,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <font name="DIN Condensed" size="36" style="1"/>
+          <font name="Avenir Next Condensed" size="36" style="1"/>
           <foreground color="-11838824"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
