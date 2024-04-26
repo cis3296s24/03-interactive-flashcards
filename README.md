@@ -38,8 +38,7 @@ Run EXE file
 
 ### How to build
 - Use this github repository: [Interactive Flashcards](https://github.com/cis3296s24/03-interactive-flashcards)
-- Specify what branch to use for a more stable release or for cutting edge development.  
+- Download zip of the project or fork and clone the repository into IntelliJ 
 - Use IntelliJ 11
-- Specify additional library to download if needed 
-- What file and target to compile and run. 
-- What is expected to happen when the app starts. 
+- Use openJDK of 20 or higher
+- Run the program from the DeckMenu2 java file in the DeckMenu2 folder
