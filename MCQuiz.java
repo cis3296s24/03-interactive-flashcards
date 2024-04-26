@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -78,12 +76,15 @@ public class MCQuiz extends JFrame{
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
+        questionPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         currentQuestion = 1; //initialises current question number
         /* initialize, then change to question # -- for each q  */
-        //QuizQLabel = new JLabel("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
         QuizQLabel = new JLabel("Question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
         QuizQLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        QuizQLabel.setFont(new Font("AppleGothic", Font.PLAIN, 24));
+        QuizQLabel.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 24));
         QuizQLabel.setForeground(new Color(75, 90, 152));
         questionPanel.add(QuizQLabel, BorderLayout.CENTER);
 
@@ -95,19 +96,25 @@ public class MCQuiz extends JFrame{
 
         option1Button.setBackground(new Color(225, 252, 255)); // Set background color
         option1Button.setForeground(new Color(75, 90, 152)); // Set text color
-        option1Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        option1Button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
 
         option2Button.setBackground(new Color(225, 252, 255)); // Set background color
         option2Button.setForeground(new Color(75, 90, 152)); // Set text color
-        option2Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        option2Button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
 
         option3Button.setBackground(new Color(225, 252, 255)); // Set background color
         option3Button.setForeground(new Color(75, 90, 152)); // Set text color
-        option3Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        option3Button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
 
         option4Button.setBackground(new Color(225, 252, 255)); // Set background color
         option4Button.setForeground(new Color(75, 90, 152)); // Set text color
-        option4Button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        option4Button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
+
+        QuizQLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        option1Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        option2Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        option3Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        option4Button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //option button action listeners 
         option1Button.addActionListener(new ActionListener(){
@@ -141,38 +148,46 @@ public class MCQuiz extends JFrame{
 
 
 
-        JButton submitAnswerButton = new JButton("submit");
+        JButton submitAnswerButton = new JButton("Submit");
 
         submitAnswerButton.setBackground(new Color(225, 252, 255)); // Set background color
         submitAnswerButton.setForeground(new Color(75, 90, 152)); // Set text color
-        submitAnswerButton.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        submitAnswerButton.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
+
+        submitAnswerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         submitAnswerButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 QuizQuestions[currentQuestion].setUserAnswer(selectedUserAnswer);
-
+                //if answer is correct, add to score
+                if(checkAnswer(QuizQuestions[currentQuestion].getUserAnswer(), QuizQuestions[currentQuestion].getCorrectAnswer())){
+                    score++; //add to score
+                    //something like
+                    //QuizQuestions[currentQuestion].isCorrect(); //sets if question is correct or not
+                }
                 //END OF QUIZ
                 if ((currentQuestion + 1 == deckLength) || (currentQuestion + 1 == 10)) {    
                     //add submit test button, popup score page, make into its own method/class
                     dispose();
                     JFrame resultsPageFrame = new JFrame("Results");
                     resultsPageFrame.getContentPane().setBackground(new Color(225, 252, 255));
-                    resultsPageFrame.setSize(400, 100);
+                    resultsPageFrame.setSize(100, 100);
                     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JPanel resultsPanel = new JPanel();
-                    getContentPane().setBackground(new Color(225, 252, 255));
+                    resultsPanel.setBackground(new Color(225, 252, 255));
 
                     JLabel scoreLabel = new JLabel("score: " + score);
                     scoreLabel.setBackground(new Color(225, 252, 255)); // Set background color
                     scoreLabel.setForeground(new Color(75, 90, 152)); // Set text color
-                    scoreLabel.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+                    scoreLabel.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
                     
-                    JButton exitResultsPage = new JButton("exit");
+                    JButton exitResultsPage = new JButton("Exit");
 
                     exitResultsPage.setBackground(new Color(225, 252, 255)); // Set background color
                     exitResultsPage.setForeground(new Color(75, 90, 152)); // Set text color
-                    exitResultsPage.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+                    exitResultsPage.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
                     exitResultsPage.addActionListener(new ActionListener(){
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -188,17 +203,12 @@ public class MCQuiz extends JFrame{
 
                     resultsPageFrame.add(resultsPanel); 
 
-                    resultsPageFrame.setSize(500,500);
+                    resultsPageFrame.setSize(200,200);
+                    resultsPageFrame.setBackground(new Color(225, 252, 255));
+                    resultsPageFrame.setLocationRelativeTo(null);
                     resultsPageFrame.setVisible(true);
 
                     return;
-                }            
-
-                //if answer is correct, add to score 
-                if(checkAnswer(QuizQuestions[currentQuestion].getUserAnswer(), QuizQuestions[currentQuestion].getCorrectAnswer())){
-                    score++; //add to score
-                    //something like 
-                        //QuizQuestions[currentQuestion].isCorrect(); //sets if question is correct or not 
                 }
 
                 currentQuestion++;
@@ -206,12 +216,13 @@ public class MCQuiz extends JFrame{
             }
         });
 
-        JButton exitQuiz = new JButton("exit");
+        JButton exitQuiz = new JButton("Exit");
 
         exitQuiz.setBackground(new Color(225, 252, 255)); // Set background color
         exitQuiz.setForeground(new Color(75, 90, 152)); // Set text color
-        exitQuiz.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+        exitQuiz.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
 
+        exitQuiz.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         exitQuiz.addActionListener(new ActionListener(){
             @Override
@@ -253,7 +264,8 @@ public class MCQuiz extends JFrame{
      */
     public void makeQuizQArray(){
         QuizQuestions = new MCQuizSetup[deckLength]; 
-        Random random = new Random(); 
+        Random random = new Random();
+        UsedQuizQIndex.clear();
         
         int ranNum = random.nextInt(deckLength);    //set first ranNum 
         UsedQuizQIndex.add(ranNum);  //add to usedQuizQIndex ArrayList
@@ -298,7 +310,15 @@ public class MCQuiz extends JFrame{
         //gets 3 random answers 
         for(int i = 0; i<3; i++){ 
             ranNum = random.nextInt(deckLength);    //need a way to check for repetitions/...
-            answerOptions2[i] = deck.get(ranNum).getAnswer(); 
+            if (Arrays.asList(answerOptions2).contains(deck.get(ranNum).getAnswer())) {
+                i--;
+                continue;
+            }
+            if (deck.get(ranNum).getAnswer() == QuizQuestions[questionNum].getCorrectAnswer()) {
+                i--;
+                continue;
+            }
+            answerOptions2[i] = deck.get(ranNum).getAnswer();
         }
 
         answerOptions2[3] = QuizQuestions[questionNum].getCorrectAnswer(); //adds correct answer to list
@@ -342,8 +362,10 @@ public class MCQuiz extends JFrame{
      * sets the next quiz question
      */
     public void setNextQuizQuestion(){
-        QuizQLabel.setText("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion()); 
-        
+        QuizQLabel.setText("question " + currentQuestion + ": " + QuizQuestions[currentQuestion].getQuizCard().getQuestion());
+
+        QuizQuestions[currentQuestion].shuffle();
+
         option1Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(0)); 
         option2Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(1)); 
         option3Button.setText(QuizQuestions[currentQuestion].getAnswerOptionsAtIndex(2)); 

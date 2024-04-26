@@ -54,7 +54,7 @@ public class MatchingGame {
         JButton backButton = new JButton("Back");
         backButton.setBackground(new Color(225, 252, 255)); // Set background color
         backButton.setForeground(new Color(75, 90, 152)); // Set text color
-        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
+        backButton.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 24)); // Set font
 
 
         backButton.addActionListener(new ActionListener() {
@@ -79,7 +79,7 @@ public class MatchingGame {
             JButton button = new JButton(questionText);
             button.setBackground(new Color(225, 252, 255)); // Set background color
             button.setForeground(new Color(75, 90, 152)); // Set text color
-            button.setFont(new Font("AppleGothic", Font.PLAIN, 28)); // Set font
+            button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 28)); // Set font
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 @Override

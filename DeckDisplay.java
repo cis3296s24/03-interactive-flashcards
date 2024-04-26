@@ -42,7 +42,7 @@ public class DeckDisplay extends JFrame {
             cardButton.setMargin(new Insets(10, 10, 10, 10)); // Add margins for spacing
             cardButton.setBackground(new Color(225, 252, 255)); // Set background color
             cardButton.setForeground(new Color(75, 90, 152)); // Set text color
-            cardButton.setFont(new Font("AppleGothic", Font.PLAIN, 22)); // Set font
+            cardButton.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 22)); // Set font
             cardPanel.add(cardButton);
             //actionlistener for each card, allows flashcardbuilder to edit card
             cardButton.addActionListener(e -> {
@@ -56,7 +56,7 @@ public class DeckDisplay extends JFrame {
         plus_button.setMargin(new Insets(10, 10, 10, 10)); // Add margins for spacing
         plus_button.setBackground(new Color(225, 252, 255)); // Set background color
         plus_button.setForeground(new Color(75, 90, 152)); // Set text color
-        plus_button.setFont(new Font("AppleGothic", Font.PLAIN, 22)); // Set font
+        plus_button.setFont(new Font("Avenir Next Condensed", Font.PLAIN, 22)); // Set font
         plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
         cardPanel.add(plus_button);
 
@@ -100,12 +100,12 @@ public class DeckDisplay extends JFrame {
 
         backButton.setBackground(new Color(225, 252, 255)); // Set background color
         backButton.setForeground(new Color(75, 90, 152)); // Set text color
-        backButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
+        backButton.setFont(new Font("Avenir Next Condensed", Font.BOLD, 24)); // Set font
 
         JButton deleteButton = new JButton("Delete");
         deleteButton.setBackground(new Color(225, 252, 255)); // Set background color
         deleteButton.setForeground(new Color(75, 90, 152)); // Set text color
-        deleteButton.setFont(new Font("AppleGothic", Font.PLAIN, 24)); // Set font
+        deleteButton.setFont(new Font("Avenir Next Condensed", Font.BOLD, 24)); // Set font
 
         backButtonPanel.add(deleteButton);
         backButtonPanel.add(backButton);
@@ -198,7 +198,7 @@ public class DeckDisplay extends JFrame {
     public void setbutton(JButton button){
         button.setBackground(new Color(225, 252, 255)); // Set background color
         button.setForeground(new Color(75, 90, 152)); // Set text color
-        button.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
+        button.setFont(new Font("Avenir Next Condensed", Font.BOLD, 20)); // Set font
     }
 
     /**

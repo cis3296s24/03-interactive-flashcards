@@ -1,4 +1,7 @@
-/* MCQuizSetup object has a question, array of answer options and user answer associated with it 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+/* MCQuizSetup object has a question, array of answer options and user answer associated with it
  * Has all info pertaining to each question
 */
 
@@ -87,6 +90,12 @@ public class MCQuizSetup{
      */
     public String getCorrectAnswer(){
         return quizCard.getAnswer();
+    }
+
+    public void shuffle() {
+        List<String> temp = Arrays.asList(answerOptions);
+        Collections.shuffle(temp);
+        temp.toArray(answerOptions);
     }
     
 }
