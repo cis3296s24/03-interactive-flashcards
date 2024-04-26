@@ -136,7 +136,7 @@ public class DeckDisplay extends JFrame {
 
         //review button action listener
         reviewButton.addActionListener(e -> {
-            if (deck.size() < 2) {
+            if (deck.size() < 1) {
                 JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to review!");
                 return;
             }
@@ -156,7 +156,7 @@ public class DeckDisplay extends JFrame {
 
         //learn button action listener
         learnButton.addActionListener(e -> {
-            if (deck.size() < 2) {
+            if (deck.size() < 1) {
                 JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to learn!");
                 return;
             }
@@ -166,7 +166,7 @@ public class DeckDisplay extends JFrame {
 
         //matching button action listener
         matchingButton.addActionListener(e -> {
-            if (deck.size() < 2) {
+            if (deck.size() < 1) {
                 JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to play!");
                 return;
             }

@@ -41,7 +41,7 @@ public class Learn extends JDialog{
         setLocationRelativeTo(parent);
 
         reviewLabel.setText(curr_card.question);
-        Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
+        Border blackBorder = BorderFactory.createLineBorder(new Color(75, 90, 152));
         reviewLabel.setBorder(blackBorder);
         reviewLabel.setMinimumSize(new Dimension(430,250));
         reviewLabel.setPreferredSize(new Dimension(430,250));
