@@ -19,7 +19,6 @@ public class DeckDisplay extends JFrame {
     public DeckDisplay(Deck deck) {
         clearCardPanel();
         setTitle("Deck Display");
-        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(750, 500));
 
         // Set background color
@@ -32,7 +31,6 @@ public class DeckDisplay extends JFrame {
 
         cardPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         cardPanel.setAlignmentY(JPanel.TOP_ALIGNMENT); // Align at the top
-        //cardPanel = new JPanel(new GridLayout(0, 4));
         cardPanel.setBackground(new Color(225, 252, 255));
         JScrollPane scrollPane = new JScrollPane(cardPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -61,6 +59,7 @@ public class DeckDisplay extends JFrame {
         plus_button.setFont(new Font("AppleGothic", Font.PLAIN, 22)); // Set font
         plus_button.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
         cardPanel.add(plus_button);
+
         //Actionlistener to create and edit new card
         plus_button.addActionListener(e -> {
             FlashCard new_flashcard = new FlashCard();
@@ -83,26 +82,12 @@ public class DeckDisplay extends JFrame {
         JButton mcButton = new JButton("Multiple Choice");
         JButton matchingButton = new JButton("Matching");
 
+        setbutton(reviewButton);
+        setbutton(tfButton);
+        setbutton(learnButton);
+        setbutton(mcButton);
+        setbutton(matchingButton);
 
-        reviewButton.setBackground(new Color(225, 252, 255)); // Set background color
-        reviewButton.setForeground(new Color(75, 90, 152)); // Set text color
-        reviewButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-        tfButton.setBackground(new Color(225, 252, 255)); // Set background color
-        tfButton.setForeground(new Color(75, 90, 152)); // Set text color
-        tfButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-        learnButton.setBackground(new Color(225, 252, 255)); // Set background color
-        learnButton.setForeground(new Color(75, 90, 152)); // Set text color
-        learnButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        mcButton.setBackground(new Color(225, 252, 255)); // Set background color
-        mcButton.setForeground(new Color(75, 90, 152)); // Set text color
-        mcButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        matchingButton.setBackground(new Color(225, 252, 255)); // Set background color
-        matchingButton.setForeground(new Color(75, 90, 152)); // Set text color
-        matchingButton.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
-
-        //buttonPanel.add(backButton);
         buttonPanel.add(reviewButton);
         buttonPanel.add(tfButton);
         buttonPanel.add(learnButton);
@@ -155,7 +140,7 @@ public class DeckDisplay extends JFrame {
             new Review(null, deck);
         });
 
-        //quiz button action listener
+        //TF quiz button action listener
         tfButton.addActionListener(e -> {
             if (deck.size() < 2) {
                 JOptionPane.showMessageDialog(this, "Add at least two flashcards to your deck to play!");
@@ -165,6 +150,7 @@ public class DeckDisplay extends JFrame {
             new TrueFalse(null, deck);
         });
 
+        //learn button action listener
         learnButton.addActionListener(e -> {
             dispose();
             new Learn(null, deck);
@@ -176,6 +162,7 @@ public class DeckDisplay extends JFrame {
             new MatchingGame(deck);
         });
 
+        //delete button action listener
         deleteButton.addActionListener(e -> {
             int choice = JOptionPane.showConfirmDialog(DeckDisplay.this, "Are you sure you want to delete this deck?", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
@@ -186,11 +173,20 @@ public class DeckDisplay extends JFrame {
             }
         });
 
-
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+    }
+
+    /**
+     * setbutton sets up the look of a specified button
+     * @param button JButton
+     */
+    public void setbutton(JButton button){
+        button.setBackground(new Color(225, 252, 255)); // Set background color
+        button.setForeground(new Color(75, 90, 152)); // Set text color
+        button.setFont(new Font("AppleGothic", Font.PLAIN, 20)); // Set font
     }
 
     /**

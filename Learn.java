@@ -47,6 +47,7 @@ public class Learn extends JDialog{
         reviewLabel.setPreferredSize(new Dimension(430,250));
         reviewLabel.setMaximumSize(new Dimension(430,250));
         reviewLabel.setVerticalTextPosition(SwingConstants.CENTER);
+        reviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         submitButton.addActionListener(e -> {
             String inputText = inputBox.getText();
