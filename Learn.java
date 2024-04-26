@@ -34,7 +34,7 @@ public class Learn extends JDialog{
         this.deck = deck;
         initialize_map();
         curr_card = this.deck.get(0);
-        setTitle("Review");
+        setTitle("Learn");
         setContentPane(panel1);
         setMinimumSize(new Dimension(500, 500));
         setModal(true);

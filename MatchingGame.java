@@ -45,7 +45,7 @@ public class MatchingGame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        frame.setTitle("Multiple Choice Quiz Frame");
+        frame.setTitle("Matching");
         //frame.setPreferredSize(new Dimension(500, 500));
 
         // Set background color

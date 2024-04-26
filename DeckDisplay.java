@@ -136,6 +136,10 @@ public class DeckDisplay extends JFrame {
 
         //review button action listener
         reviewButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcards to your deck to review!");
+                return;
+            }
             dispose();
             new Review(null, deck);
         });
@@ -152,12 +156,20 @@ public class DeckDisplay extends JFrame {
 
         //learn button action listener
         learnButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to learn!");
+                return;
+            }
             dispose();
             new Learn(null, deck);
         });
 
         //matching button action listener
         matchingButton.addActionListener(e -> {
+            if (deck.size() < 2) {
+                JOptionPane.showMessageDialog(this, "Add at least one flashcard to your deck to play!");
+                return;
+            }
             dispose();
             new MatchingGame(deck);
         });
